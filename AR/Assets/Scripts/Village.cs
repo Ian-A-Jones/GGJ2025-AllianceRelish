@@ -67,7 +67,7 @@ public class Village : MonoBehaviour {
 			Vector2  randomRange = Random.insideUnitCircle*VILLAGE_RADIUS;
 			Vector2 thicketPos = OffsetTrees(randomRange);
 
-			Debug.Log(thicketPos);
+
 			for (int j = 0; j<FOREST_DENSITY*10; j++) {
 				trees.Add(Instantiate(Resources.Load("Prefabs/Tree")) as GameObject);
 				trees[trees.Count-1].gameObject.transform.parent = gameObject.transform.FindChild("Terrain").FindChild("Trees");
@@ -113,17 +113,17 @@ public class Village : MonoBehaviour {
 		Vector2 offset = new Vector2 ();
 
 		if (pos.x > 0) {
-			offset.x = 1;
+			offset.x = 1f;
 		}
 		else{
-			offset.x = -1;
+			offset.x = -1f;
 		}
 
 		if (pos.y > 0) {
-			offset.y = 1;
+			offset.y = 1f;
 		}
 		else{
-			offset.y = -1;
+			offset.y = -1f;
 		}
 
 		offset *= VILLAGE_RADIUS;
