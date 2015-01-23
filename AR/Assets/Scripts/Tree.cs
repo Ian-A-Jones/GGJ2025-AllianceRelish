@@ -18,7 +18,7 @@ public class Tree : MonoBehaviour {
 	}
 
 	void OnTriggerStay2D(Collider2D col){
-		gameObject.transform.localPosition += new Vector3 (Random.Range(-1f,1f), Random.Range(-1f,1f), 0);
+		//gameObject.transform.localPosition += new Vector3 (Random.Range(-1f,1f), Random.Range(-1f,1f), 0);
 
 	}
 }
