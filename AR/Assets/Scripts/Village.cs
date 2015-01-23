@@ -12,6 +12,9 @@ public class Village : MonoBehaviour {
 	private const float HUT_DENSITY = 0.8f;
 	private const float FOREST_DENSITY = 0.8f;
 	private const float THICKETS = 5;
+	private const float VILLAGE_RADIUS = 5;
+
+	private float riverXPos = 0;
 	// Use this for initialization
 	void Start () {
 
@@ -34,27 +37,68 @@ public class Village : MonoBehaviour {
 
 
 		for (int i = 0; i<HUT_DENSITY*10; i++) {
+
+
+			Vector2 hutPos = Random.insideUnitCircle*VILLAGE_RADIUS;
+
+
 			huts.Add(Instantiate(Resources.Load("Prefabs/Hut")) as GameObject);
-			huts[huts.Count-1].GetComponent<Hut>().Initialise(new Vector2(0,0));
+			huts[huts.Count-1].GetComponent<Hut>().Initialise(hutPos);
+			huts[huts.Count-1].gameObject.transform.parent = gameObject.transform.FindChild("Terrain").FindChild("Huts");
 		}
 
 	}
 
 	void GenerateRiver(){
 		river = (Instantiate(Resources.Load("Prefabs/River")) as GameObject);
-		int riverXPos = Random.Range (2, 16);
+		riverXPos = Random.Range (-7, -4);
+
+		if (Random.Range (1.0f, 3.0f)==2) {
+			riverXPos = Random.Range (4.0f, 7.0f);
+		}
 		river.transform.position = new Vector3 (riverXPos, 0, 0);
 	}
 
 	void GenerateForest(){
 
 		for(int i = 0; i<THICKETS; i++){
-			Vector2 thicketPos = new Vector2(Random.Range(0,18), Random.Range(0,10));
-			for (int j = 0; j<HUT_DENSITY*10; j++) {
-				trees.Add(Instantiate(Resources.Load("Prefabs/Hut")) as GameObject);
+
+			Vector2  randomRange = Random.insideUnitCircle*VILLAGE_RADIUS;
+			Vector2 thicketPos = OffsetTrees(randomRange);
+
+
+			for (int j = 0; j<FOREST_DENSITY*10; j++) {
+
+
+
+				trees.Add(Instantiate(Resources.Load("Prefabs/Tree")) as GameObject);
+				trees[trees.Count-1].gameObject.transform.parent = gameObject.transform.FindChild("Terrain").FindChild("Trees");
 				trees[trees.Count-1].GetComponent<Tree>().Initialise(new Vector2(thicketPos.x,thicketPos.y));
+
 			}
 		}
 
+	}
+
+	Vector2 OffsetTrees(Vector2 pos){
+		Vector2 offset = new Vector2 ();
+
+		if (pos.x > 0) {
+			offset.x = 1;
+		}
+		else{
+			offset.x = -1;
+		}
+
+		if (pos.y > 0) {
+			offset.y = 1;
+		}
+		else{
+			offset.y = -1;
+		}
+
+		offset *= VILLAGE_RADIUS;
+
+		return offset;
 	}
 }
