@@ -9,7 +9,15 @@ public class ChatDialogue : MonoBehaviour {
 	string Question;
 	//string[] Answers; 
 	bool activeQ;
-	Rect QuestionRectangle = new Rect(Screen.width-1000,Screen.height -150, 1000,150);
+    Rect QuestionRectangle = new Rect(Screen.width - (Screen.width / 3 * 2), Screen.height - (Screen.height / 10 * 3), Screen.width / 3 * 2, Screen.height / 10 * 3);
+    Rect LabelRectangle = new Rect(Screen.width - (Screen.width / 3 * 1), Screen.height - (Screen.height / 10 * 3), Screen.width / 3 * 1, Screen.height / 10 * 1);
+
+
+
+
+
+
+    //Rect LabelRectangle = new Rect(Screen.width-900, Screen.height-140, 500, 30);
 	Rect AnswerRectangle = new Rect(Screen.width-950, Screen.height -90, 900,30);
 	Rect AnswerRectangle2 = new Rect(Screen.width-950, Screen.height -60, 900,30);
 	public Questions questions;
@@ -34,8 +42,10 @@ public class ChatDialogue : MonoBehaviour {
         GUI.skin = GSKIN;
         if (activeQ)
         {
-            GUI.Box(new Rect(QuestionRectangle), Question);
+           // GUI.Window(0, WindowRectangle, DoMyWindow,"");
 
+            GUI.Box(new Rect(QuestionRectangle), "");
+            GUI.Label(new Rect(LabelRectangle),Question);
             if (GUI.Button(new Rect(AnswerRectangle), Answer1))
             {
                 activeQ = false;
@@ -44,10 +54,11 @@ public class ChatDialogue : MonoBehaviour {
             {
                 activeQ = false;
             }
+          
         }
 
 	}
-
+   //
 	#region new question + answer
 	private int randQ()
 	{
