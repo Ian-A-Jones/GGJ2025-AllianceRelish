@@ -12,11 +12,16 @@ public class Villager : MonoBehaviour
 
 	public JSONObject info;
 
+	string gender = "Male";
+
+	Vector2 targetPos = new Vector2();
+
 
 	// Use this for initialization
 	void Start () 
 	{
-
+		gameObject.transform.localPosition = new Vector3 (0, 0, 0);
+		SetTarget ();
 	}
 	
 	public bool alive()
@@ -33,7 +38,13 @@ public class Villager : MonoBehaviour
 
 	public void setInfo(JSONObject newInfo){
 		info = newInfo;
-		return;
+		gender = info.GetField ("Gender").str;
+
+
+		if (gender == "Female") {
+			gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprites/People/Villager_Front_Female");
+		}
+
 	}
 
 	public void unHunger()
@@ -72,35 +83,30 @@ public class Villager : MonoBehaviour
 		}
 	}
 
-    public Vector2 getNewDestination()
+    public void SetTarget()
     {
-        Vector2 newPos = new Vector2(Random.Range(-15, 15), Random.Range(-8, 8));
-//		Debug.Log ("Dest pos: " + newPos);
-
-        return newPos;
+      	targetPos = new Vector2(Random.Range(-6, 6), Random.Range(-6, 6));
     }
 
-    public Vector2 curPosition()
-    {
-        Vector2 cPos = transform.position;
-        return cPos;
-    }
+
 
     public void moveVillager()
     {
 
-		//gameObject.GetComponent<SpriteRenderer>().sortingOrder = Mathf.RoundToInt((gameObject.transform.position.y-10) * 100f) * -1;
-        Vector2 curPos = curPosition();
-        Vector2 dest = getNewDestination();
+		if (Vector2.Distance (new Vector2 (gameObject.transform.localPosition.x, gameObject.transform.localPosition.y), targetPos) < 0.2f) {
+			SetTarget();
+		}
 
-        Vector2 diff = dest - curPos;
+		//(int)((gameObject.transform.localPosition.y-10) * 100) * -1;
+		
+		Vector2 direction = targetPos - new Vector2 (gameObject.transform.localPosition.x, gameObject.transform.localPosition.y);
 
 
-        diff = diff.normalized;
-        rigidbody2D.AddForce(diff);     
+		direction = direction.normalized;
+		rigidbody2D.velocity=direction;     
     }
 
-    void OnTriggerStay2D(Collider2D col)
+    void OnTriggerEnter2D(Collider2D col)
     {
 
         if (col.gameObject.tag == "River")
@@ -110,13 +116,9 @@ public class Villager : MonoBehaviour
         }
         if (col.gameObject.tag == "Hut")
         {
-            Vector2 curPos = curPosition();
-            Vector2 dest = getNewDestination();
 
-            Vector2 diff = dest - curPos;
+			
 
-            diff = diff.normalized;
-            rigidbody2D.AddForce(diff);
         }
     }
 	
