@@ -225,7 +225,7 @@ public class VillageGenerator : MonoBehaviour {
 		huts [0].GetComponent<SpriteRenderer> ().sprite = Resources.Load <Sprite> ("Sprites/Huts/Hut_Gold");
 	}
 
-	public void  addGraffiti()
+	public void addGraffiti()
 	{
 		int randHut = Random.Range(0,huts.Count);
 		
@@ -257,5 +257,22 @@ public class VillageGenerator : MonoBehaviour {
 		int randHut = Random.Range(0,villagers.Count);
 		
 		//Change randomVillager to ArrowInKnee
+	}
+
+	public void updateHuts(int pop)
+	{
+		if(pop > huts.Count)
+		{
+
+			Vector3 hutPos; 
+			do{
+				hutPos = Random.insideUnitCircle*(VILLAGE_RADIUS*0.5f)*1.5f;
+			}while(false);//Vector2.Distance(Vector2.zero, hutPos)<4);
+
+			huts.Add(Instantiate(Resources.Load("Prefabs/Hut")) as GameObject);
+			huts[huts.Count-1].GetComponent<Hut>().Initialise(new Vector2(hutPos.x, hutPos.y));
+			huts[huts.Count-1].GetComponent<Hut>().hutsRef = huts;
+			huts[huts.Count-1].gameObject.transform.parent = gameObject.transform.FindChild("Terrain").FindChild("Huts");
+		}
 	}
 }
