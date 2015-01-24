@@ -203,7 +203,11 @@ public class VillageManager : MonoBehaviour
                     APop.Play();
 
 					//Pick random amount of time for next decision
+<<<<<<< HEAD
 					nextDecisionTimer = 10;// Random.Range(0,1);
+=======
+					nextDecisionTimer = Random.Range(1,35);
+>>>>>>> origin/master
 
 					decisionTimer = 0;
 				}
@@ -359,7 +363,7 @@ public class VillageManager : MonoBehaviour
 	}
 	bool gameOver()
 	{
-		if(population <=0)
+		if(population <1)
 		{
 			//Dead Village end state
 			villageDeadEndState = true;
