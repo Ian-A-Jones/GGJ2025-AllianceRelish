@@ -118,10 +118,10 @@ public class Questions {
 		AnswerArr [27, 1] = "We don’t need anymore farms, well be ok.";
 		AnswerArr [28, 0] = "Sure we can trade, let him in!";
 		AnswerArr [28, 1] = "No we don’t need anyone from the outside interfering with us, send him away!";
-		AnswerArr [29, 0] = "...,";
-		AnswerArr [29, 1] = "...";
-		AnswerArr [30, 0] = "...";
-		AnswerArr [30, 1] = "...";
+		AnswerArr [29, 0] = "He'll just have to deal with it";
+		AnswerArr [29, 1] = "I can't be expected to solve every little problem";
+		AnswerArr [30, 0] = "Well that's his own fault";
+		AnswerArr [30, 1] = "Quick! get some water!";
 		AnswerArr [31, 0] = "That’s very invasive, don’t let him continue ";
 		AnswerArr [31, 1] = "Let him do it, it keeps up appearances ";
 		AnswerArr [32, 0] = "Sanction.";
@@ -150,8 +150,8 @@ public class Questions {
 		OutcomeArr [0, 1] = "loseHappiness,losePopulation";
 		OutcomeArr [1, 0] = "loseWater";
 		OutcomeArr [1, 1] = "loseHappiness,losePopulation";
-		OutcomeArr [2, 0] = "losePopulation,loseSupplies,gainHappiness,activate4";
-		OutcomeArr [2, 1] = "losePopulation,loseHappiness,activate3";
+		OutcomeArr [2, 0] = "losePopulation,loseSupplies,gainHappiness,activate3";
+		OutcomeArr [2, 1] = "losePopulation,loseHappiness,activate4";
 		//answers to the good outcome of people returning
 		OutcomeArr [3, 0] = "gainSupplies";
 		OutcomeArr [3, 1] = "gainSupplies";
@@ -207,9 +207,9 @@ public class Questions {
 		OutcomeArr [28, 0] = "gainSupplies";
 		OutcomeArr [28, 1] = "nothing";
 		OutcomeArr [29, 0] = "Q30";
-		OutcomeArr [29, 1] = "nothing";
-		OutcomeArr [30, 0] = "burntHut";
-		OutcomeArr [30, 1] = "burntHut";
+		OutcomeArr [29, 1] = "Q30";
+		OutcomeArr [30, 0] = "burntHut,lose1Population";
+		OutcomeArr [30, 1] = "burntHut,loseWater,loseHappiness";
 		OutcomeArr [31, 0] = "loseHappiness";
 		OutcomeArr [31, 1] = "gainHappiness";
 		OutcomeArr [32, 0] = "lose1happiness";
