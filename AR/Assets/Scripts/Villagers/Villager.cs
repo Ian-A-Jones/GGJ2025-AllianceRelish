@@ -4,7 +4,7 @@ using System.Collections;
 [System.Serializable]
 public class Villager : MonoBehaviour
 {
-	public bool hungry = false, thirsty = false;
+	public bool hungry = false, thirsty = false, dead = false;
 
 	public int daysHungry = 0, daysThirsty = 0;
 
@@ -18,7 +18,7 @@ public class Villager : MonoBehaviour
 	
 	public bool alive()
 	{
-		if(daysHungry + daysThirsty >= DeathThreshold)
+		if(daysHungry + daysThirsty >= DeathThreshold || dead)
 		{
 			return false;
 		}

@@ -9,15 +9,14 @@ public class VillageManager : MonoBehaviour
 
 	#region Village stats
 	//Total number of Villagers
-	public int population;
-    public int newPopulation;
+	public float population;
 
 	//Total amount of food and water available
-	public int foodSupply;
-	public int waterSupply;
+	public float foodSupply;
+	public float waterSupply;
 
-	public int foodGain;
-	public int waterGain;
+	public float foodGain;
+	public float waterGain;
 
 	//How happy village is as a whole
 	public float happiness;
@@ -41,7 +40,7 @@ public class VillageManager : MonoBehaviour
 	float decisionTimer = 0;
 
 	//Time reqiured for next decision
-	float nextDecisionTimer = 10;
+	float nextDecisionTimer = 1;
 
 	#endregion
 
@@ -78,7 +77,7 @@ public class VillageManager : MonoBehaviour
 	{
 		population = 10;
 
-		VillageGenRef.GenerateVillage(population);
+		VillageGenRef.GenerateVillage((int)population);
 
 		foodSupply = 200;
 		waterSupply = 200;
@@ -98,31 +97,28 @@ public class VillageManager : MonoBehaviour
             Villagers[Villagers.Count - 1].AddComponent<Villager>();
             // Debug.Log("DRAWING VILLAGER");
         }
-		newPopulation = population;
 	}
 	
 	// Update is called once per frame
 	void Update () 
 	{
-       
-
-        //If the population has increased draw a new villager and increase the population value.
-        if (newPopulation > population)
-        {
-            Villagers.Add(Instantiate(Resources.Load("Prefabs/Villagerlol")) as GameObject);
-            Villagers[Villagers.Count - 1].AddComponent<Villager>();
-
-            population = newPopulation;
-        }
-       
 		//If game isn't over
 		if(!gameOver())
 		{
 			if(!ChatDialogue.activeQ)
 			{
-	            foreach (GameObject villager in Villagers)
+				foreach (GameObject villager in Villagers.ToArray())
 	            {
-	                villager.GetComponent<Villager>().moveVillager();
+					if(villager.GetComponent<Villager>().alive())
+					{
+	                	villager.GetComponent<Villager>().moveVillager();
+					}
+					else
+					{
+						Villagers.Remove(villager);
+						Destroy(villager);
+						population--;
+					}
 	            }
 				//Decision timer stuff
 				if(decisionTimer > nextDecisionTimer)
@@ -132,7 +128,7 @@ public class VillageManager : MonoBehaviour
 					ChatDialogue.activeQ = true;
 
 					//Pick random amount of time for next decision
-					nextDecisionTimer = Random.Range(0,70);
+					nextDecisionTimer = Random.Range(0,1);
 
 					decisionTimer = 0;
 				}
@@ -155,7 +151,6 @@ public class VillageManager : MonoBehaviour
 					{
 						if(villager.GetComponent<Villager>().alive())
 						{
-	                        
 							if(foodSupply > 0)
 							{
 								villager.GetComponent<Villager>().unHunger();
@@ -194,6 +189,8 @@ public class VillageManager : MonoBehaviour
 						//25% chance of Pop increase
 						if(Random.value > 0.75f)
 						{
+							Villagers.Add(Instantiate(Resources.Load("Prefabs/Villagerlol")) as GameObject);
+							Villagers[Villagers.Count - 1].AddComponent<Villager>();
 							population++;
 						}
 					}
@@ -228,6 +225,19 @@ public class VillageManager : MonoBehaviour
 		}
 	}
 
+	public void cull(int toCull)
+	{
+		int totalCulled = 0;
+		while(totalCulled < toCull)
+		{
+			int randVil = Random.Range(0, Villagers.Count);
+			if(Villagers[randVil].GetComponent<Villager>().alive())
+			{
+				Villagers[randVil].GetComponent<Villager>().dead = true;
+				totalCulled++;
+			}
+		}
+	}
 	bool gameOver()
 	{
 		if(population <=0)
@@ -270,10 +280,10 @@ public class VillageManager : MonoBehaviour
 		GUI.skin = skin;
 
 		GUI.Box (new Rect (-200, 0, 2500, 50), "");
-		GUI.Label (new Rect (Screen.width / 2 - 400, 10, 150, 100), "Total Food: " + foodSupply);
-		GUI.Label (new Rect (Screen.width / 2 - 200, 10, 150, 100), "Total Water: " + waterSupply);
-		GUI.Label (new Rect (Screen.width / 2 , 10, 150, 100), "Happiness: " + happiness + "%");
-		GUI.Label (new Rect (Screen.width / 2 + 200, 10, 150, 100), "Population: " + population);
+		GUI.Label (new Rect (Screen.width / 2 - 400, 10, 150, 100), "Total Food: " + foodSupply.ToString("f0"));
+		GUI.Label (new Rect (Screen.width / 2 - 200, 10, 150, 100), "Total Water: " + waterSupply.ToString("f0"));
+		GUI.Label (new Rect (Screen.width / 2 , 10, 150, 100), "Happiness: " + happiness.ToString("f0"));
+		GUI.Label (new Rect (Screen.width / 2 + 200, 10, 150, 100), "Population: " + population.ToString("f0"));
 
 		if (unhappyVillageEndState == true) 
 		{
