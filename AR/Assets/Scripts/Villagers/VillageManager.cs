@@ -159,7 +159,7 @@ public class VillageManager : MonoBehaviour
 					ChatDialogue.activeQ = true;
 
 					//Pick random amount of time for next decision
-					nextDecisionTimer = 2;// Random.Range(0,1);
+					nextDecisionTimer = 100;// Random.Range(0,1);
 
 					decisionTimer = 0;
 				}
@@ -340,7 +340,7 @@ public class VillageManager : MonoBehaviour
 		GUI.Box (new Rect (-200, 0, 2500, 50), "");
 		GUI.Label (new Rect (Screen.width / 2 - 400, 10, 150, 100), "Total Food: " + foodSupply.ToString("F0"));
 		GUI.Label (new Rect (Screen.width / 2 - 200, 10, 150, 100), "Total Water: " + waterSupply.ToString("F0"));
-		GUI.Label (new Rect (Screen.width / 2 , 10, 150, 100), "Happiness: " + happiness);
+		GUI.Label (new Rect (Screen.width / 2 , 10, 150, 100), "Happiness: " + happiness.ToString("F0"));
 		GUI.Label (new Rect (Screen.width / 2 + 200, 10, 150, 100), "Population: " + population.ToString("F0"));
 
 		GUI.BeginGroup(new Rect (0,25,200,50), "");
