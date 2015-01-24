@@ -53,7 +53,7 @@ public class VillageGenerator : MonoBehaviour {
 			
 			Vector3 hutPos; 
 			do{
-				hutPos = Random.;//*(VILLAGE_RADIUS*0.5f)*1.5f;
+				hutPos = Random.insideUnitCircle*(VILLAGE_RADIUS*0.5f)*1.5f;
 			}while(false);//Vector2.Distance(Vector2.zero, hutPos)<4);
 			
 			

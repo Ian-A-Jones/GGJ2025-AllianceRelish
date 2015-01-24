@@ -75,9 +75,26 @@ public class VillageManager : MonoBehaviour
 	int villagerID;
 
 	public bool VillagerInfo = false;
+    public ParticleSystem death;
 
-	#region stateConditions
-	bool villageDeadEndState = false;
+
+    #region AUDIO
+    //Voices
+    public AudioSource GroanM;
+    public AudioSource GroanF;
+    public AudioSource F_Uhu;
+    public AudioSource F_Cough;
+    public AudioSource Laugh;
+    public AudioSource M_Rare;
+    public AudioSource M_Other;
+
+    //Other
+    public AudioSource APop;
+    public AudioSource Splat;
+    #endregion
+
+    #region stateConditions
+    bool villageDeadEndState = false;
 	bool unhappyVillageEndState = false;
 	public bool questionVictory = false;
 	int happinessVictory = 200;
@@ -145,6 +162,11 @@ public class VillageManager : MonoBehaviour
 							villagerInfoGender = hit.collider.gameObject.GetComponent<Villager>().info.GetField("Gender").str;
 							villagerInfoAge = hit.collider.GetComponent<Villager>().age.ToString();
 							villagerID = hit.collider.gameObject.GetInstanceID();
+
+                            Debug.Log(villagerInfoGender);
+                            chooseTribeAudio(villagerInfoGender);
+                            
+
 						}
 					}
 					else
@@ -166,7 +188,10 @@ public class VillageManager : MonoBehaviour
 						Villagers.Remove(villager);
 						Destroy(villager);
 						population--;
+                        Splat.Play();
+                        death.Play();
 					}
+                    death.Stop();
 	            }
 				//Decision timer stuff
 				if(decisionTimer > nextDecisionTimer)
@@ -175,9 +200,10 @@ public class VillageManager : MonoBehaviour
 					Debug.Log ("Next decision");
 					ChatDialogue.activeQ = true;
 					setVillagersKinematic(true);
+                    APop.Play();
 
 					//Pick random amount of time for next decision
-					nextDecisionTimer = 1;// Random.Range(0,1);
+					nextDecisionTimer = 10;// Random.Range(0,1);
 
 					decisionTimer = 0;
 				}
@@ -264,7 +290,42 @@ public class VillageManager : MonoBehaviour
 			Debug.Log ("Game over");
 		}
 	}
-	
+
+
+    void chooseTribeAudio(string gender)
+    {
+        int rand = 0;
+        if (gender == "Male")
+        {
+            rand = Random.Range(0, 6);
+            if (rand == 0 || rand == 1)
+            {
+                GroanM.Play();
+            }
+            else if (rand == 2 || rand == 3)
+            {
+                Laugh.Play();
+            }
+            else if (rand == 4)
+            {
+                M_Rare.Play();
+            }
+            else if (rand == 5)
+            {
+                M_Other.Play();
+            }
+        }
+        else
+        {
+            rand = Random.Range(0, 3);
+            if (rand == 0)
+                GroanF.Play();
+            else if (rand == 1)
+                F_Uhu.Play();
+            else if (rand == 2)
+                F_Cough.Play();               
+        }
+    }
 	void happyCalc(float supply, float happyThresh, float sadThresh)
 	{
 		if(supply / population > happyThresh)

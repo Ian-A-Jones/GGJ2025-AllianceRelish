@@ -32,9 +32,16 @@ public class ChatDialogue : MonoBehaviour {
 
     public ParticleSystem Rain;
     public ParticleSystem BloodRain;
-    public AudioSource Thunder;
-    public AudioSource Laugh;
 
+    #region AudioSources
+    //Other
+    public AudioSource Thunder;
+
+    //Voices
+    public AudioSource Laugh;
+    public AudioSource Groan;  
+
+    #endregion
     float RAINTIMER = 30;
     float timeRained = 0;
     int days = 0;
@@ -341,7 +348,6 @@ public class ChatDialogue : MonoBehaviour {
             case "RainingBlood":
                 BloodRain.Play();
                 isRaining = true;
-                Thunder.Play();
                 Laugh.Play();
                 update();
                 break;
