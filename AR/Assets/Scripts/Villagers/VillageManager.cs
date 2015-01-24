@@ -76,6 +76,7 @@ public class VillageManager : MonoBehaviour
 
 	public bool VillagerInfo = false;
     public ParticleSystem death;
+    public ParticleSystem groundHit;
 
 
     #region AUDIO
@@ -137,11 +138,7 @@ public class VillageManager : MonoBehaviour
 
 		foreach (GameObject v in Villagers) {
 			v.GetComponent<SpriteRenderer>().sortingOrder = (int)((v.transform.position.y-10) * 100f) * -1;
-		}
-
-
-
-	
+		}	
 		
 		//If game isn't over
 		if(!gameOver())
@@ -164,9 +161,7 @@ public class VillageManager : MonoBehaviour
 							villagerID = hit.collider.gameObject.GetInstanceID();
 
                             Debug.Log(villagerInfoGender);
-                            chooseTribeAudio(villagerInfoGender);
-                            
-
+                            chooseTribeAudio(villagerInfoGender);                           
 						}
 					}
 					else
@@ -204,9 +199,9 @@ public class VillageManager : MonoBehaviour
 
 					//Pick random amount of time for next decision
 
-					nextDecisionTimer = 10;// Random.Range(0,1);
+					nextDecisionTimer = 2;// Random.Range(0,1);
 
-					nextDecisionTimer = Random.Range(1,35);
+					//nextDecisionTimer = Random.Range(1,35);
 
 
 					decisionTimer = 0;
