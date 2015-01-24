@@ -41,7 +41,7 @@ public class VillageManager : MonoBehaviour
 	float decisionTimer = 0;
 
 	//Time reqiured for next decision
-	float nextDecisionTimer = 60;
+	float nextDecisionTimer = 10;
 
 	#endregion
 
@@ -111,88 +111,91 @@ public class VillageManager : MonoBehaviour
 		//If game isn't over
 		if(!gameOver())
 		{
-            foreach (GameObject villager in Villagers)
-            {
-                villager.GetComponent<Villager>().moveVillager();
-            }
-			//Decision timer stuff
-			if(decisionTimer > nextDecisionTimer)
+			if(!ChatDialogue.activeQ)
 			{
-				//Start decision
-				Debug.Log ("Next decision");
-				//ChooseNextDecision();
-
-				//Pick random amount of time for next decision
-				nextDecisionTimer = Random.Range(0,70);
-
-				decisionTimer = 0;
-			}
-			else
-			{
-				decisionTimer += Time.deltaTime;
-			}
-
-			//VillageStat updates
-			//IF a day has passed
-			if(dayTimer > TIMEPERDAY)
-			{
-				days ++;
-				dayTimer = 0;
-
-				foodSupply += foodGain;
-				waterSupply += waterGain;
-
-				foreach(GameObject villager in Villagers.ToArray())
+	            foreach (GameObject villager in Villagers)
+	            {
+	                villager.GetComponent<Villager>().moveVillager();
+	            }
+				//Decision timer stuff
+				if(decisionTimer > nextDecisionTimer)
 				{
-					if(villager.GetComponent<Villager>().alive())
+					//Start decision
+					Debug.Log ("Next decision");
+					ChatDialogue.activeQ = true;
+
+					//Pick random amount of time for next decision
+					nextDecisionTimer = Random.Range(0,70);
+
+					decisionTimer = 0;
+				}
+				else
+				{
+					decisionTimer += Time.deltaTime;
+				}
+
+				//VillageStat updates
+				//IF a day has passed
+				if(dayTimer > TIMEPERDAY)
+				{
+					days ++;
+					dayTimer = 0;
+
+					foodSupply += foodGain;
+					waterSupply += waterGain;
+
+					foreach(GameObject villager in Villagers.ToArray())
 					{
-                        
-						if(foodSupply > 0)
+						if(villager.GetComponent<Villager>().alive())
 						{
-							villager.GetComponent<Villager>().unHunger();
-							foodSupply --;
+	                        
+							if(foodSupply > 0)
+							{
+								villager.GetComponent<Villager>().unHunger();
+								foodSupply --;
+							}
+							else
+							{
+								villager.GetComponent<Villager>().hungerTick();
+							}
+
+							if(waterSupply > 0)
+							{
+								villager.GetComponent<Villager>().unThirst();
+								waterSupply --;
+							}
+							else
+							{
+								villager.GetComponent<Villager>().thirstTick();
+							}		
 						}
 						else
 						{
-							villager.GetComponent<Villager>().hungerTick();
+							Villagers.Remove(villager);
+							Destroy(villager);
+							population--;
 						}
-
-						if(waterSupply > 0)
-						{
-							villager.GetComponent<Villager>().unThirst();
-							waterSupply --;
-						}
-						else
-						{
-							villager.GetComponent<Villager>().thirstTick();
-						}		
 					}
-					else
+
+					happyCalc(foodSupply, HAPPYFOODTHRESH, SADFOODTHRESH);
+					
+					happyCalc(waterSupply, HAPPYWATERTHRESH, SADWATERTHRESH);
+
+					if(happiness > 50 && foodSupply > 0 && waterSupply > 0)
 					{
-						Villagers.Remove(villager);
-						Destroy(villager);
-						population--;
+						population++;
 					}
-                    if (foodSupply > 100 && waterSupply > 100 && happiness > 50)
-                    {
-                        newPopulation++;
-                    }
+
+					debugStats();
 				}
-
-				happyCalc(foodSupply, HAPPYFOODTHRESH, SADFOODTHRESH);
-				
-				happyCalc(waterSupply, HAPPYWATERTHRESH, SADWATERTHRESH);
-
-				if(happiness > 50 && foodSupply > 0 && waterSupply > 0)
+				else
 				{
-					population++;
+					dayTimer += Time.deltaTime;
 				}
-
-				debugStats();
 			}
 			else
 			{
-				dayTimer += Time.deltaTime;
+				Time.timeScale = 0;
 			}
 		}
 		else

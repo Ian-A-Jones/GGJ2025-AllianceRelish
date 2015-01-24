@@ -10,7 +10,7 @@ public class ChatDialogue : MonoBehaviour {
     public GUISkin GSKIN; 
 	string Question;
 	//string[] Answers; 
-	bool activeQ;
+	public static bool activeQ;
     Rect QuestionRectangle = new Rect(Screen.width - (Screen.width / 3 * 2), Screen.height - (Screen.height / 10 * 3), Screen.width / 3 * 2, Screen.height / 10 * 3);
 <<<<<<< HEAD
     Rect LabelRectangle = new Rect(Screen.width - (Screen.width / 3 * 2), Screen.height - (Screen.height / 10 * 3), Screen.width / 3 * 2, Screen.height / 10 * 1);
@@ -47,7 +47,7 @@ public class ChatDialogue : MonoBehaviour {
 		string[] Outcomes = newOutcome(id);
 		Outcome1 = Outcomes[0];
 		Outcome2 = Outcomes[1];
-        activeQ = true;
+        activeQ = false;
     }
 
 	void OnGUI()
@@ -63,11 +63,13 @@ public class ChatDialogue : MonoBehaviour {
             {
 				purformOutcome(Outcome1);
                 activeQ = false;
+				Time.timeScale = 1;
             }
             if (GUI.Button(new Rect(AnswerRectangle2), Answer2))
             {
 				purformOutcome(Outcome2);
                 activeQ = false;
+				Time.timeScale = 1;
             }
           
         }
@@ -117,12 +119,14 @@ public class ChatDialogue : MonoBehaviour {
 				villageManagerRef.foodSupply-= Random.Range(1, 5);
 				break;
 			case "loseHappiness":
+				Debug.Log ("Happiness loss");
 				villageManagerRef.happiness-= Random.Range(1,5);
 				break;
 			case "loseWater":
 				villageManagerRef.waterSupply-= Random.Range(1,5);
 				break;
 			case "losePopulation":
+				Debug.Log ("Pop loss");
 				villageManagerRef.population-= Random.Range(1,5);
 				break;
 			case "loseSupplies":
