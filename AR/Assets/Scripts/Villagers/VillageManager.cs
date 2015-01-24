@@ -4,8 +4,12 @@ using System.Collections.Generic;
 
 public class VillageManager : MonoBehaviour
 {		
+
 	//Reference to Village Generator
 	public VillageGenerator VillageGenRef;
+	public ChatDialogue ChatDialogueRef;
+
+	VillagerImporter villagerImporter;
 
 	#region Village stats
 	//Total number of Villagers
@@ -65,6 +69,13 @@ public class VillageManager : MonoBehaviour
 	public GUISkin skin;
 	public GUISkin skin2;
 
+	string villagerInfoName;
+	string villagerInfoGender;
+	string villagerInfoAge;
+	int villagerID;
+
+	public bool VillagerInfo = false;
+
 	#region stateConditions
 	bool villageDeadEndState = false;
 	bool unhappyVillageEndState = false;
@@ -77,6 +88,8 @@ public class VillageManager : MonoBehaviour
 	void Start () 
 	{
 		population = 10;
+
+		villagerImporter = gameObject.AddComponent<VillagerImporter> ();
 
 		VillageGenRef.GenerateVillage((int)population);
 
@@ -96,6 +109,7 @@ public class VillageManager : MonoBehaviour
         {
             Villagers.Add(Instantiate(Resources.Load("Prefabs/Villagerlol")) as GameObject);
             Villagers[Villagers.Count - 1].AddComponent<Villager>();
+			Villagers[Villagers.Count - 1].GetComponent<Villager>().setInfo(villagerImporter.GetVillagerInfo());
             // Debug.Log("DRAWING VILLAGER");
         }
 	}
@@ -108,6 +122,29 @@ public class VillageManager : MonoBehaviour
 		{
 			if(!ChatDialogue.activeQ)
 			{
+				if(Input.GetMouseButtonDown(0))
+				{
+					RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
+
+					if(hit)
+					{
+						if(hit.collider.tag == "Villager")
+						{
+							VillagerInfo = true;
+
+							villagerInfoName = hit.collider.gameObject.GetComponent<Villager>().info.GetField("Name").str;
+							villagerInfoGender = hit.collider.gameObject.GetComponent<Villager>().info.GetField("Gender").str;
+							villagerInfoAge = hit.collider.GetComponent<Villager>().age.ToString();
+							villagerID = hit.collider.gameObject.GetInstanceID();
+						}
+					}
+					else
+					{
+							VillagerInfo = false;
+					}
+
+				}
+
 				foreach (GameObject villager in Villagers.ToArray())
 	            {
 					if(villager.GetComponent<Villager>().alive())
@@ -129,7 +166,7 @@ public class VillageManager : MonoBehaviour
 					ChatDialogue.activeQ = true;
 
 					//Pick random amount of time for next decision
-					nextDecisionTimer = 2;// Random.Range(0,1);
+					nextDecisionTimer = 100;// Random.Range(0,1);
 
 					decisionTimer = 0;
 				}
@@ -148,10 +185,17 @@ public class VillageManager : MonoBehaviour
 					foodSupply += foodGain;
 					waterSupply += waterGain;
 
+					VillagerInfo = false;
+
 					foreach(GameObject villager in Villagers.ToArray())
 					{
 						if(villager.GetComponent<Villager>().alive())
 						{
+							villager.GetComponent<Villager>().age++;
+							if(villager.gameObject.GetInstanceID() == villagerID)
+							{
+								villagerInfoAge = villager.GetComponent<Villager>().age.ToString();
+							}
 							if(foodSupply > 0)
 							{
 								villager.GetComponent<Villager>().unHunger();
@@ -309,14 +353,27 @@ public class VillageManager : MonoBehaviour
 		GUI.Box (new Rect (-200, 0, 2500, 50), "");
 		GUI.Label (new Rect (Screen.width / 2 - 400, 10, 150, 100), "Total Food: " + foodSupply.ToString("F0"));
 		GUI.Label (new Rect (Screen.width / 2 - 200, 10, 150, 100), "Total Water: " + waterSupply.ToString("F0"));
-		GUI.Label (new Rect (Screen.width / 2 , 10, 150, 100), "Happiness: " + happiness);
+		GUI.Label (new Rect (Screen.width / 2 , 10, 150, 100), "Happiness: " + happiness.ToString("F0"));
 		GUI.Label (new Rect (Screen.width / 2 + 200, 10, 150, 100), "Population: " + population.ToString("F0"));
 
-		GUI.skin = skin2;
-		GUI.Label (new Rect (Screen.width / 2 - 425, 10, 50, 50), food);
-		GUI.Label (new Rect (Screen.width / 2 - 225, 10, 50, 50), water);
-		GUI.Label (new Rect (Screen.width / 2 - 25, 10, 50, 50), happinessIcon);
-		GUI.Label (new Rect (Screen.width / 2 + 175, 10, 50, 50), pop);
+		GUI.BeginGroup(new Rect (0,25,200,50), "");
+		GUI.Box (new Rect (0,0,200,50), "Recent Stat Changes");
+		GUI.Label (new Rect (0,30,250,175), ChatDialogueRef.qOutcome);
+		GUI.EndGroup();
+
+		if(VillagerInfo)
+		{
+			GUI.BeginGroup(new Rect (50, Screen.height - 250, 400, 300));
+			
+			GUI.Box(new Rect(0,0,250,400), "Villager Info");
+			
+			GUI.Label(new Rect(25,80,200,100), "Name: " + villagerInfoName);
+			GUI.Label(new Rect(25,140,200,100), "Gender: " + villagerInfoGender);
+			GUI.Label(new Rect(25,200,200,100), "Age: " + villagerInfoAge);
+			
+			GUI.EndGroup();
+		}
+
 
 		if (questionVictory) 
 		{
@@ -397,6 +454,13 @@ public class VillageManager : MonoBehaviour
 			}
 			GUI.EndGroup();
 		}
+
+		GUI.skin = skin2;
+		GUI.Label (new Rect (Screen.width / 2 - 425, 10, 50, 50), food);
+		GUI.Label (new Rect (Screen.width / 2 - 225, 10, 50, 50), water);
+		GUI.Label (new Rect (Screen.width / 2 - 25, 10, 50, 50), happinessIcon);
+		GUI.Label (new Rect (Screen.width / 2 + 175, 10, 50, 50), pop);
+
 		
 	}
 

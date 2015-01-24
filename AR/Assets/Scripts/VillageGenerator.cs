@@ -17,7 +17,7 @@ public class VillageGenerator : MonoBehaviour {
 
 	GameObject fineArt;
 
-	private const float FOREST_DENSITY = 0.8f;
+	private const float FOREST_DENSITY = 0.4f;
 	private const float THICKETS = 100;
 	private const float VILLAGE_RADIUS = 6;
 	
@@ -26,11 +26,6 @@ public class VillageGenerator : MonoBehaviour {
 	void Start () {
 
 
-		
-		//		GenerateRiver ();
-		//		GenerateForest ();
-		//		GenerateHuts ();
-		//		SetRenderingOrder ();
 	}
 	
 	public void GenerateVillage(int population)
@@ -39,7 +34,7 @@ public class VillageGenerator : MonoBehaviour {
 		GenerateRiver ();
 		GenerateHuts (population);
 		GenerateForest ();
-
+		Debug.Log (trees.Count);
 	}
 	
 	// Update is called once per frame
@@ -60,7 +55,7 @@ public class VillageGenerator : MonoBehaviour {
 			Vector2 hutPos; 
 			do{
 				hutPos = Random.insideUnitCircle*(VILLAGE_RADIUS*0.8f);
-			}while(false);//Vector2.Distance(Vector2.zero, hutPos)<2);
+			}while(Vector2.Distance(Vector2.zero, hutPos)<2);
 			
 			
 			huts.Add(Instantiate(Resources.Load("Prefabs/Hut")) as GameObject);
