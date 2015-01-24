@@ -12,10 +12,9 @@ public class VillageManager : MonoBehaviour
 	public int foodSupply;
 	public int waterSupply;
 
-	//Drain of Food and Water based on Population
-	public float foodDrain;
-	public float waterDrain;
-	
+	public int foodGain;
+	public int waterGain;
+
 	//How happy village is as a whole
 	public float happiness;
 
@@ -63,6 +62,9 @@ public class VillageManager : MonoBehaviour
 		foodSupply = 200;
 		waterSupply = 200;
 
+		foodGain = 5;
+		waterGain = 5;
+
 		happiness = 50;
 
 		sickness = 0;
@@ -105,6 +107,9 @@ public class VillageManager : MonoBehaviour
 			{
 				days ++;
 				dayTimer = 0;
+
+				foodSupply += foodGain;
+				waterSupply += waterGain;
 
 				foreach(GameObject villager in Villagers.ToArray())
 				{
