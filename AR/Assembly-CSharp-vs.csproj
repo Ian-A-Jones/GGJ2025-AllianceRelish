@@ -55,6 +55,7 @@
      <Compile Include="Assets\Scripts\Question Boxes\ChatDialogue.cs" />
      <Compile Include="Assets\Scripts\Question Boxes\Questions.cs" />
      <Compile Include="Assets\Scripts\RenderParticlesOnLayer.cs" />
+     <Compile Include="Assets\Scripts\Tornado.cs" />
      <Compile Include="Assets\Scripts\Tree.cs" />
      <Compile Include="Assets\Scripts\VillageGenerator.cs" />
      <Compile Include="Assets\Scripts\Villagers\VillageManager.cs" />
@@ -66,7 +67,7 @@
      <None Include="Assets\Necromancer GUI\Kingthings.txt" />
      <None Include="Assets\Necromancer GUI\Readme.txt" />
  <Reference Include="Assembly-UnityScript-firstpass">
- <HintPath>D:/GGJ2025-AllianceRelish/AR/Library/ScriptAssemblies/Assembly-UnityScript-firstpass.dll</HintPath>
+ <HintPath>D:/GGJ REPO2/GGJ2025-AllianceRelish/AR/Library/ScriptAssemblies/Assembly-UnityScript-firstpass.dll</HintPath>
  </Reference>
   </ItemGroup>
   <ItemGroup>

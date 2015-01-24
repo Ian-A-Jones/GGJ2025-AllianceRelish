@@ -42,7 +42,7 @@ public class ChatDialogue : MonoBehaviour {
     public AudioSource Groan;  
 
     #endregion
-    float RAINTIMER = 30;
+    float RAINTIMER = 0.05f;
     float timeRained = 0;
     int days = 0;
     bool isRaining = false;
@@ -110,6 +110,7 @@ public class ChatDialogue : MonoBehaviour {
 		string[] Outcomes = newOutcome(id);
 		Outcome1 = Outcomes[0];
 		Outcome2 = Outcomes[1];
+        update();
 	}
 
 	#region new question + answer
@@ -378,8 +379,10 @@ public class ChatDialogue : MonoBehaviour {
         if (isRaining)
         {
             timeRained += Time.deltaTime;
+            Debug.Log("Time Rained: " + timeRained);
             if (timeRained > RAINTIMER)
             {
+                Debug.Log("Stop rain");
                 timeRained = 0;
                 isRaining = false;
                 BloodRain.Stop();
