@@ -16,10 +16,15 @@ public class Villager : MonoBehaviour
 
 	Vector2 targetPos = new Vector2();
 
+	SpriteRenderer renderer;
+
+	Sprite forwardSprite, rightSprite;
+
 
 	// Use this for initialization
 	void Awake () 
 	{
+		renderer = gameObject.GetComponent<SpriteRenderer>();
 		gameObject.transform.localPosition = new Vector3 (0, 0, 0);
 		SetTarget ();
 	}
@@ -41,9 +46,12 @@ public class Villager : MonoBehaviour
 		gender = info.GetField ("Gender").str;
 
 
-		if (gender == "Female") {
-			gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprites/People/Villager_Front_Female");
-		}
+
+		forwardSprite = Resources.Load<Sprite>("Sprites/People/Villager_Front_"+gender);
+		rightSprite = Resources.Load<Sprite>("Sprites/People/Villager_Right_"+gender);
+
+
+		renderer.sprite = forwardSprite;
 
 	}
 
@@ -102,7 +110,26 @@ public class Villager : MonoBehaviour
 		Vector2 direction = targetPos - new Vector2 (gameObject.transform.localPosition.x, gameObject.transform.localPosition.y);
 
 
+
 		direction = direction.normalized;
+
+
+		if (Mathf.Abs (direction.x) > Mathf.Abs (direction.y)) {
+			renderer.sprite = rightSprite;
+			if (direction.x > 0) {
+				gameObject.transform.localScale = new Vector3(1,1,1);
+			}
+			else{
+				gameObject.transform.localScale = new Vector3(-1,1,1);
+			}
+		}
+		else{
+			renderer.sprite = forwardSprite;
+		}
+
+
+
+
 		rigidbody2D.velocity=direction;     
     }
 

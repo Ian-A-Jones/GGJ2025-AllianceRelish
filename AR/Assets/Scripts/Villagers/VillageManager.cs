@@ -258,10 +258,10 @@ public class VillageManager : MonoBehaviour
 						}
 						else
 						{
-							Villagers.Remove(villager);
 							Destroy(villager);
 							death.Play();
 							Splat.Play();
+							Villagers.Remove(villager);
 							population--;
 						}
 					}
