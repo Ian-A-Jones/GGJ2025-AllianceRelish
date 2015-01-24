@@ -9,7 +9,6 @@ public class Village : MonoBehaviour {
 
 	GameObject river;
 
-	private const float HUT_COUNT = 10;
 	private const float FOREST_DENSITY = 0.8f;
 	private const float THICKETS = 100;
 	private const float VILLAGE_RADIUS = 5;
@@ -17,15 +16,19 @@ public class Village : MonoBehaviour {
 	private float riverXPos = 0;
 	// Use this for initialization
 	void Start () {
+		
+//		GenerateRiver ();
+//		GenerateForest ();
+//		GenerateHuts ();
+//		SetRenderingOrder ();
+	}
 
-
-
+	public void GenerateVillage(int population)
+	{
 		GenerateRiver ();
 		GenerateForest ();
-		GenerateHuts ();
+		GenerateHuts (population);
 		SetRenderingOrder ();
-
-
 	}
 	
 	// Update is called once per frame
@@ -34,10 +37,10 @@ public class Village : MonoBehaviour {
 	}
 
 
-	void GenerateHuts(){
+	void GenerateHuts(int population){
 
 
-		for (int i = 0; i<HUT_COUNT; i++) {
+		for (int i = 0; i < population; i++) {
 
 
 			//Vector2 hutPos = Random.insideUnitCircle*VILLAGE_RADIUS;
@@ -51,6 +54,7 @@ public class Village : MonoBehaviour {
 			huts.Add(Instantiate(Resources.Load("Prefabs/Hut")) as GameObject);
 			huts[huts.Count-1].GetComponent<Hut>().Initialise(hutPos);
 			huts[huts.Count-1].GetComponent<Hut>().hutsRef = huts;
+			huts[huts.Count-1].name = "Hut" + (i+1);
 			huts[huts.Count-1].gameObject.transform.parent = gameObject.transform.FindChild("Terrain").FindChild("Huts");
 		}
 

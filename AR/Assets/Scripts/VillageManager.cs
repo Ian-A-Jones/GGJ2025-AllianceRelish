@@ -4,6 +4,9 @@ using System.Collections.Generic;
 
 public class VillageManager : MonoBehaviour
 {		
+	//Reference to Village Generator
+	public Village VillageRef;
+
 	#region Village stats
 	//Total number of Villagers
 	public int population;
@@ -58,6 +61,8 @@ public class VillageManager : MonoBehaviour
 	void Start () 
 	{
 		population = 10;
+
+		VillageRef.GenerateVillage(population);
 
 		foodSupply = 200;
 		waterSupply = 200;
