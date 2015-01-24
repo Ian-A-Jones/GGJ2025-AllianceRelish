@@ -47,6 +47,13 @@ public class ChatDialogue : MonoBehaviour {
     int days = 0;
     bool isRaining = false;
 	#endregion 
+
+	#region temp Variables
+	float popPercent;
+	float oldPop;
+	float popLoss;
+
+	#endregion
 	
 	void Start()
 	{
@@ -182,9 +189,14 @@ public class ChatDialogue : MonoBehaviour {
 				break;
 			case "losePopulation":
 				Debug.Log ("Pop loss");
-				villageManagerRef.population*= Random.Range(0.60f, 0.85f);
-				villageManagerRef.population-= Random.Range(1,3);
-				qOutcome = "Lose Population";
+				popPercent = Random.Range(0.60f, 0.85f);
+				oldPop = villageManagerRef.population;
+				villageManagerRef.population*= popPercent;
+				popLoss = Random.Range(1,3);
+				villageManagerRef.population-= popLoss;
+
+				villageManagerRef.cull ((int)((villageManagerRef.population-oldPop) + popLoss));
+				qOutcome = "Lose " + ((villageManagerRef.population-oldPop) + popLoss).ToString() + " Population";
 				break;
 			case "loseSupplies":
 				villageManagerRef.foodSupply*= Random.Range(0.65f, 0.90f);
@@ -215,9 +227,14 @@ public class ChatDialogue : MonoBehaviour {
 					qOutcome = "Lose Water";
 				}else if (rand == 3)
 				{
-					villageManagerRef.population*= Random.Range (0.30f, 0.65f);
-					villageManagerRef.population-= Random.Range(1,3);
-					qOutcome = "Lose Population";
+					popPercent = Random.Range(0.60f, 0.85f);
+					oldPop = villageManagerRef.population;
+					villageManagerRef.population*= popPercent;
+					popLoss = Random.Range(1,3);
+					villageManagerRef.population-= popLoss;
+					
+					villageManagerRef.cull ((int)((villageManagerRef.population-oldPop) + popLoss));
+					qOutcome = "Lose " + ((villageManagerRef.population-oldPop) + popLoss).ToString() + " Population";
 				}
 				villageManagerRef.happiness*= Random.Range (0.30f, 0.65f);
 				break;
@@ -227,6 +244,7 @@ public class ChatDialogue : MonoBehaviour {
 				break;
 			case "lose1Population":
 				villageManagerRef.population--;
+				villageManagerRef.cull(1);
 				qOutcome = "Lose Population";
 				break;
 			case "lose1Happiness":
