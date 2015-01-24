@@ -7,13 +7,15 @@ public class VillageGenerator : MonoBehaviour {
 	List<GameObject> huts = new List<GameObject>();
 	List<GameObject> trees = new List<GameObject>();
 
+	public GameObject elderHut;
+
     List<GameObject> villagers = new List<GameObject>();
 
 	GameObject river;
 
 	private const float FOREST_DENSITY = 0.8f;
 	private const float THICKETS = 100;
-	private const float VILLAGE_RADIUS = 5;
+	private const float VILLAGE_RADIUS = 4;
 	
 	private float riverXPos = 0;
 	// Use this for initialization
@@ -31,8 +33,9 @@ public class VillageGenerator : MonoBehaviour {
 	{
 
 		GenerateRiver ();
-		GenerateForest ();
 		GenerateHuts (population);
+		GenerateForest ();
+
 		SetRenderingOrder ();
 	}
 	
@@ -53,7 +56,7 @@ public class VillageGenerator : MonoBehaviour {
 			Vector2 hutPos; 
 			do{
 				hutPos = Random.insideUnitCircle*VILLAGE_RADIUS;
-			}while(Vector2.Distance(Vector2.zero, hutPos)<3);
+			}while(Vector2.Distance(Vector2.zero, hutPos)<2);
 			
 			
 			huts.Add(Instantiate(Resources.Load("Prefabs/Hut")) as GameObject);
@@ -68,7 +71,7 @@ public class VillageGenerator : MonoBehaviour {
 				if(huts[i]!=huts[j]){
 					if(huts[i].GetComponent<BoxCollider2D>().bounds.Intersects(huts[j].GetComponent<BoxCollider2D>().bounds)){
 						
-						Vector2 offset = Random.insideUnitCircle*2;
+						Vector2 offset = Random.insideUnitCircle*6;
 						
 						huts[i].transform.localPosition += new Vector3 (offset.x*2, offset.y*2, 0);
 					}
@@ -84,7 +87,7 @@ public class VillageGenerator : MonoBehaviour {
 		river = (Instantiate(Resources.Load("Prefabs/River")) as GameObject);
 		riverXPos = Random.Range (-7, -4);
 		
-		if (Random.Range (1.0f, 3.0f)==2) {
+		if (Random.Range (1, 3)==2) {
 			riverXPos = Random.Range (4.0f, 7.0f);
 		}
 		river.transform.position = new Vector3 (riverXPos, 0, 0);
