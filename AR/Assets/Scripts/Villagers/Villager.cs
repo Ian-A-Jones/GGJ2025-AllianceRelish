@@ -33,7 +33,6 @@ public class Villager : MonoBehaviour
 
 	public void setInfo(JSONObject newInfo){
 		info = newInfo;
-		Debug.Log (info);
 		return;
 	}
 
