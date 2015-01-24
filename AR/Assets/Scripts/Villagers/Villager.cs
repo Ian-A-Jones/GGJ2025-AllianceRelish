@@ -10,6 +10,8 @@ public class Villager : MonoBehaviour
 
 	public static int DeathThreshold = 6;
 
+	JSONObject info;
+
 
 	// Use this for initialization
 	void Start () 
@@ -27,6 +29,12 @@ public class Villager : MonoBehaviour
 		{
 			return true;
 		}
+	}
+
+	public void setInfo(JSONObject newInfo){
+		info = newInfo;
+		Debug.Log (info);
+		return;
 	}
 
 	public void unHunger()

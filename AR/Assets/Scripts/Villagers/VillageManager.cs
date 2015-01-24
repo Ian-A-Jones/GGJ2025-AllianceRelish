@@ -9,6 +9,8 @@ public class VillageManager : MonoBehaviour
 	public VillageGenerator VillageGenRef;
 	public ChatDialogue ChatDialogueRef;
 
+	VillagerImporter villagerImporter;
+
 	#region Village stats
 	//Total number of Villagers
 	public float population;
@@ -80,6 +82,8 @@ public class VillageManager : MonoBehaviour
 	{
 		population = 10;
 
+		villagerImporter = gameObject.AddComponent<VillagerImporter> ();
+
 		VillageGenRef.GenerateVillage((int)population);
 
 		foodSupply = 200;
@@ -98,6 +102,7 @@ public class VillageManager : MonoBehaviour
         {
             Villagers.Add(Instantiate(Resources.Load("Prefabs/Villagerlol")) as GameObject);
             Villagers[Villagers.Count - 1].AddComponent<Villager>();
+			Villagers[Villagers.Count - 1].GetComponent<Villager>().setInfo(villagerImporter.GetVillagerInfo());
             // Debug.Log("DRAWING VILLAGER");
         }
 	}
