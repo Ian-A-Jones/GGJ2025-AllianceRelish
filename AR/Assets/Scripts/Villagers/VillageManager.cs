@@ -70,7 +70,7 @@ public class VillageManager : MonoBehaviour
 	{
 		population = 10;
 
-		VillageGenRef.GenerateVillage(population);
+		VillageGenRef.GenerateVillage((int)(population*0.5f));
 
 		foodSupply = 200;
 		waterSupply = 200;
@@ -95,6 +95,7 @@ public class VillageManager : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
+
 		//If game isn't over
 		if(!gameOver())
 		{
@@ -121,7 +122,7 @@ public class VillageManager : MonoBehaviour
 					ChatDialogue.activeQ = true;
 
 					//Pick random amount of time for next decision
-					nextDecisionTimer = Random.Range(0,1);
+					nextDecisionTimer = 100;// Random.Range(0,1);
 
 					decisionTimer = 0;
 				}
@@ -195,10 +196,7 @@ public class VillageManager : MonoBehaviour
 					dayTimer += Time.deltaTime;
 				}
 			}
-			else
-			{
-				Time.timeScale = 0;
-			}
+
 		}
 		else
 		{

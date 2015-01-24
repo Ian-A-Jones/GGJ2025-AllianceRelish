@@ -50,7 +50,6 @@ public class ChatDialogue : MonoBehaviour {
 					purformOutcome(Outcome1);
 	                activeQ = false;
 
-					Time.timeScale = 1;
 					nextQ();
 
 
@@ -60,7 +59,6 @@ public class ChatDialogue : MonoBehaviour {
 					purformOutcome(Outcome2);
 	                activeQ = false;
 
-					Time.timeScale = 1;
 					nextQ();
 	            }
 			}
