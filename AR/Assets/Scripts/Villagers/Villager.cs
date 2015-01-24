@@ -80,6 +80,8 @@ public class Villager : MonoBehaviour
 
     public void moveVillager()
     {
+
+		gameObject.GetComponent<SpriteRenderer>().sortingOrder = Mathf.RoundToInt((gameObject.transform.position.y-10) * 100f) * -1;
         Vector2 curPos = curPosition();
         Vector2 dest = getNewDestination();
 

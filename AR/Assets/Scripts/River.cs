@@ -5,9 +5,6 @@ using System.Collections.Generic;
 public class River : MonoBehaviour {
 
 	public ParticleSystem riverParticles;
-	ParticleSystem.Particle[] particleList; 
-
-	float setTimeScale = 0;
 
 	// Use this for initialization
 	void Awake () {

@@ -11,6 +11,8 @@ public class VillageGenerator : MonoBehaviour {
 
     List<GameObject> villagers = new List<GameObject>();
 
+
+
 	GameObject river;
 
 	GameObject fineArt;
@@ -38,7 +40,6 @@ public class VillageGenerator : MonoBehaviour {
 		GenerateHuts (population);
 		GenerateForest ();
 
-		SetRenderingOrder ();
 	}
 	
 	// Update is called once per frame
@@ -47,6 +48,8 @@ public class VillageGenerator : MonoBehaviour {
 	}
 
 	void GenerateHuts(int population){		
+
+		huts.Add (elderHut);
 		
 		for (int i = 0; i < population; i++) {
 			
@@ -56,8 +59,8 @@ public class VillageGenerator : MonoBehaviour {
 			
 			Vector2 hutPos; 
 			do{
-				hutPos = Random.insideUnitCircle*VILLAGE_RADIUS;
-			}while(Vector2.Distance(Vector2.zero, hutPos)<2);
+				hutPos = Random.insideUnitCircle*(VILLAGE_RADIUS*0.8f);
+			}while(false);//Vector2.Distance(Vector2.zero, hutPos)<2);
 			
 			
 			huts.Add(Instantiate(Resources.Load("Prefabs/Hut")) as GameObject);
@@ -67,19 +70,23 @@ public class VillageGenerator : MonoBehaviour {
 		}
 		
 		//Move huts away from each other and river
+
 		for (int i = 0; i<huts.Count; i++) {
 			for(int j = 0; j<huts.Count; j++){
-				if(huts[i]!=huts[j]){
+				if(huts[i]!=huts[j] && i!=0){
 					if(huts[i].GetComponent<BoxCollider2D>().bounds.Intersects(huts[j].GetComponent<BoxCollider2D>().bounds)){
+						do{
+							Vector2 offset = Random.insideUnitCircle;
 						
-						Vector2 offset = Random.insideUnitCircle*6;
-						
-						huts[i].transform.localPosition += new Vector3 (offset.x*2, offset.y*2, 0);
+							huts[i].transform.localPosition += new Vector3 (offset.x*5, offset.y*5, 0);
+						}while(huts[i].GetComponent<BoxCollider2D>().bounds.Intersects(huts[j].GetComponent<BoxCollider2D>().bounds));
 					}
 					
 				}
 				
 			}
+
+			huts[i].GetComponent<SpriteRenderer>().sortingOrder = Mathf.RoundToInt((huts[i].transform.position.y-10) * 100f) * -1;
 		}
 		
 	}
@@ -124,13 +131,23 @@ public class VillageGenerator : MonoBehaviour {
 						Vector2 offset = Random.insideUnitCircle;
 						trees[i].transform.localPosition += new Vector3 (offset.x, offset.y, 0);
 					}
+
+					if(trees[i].gameObject.transform.localPosition.x>15 || trees[i].gameObject.transform.localPosition.x<-15 ||
+					   trees[i].gameObject.transform.localPosition.y>8 || trees[i].gameObject.transform.localPosition.y<-10){
+						trees[i].SetActive(false);
+						continue;
+					}
 					//Destroy trees on village
 					if(Vector2.Distance(Vector2.zero, trees[i].transform.localPosition)<VILLAGE_RADIUS+3){
 						trees[i].SetActive(false);
 					}
+
+
 				}
 				
 			}
+
+			trees[i].GetComponent<SpriteRenderer>().sortingOrder = Mathf.RoundToInt((trees[i].transform.position.y-10) * 100f) * -1;
 		}
 		
 		int index = trees.Count;
@@ -170,29 +187,7 @@ public class VillageGenerator : MonoBehaviour {
 		return pos+offset;
 	}
 	
-	void SetRenderingOrder(){
-		
-		List<GameObject> treesAndHuts = new List<GameObject> ();
-		treesAndHuts.AddRange (trees);
-		treesAndHuts.AddRange (huts);
-		
-		//Change Tree render order - higher number is top
-		for (int i = 0; i<treesAndHuts.Count; i++) {
-			
-			int renderOrder = 0;
-			
-			for(int j = 0; j<treesAndHuts.Count; j++){
-				//Tree j  is above i
-				if(treesAndHuts[i].transform.localPosition.y<treesAndHuts[j].transform.localPosition.y){
-					renderOrder++;
-				}
-				
-			}
-			
-			treesAndHuts[i].GetComponent<SpriteRenderer>().sortingOrder = renderOrder;
-		}
-		
-	}
+
 
 	public void removeATree()
 	{
