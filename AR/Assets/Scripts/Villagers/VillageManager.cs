@@ -9,14 +9,14 @@ public class VillageManager : MonoBehaviour
 
 	#region Village stats
 	//Total number of Villagers
-	public int population;
+	public float population;
 
 	//Total amount of food and water available
-	public int foodSupply;
-	public int waterSupply;
+	public float foodSupply;
+	public float waterSupply;
 
-	public int foodGain;
-	public int waterGain;
+	public float foodGain;
+	public float waterGain;
 
 	//How happy village is as a whole
 	public float happiness;
@@ -70,7 +70,7 @@ public class VillageManager : MonoBehaviour
 	{
 		population = 10;
 
-		VillageGenRef.GenerateVillage(population);
+		VillageGenRef.GenerateVillage((int)population);
 
 		foodSupply = 200;
 		waterSupply = 200;
@@ -271,10 +271,10 @@ public class VillageManager : MonoBehaviour
 		GUI.skin = skin;
 
 		GUI.Box (new Rect (-200, 0, 2500, 50), "");
-		GUI.Label (new Rect (Screen.width / 2 - 400, 10, 150, 100), "Total Food: " + foodSupply);
-		GUI.Label (new Rect (Screen.width / 2 - 200, 10, 150, 100), "Total Water: " + waterSupply);
-		GUI.Label (new Rect (Screen.width / 2 , 10, 150, 100), "Happiness: " + happiness + "%");
-		GUI.Label (new Rect (Screen.width / 2 + 200, 10, 150, 100), "Population: " + population);
+		GUI.Label (new Rect (Screen.width / 2 - 400, 10, 150, 100), "Total Food: " + foodSupply.ToString());
+		GUI.Label (new Rect (Screen.width / 2 - 200, 10, 150, 100), "Total Water: " + waterSupply.ToString());
+		GUI.Label (new Rect (Screen.width / 2 , 10, 150, 100), "Happiness: " + happiness.ToString());
+		GUI.Label (new Rect (Screen.width / 2 + 200, 10, 150, 100), "Population: " + population.ToString());
 
 		GUI.skin = skin2;
 		GUI.Label (new Rect (Screen.width / 2 - 425, 10, 50, 50), food);

@@ -21,8 +21,6 @@ public class ChatDialogue : MonoBehaviour {
 	//keep track of the questions
 	public List<int> ListaskedQ= new List<int>();
 
-	public bool Q3Active = false, Q4Active = false, Q30Next = false;
-
     //Rect LabelRectangle = new Rect(Screen.width-900, Screen.height-140, 500, 30);
 	
 	string Answer1, Answer2, Outcome1, Outcome2;
@@ -41,32 +39,27 @@ public class ChatDialogue : MonoBehaviour {
         if (activeQ)
         {
            // GUI.Window(0, WindowRectangle, DoMyWindow,"");
-			if(ListaskedQ.Count < 41)
-			{
-	            GUI.Box(new Rect(QuestionRectangle), "");
-	            GUI.Label(new Rect(LabelRectangle),Question);
-	            if (GUI.Button(new Rect(AnswerRectangle), Answer1))
-	            {
-					purformOutcome(Outcome1);
-	                activeQ = false;
 
-					Time.timeScale = 1;
-					nextQ();
+            GUI.Box(new Rect(QuestionRectangle), "");
+            GUI.Label(new Rect(LabelRectangle),Question);
+            if (GUI.Button(new Rect(AnswerRectangle), Answer1))
+            {
+				purformOutcome(Outcome1);
+                activeQ = false;
+
+				Time.timeScale = 1;
+				nextQ();
 
 
-	            }
-	            if (GUI.Button(new Rect(AnswerRectangle2), Answer2))
-	            {
-					purformOutcome(Outcome2);
-	                activeQ = false;
+            }
+            if (GUI.Button(new Rect(AnswerRectangle2), Answer2))
+            {
+				purformOutcome(Outcome2);
+                activeQ = false;
 
-					Time.timeScale = 1;
-					nextQ();
-	            }
-			}
-			{
-				//Completed Decisions end state
-			}
+				Time.timeScale = 1;
+				nextQ();
+            }
           
         }
 
@@ -86,7 +79,7 @@ public class ChatDialogue : MonoBehaviour {
    //
 	#region new question + answer
 	private int randQ()
-	{
+	{	//TODO: cheack for a repeated question, if so pick another number.
 
 		int qNum = -1;
 		bool newQFound = false;
@@ -97,17 +90,8 @@ public class ChatDialogue : MonoBehaviour {
 
 			if(!ListaskedQ.Contains(qNum))
 			{
-				if(Q30Next)
-				{
-					Q30Next = false;
-					ListaskedQ.Add (30);
-					return 30;
-				}
-				if(((qNum != 4 && qNum != 3) || qNum == 3 && Q3Active || qNum == 4 && Q4Active) && qNum != 30)
-				{
-					ListaskedQ.Add (qNum);
-					newQFound = true;
-				}
+				ListaskedQ.Add (qNum);
+				newQFound = true;
 			}
 		}
 
@@ -146,51 +130,48 @@ public class ChatDialogue : MonoBehaviour {
 			case "loseFood":
 				//TODO:pick range for loss
 				Debug.Log ("Food loss");
-				villageManagerRef.foodSupply-= Random.Range(1, 5);
+				villageManagerRef.foodSupply*= Random.Range(0.80f, 0.85f);
 				break;
 			case "loseHappiness":
 				Debug.Log ("Happiness loss");
-				villageManagerRef.happiness-= Random.Range(1,5);
+				villageManagerRef.happiness*= Random.Range(0.80f, 0.85f);
 				break;
 			case "loseWater":
-				villageManagerRef.waterSupply-= Random.Range(1,5);
+				villageManagerRef.waterSupply*= Random.Range(0.80f, 0.85f);
 				break;
 			case "losePopulation":
 				Debug.Log ("Pop loss");
-				int randPopLoss = Random.Range(1,5);
-
-				villageManagerRef.cull(randPopLoss);
-
+				villageManagerRef.population*= Random.Range(0.80f, 0.85f);
 				break;
 			case "loseSupplies":
-				villageManagerRef.foodSupply-= Random.Range(1,3);
-				villageManagerRef.waterSupply-= Random.Range(1,3);
+				villageManagerRef.foodSupply*= Random.Range(0.85f, 0.90f);
+				villageManagerRef.waterSupply*= Random.Range(0.85f, 0.90f);
 				break;
 			case "loseFoodIncrease":
-				villageManagerRef.foodGain-= Random.Range (1,3);
+				villageManagerRef.foodGain*= Random.Range (0.85f, 0.90f);
 				break;
 			case "loseWaterIncrease":
-				villageManagerRef.waterGain-= Random.Range (1,3);
+				villageManagerRef.waterGain*= Random.Range (0.85f, 0.90f);
 				break;
 			case "loseRandom":
 				int rand = Random.Range(1,3);
 				if (rand == 1)
 				{
-					villageManagerRef.foodSupply-= Random.Range (5,10);
+					villageManagerRef.foodSupply*= Random.Range (0.50f, 0.75f);
 				}else if (rand == 2)
 				{
-					villageManagerRef.waterSupply-= Random.Range (5,10);
+					villageManagerRef.waterSupply*= Random.Range (0.50f, 0.75f);
 				}else if (rand == 3)
 				{
-					villageManagerRef.population-= Random.Range (5,10);
+					villageManagerRef.population*= Random.Range (0.50f, 0.75f);
 				}
-				villageManagerRef.happiness-= Random.Range (3,6);
+				villageManagerRef.happiness-= Random.Range (0.50f, 0.75f);
 				break;
 			case "lose1Food":
 				villageManagerRef.foodSupply--;
 				break;
 			case "lose1Population":
-				villageManagerRef.cull(1);
+				villageManagerRef.population--;
 				break;
 			case "lose1Happiness":
 				villageManagerRef.happiness--;
@@ -199,38 +180,28 @@ public class ChatDialogue : MonoBehaviour {
 				//TODO:call end state here
 				break;
 			case "gainFood":
-				villageManagerRef.foodSupply+= Random.Range(1,5);
+				villageManagerRef.foodSupply*= Random.Range(1.15f,1.20f);
 				break;
 			case "gainHappiness":
-				villageManagerRef.happiness+= Random.Range (1,5);
+				villageManagerRef.happiness*= Random.Range (1.15f,1.20f);
 				break;
 			case "gainWater":
-				villageManagerRef.waterSupply+= Random.Range (1,5);
+				villageManagerRef.waterSupply*= Random.Range (1.15f,1.20f);
 				break;
 			case "gainPopulation":
-				rand = Random.Range (1,5);
-				villageManagerRef.population += rand;
-
-				for(int j = 0 ; j < rand; j++)
-				{
-					villageManagerRef.Villagers.Add(Instantiate(Resources.Load("Prefabs/Villagerlol")) as GameObject);
-					villageManagerRef.Villagers[villageManagerRef.Villagers.Count - 1].AddComponent<Villager>();
-				}
+				villageManagerRef.population*= Random.Range (1.15f,1.20f);
 				break;
 			case "gainSupplies":
-				villageManagerRef.foodSupply+= Random.Range (1,3);
-				villageManagerRef.waterSupply+= Random.Range (1,3);
+				villageManagerRef.foodSupply*= Random.Range (1.10f,1.15f);
+				villageManagerRef.waterSupply*= Random.Range (1.10f,1.15f);
 				break;
 			case "gainFoodIncrease":
-				villageManagerRef.foodGain+= Random.Range (1,3);
+				villageManagerRef.foodGain*= Random.Range (1.10f,1.15f);
 				break;
 			case "gainWaterIncrease":
-				villageManagerRef.waterGain+= Random.Range (1,3);
+				villageManagerRef.waterGain*= Random.Range (1.10f,1.15f);
 				break;
 			case "gain1Population":
-
-				villageManagerRef.Villagers.Add(Instantiate(Resources.Load("Prefabs/Villagerlol")) as GameObject);
-				villageManagerRef.Villagers[villageManagerRef.Villagers.Count - 1].AddComponent<Villager>();
 				villageManagerRef.population++;
 				break;
 			case "gain1Happiness":
@@ -246,18 +217,18 @@ public class ChatDialogue : MonoBehaviour {
 				int rand3 = Random.Range(1,2);
 				if(rand3 == 1)
 				{
-					villageManagerRef.foodSupply++;
+					villageManagerRef.foodSupply*= Random.Range(1.10f,1.15f);
 				}else if (rand3 == 2)
 				{
-					villageManagerRef.foodSupply+= 6;
+					villageManagerRef.foodSupply*= Random.Range(1.20f,1.25f);
 				}
 				break;
 			case "randomHappiness":
 				int rand2 = Random.Range(1,2);
 				if (rand2 == 1){
-					villageManagerRef.happiness+= Random.Range(1,5);
+					villageManagerRef.happiness*= Random.Range(1.10f,1.15f);
 				}else if (rand2 == 2) {
-					villageManagerRef.happiness-= Random.Range(1,5);
+					villageManagerRef.happiness*= Random.Range(0.80f,0.85f);
 				}
 				break;
 
@@ -275,14 +246,8 @@ public class ChatDialogue : MonoBehaviour {
 			case "arrowKnee":
 				break;
 			case "Q30":
-				Q30Next = true;
 				break;
-			case "activate3":
-				Q3Active = true;
-				break;
-			case "activate4":
-				Q4Active = true;
-				break;
+
 
 			}
 		}
