@@ -157,29 +157,35 @@ public class ChatDialogue : MonoBehaviour {
 				//TODO:pick range for loss
 				Debug.Log ("Food loss");
 				villageManagerRef.foodSupply*= Random.Range(0.80f, 0.85f);
+				villageManagerRef.foodSupply-= Random.Range(1,10);
 				temp = Random.Range(0.80f, 0.85f);
 				qOutcome = "Lose " + temp.ToString ("f0") + "food";
 				break;
 			case "loseHappiness":
 				Debug.Log ("Happiness loss");
 				villageManagerRef.happiness*= Random.Range(0.80f, 0.85f);
+				villageManagerRef.happiness-= Random.Range(1,10);
 				temp = Random.Range(0.80f, 0.85f);
 				qOutcome = "Lose " + temp.ToString ("f0") + "Happiness";
 				break;
 			case "loseWater":
 				villageManagerRef.waterSupply*= Random.Range(0.80f, 0.85f);
+				villageManagerRef.waterSupply-= Random.Range(1,10);
 				temp = Random.Range(0.80f, 0.85f);
 				qOutcome = "Lose " + temp.ToString ("f0") + "Water";
 				break;
 			case "losePopulation":
 				Debug.Log ("Pop loss");
 				villageManagerRef.population*= Random.Range(0.80f, 0.85f);
+				villageManagerRef.population-= Random.Range(1,3);
 				temp = Random.Range(0.80f, 0.85f);
 				qOutcome = "Lose " + temp.ToString ("f0") + "Population";
 				break;
 			case "loseSupplies":
 				villageManagerRef.foodSupply*= Random.Range(0.85f, 0.90f);
+				villageManagerRef.foodSupply-= Random.Range(1,10);
 				villageManagerRef.waterSupply*= Random.Range(0.85f, 0.90f);
+				villageManagerRef.waterSupply-= Random.Range(1,10);
 				temp = Random.Range(0.80f, 0.90f);
 				qOutcome = "Lose " + temp.ToString ("f0") + "Supplies";
 				break;
@@ -198,14 +204,17 @@ public class ChatDialogue : MonoBehaviour {
 				if (rand == 1)
 				{
 					villageManagerRef.foodSupply*= Random.Range (0.50f, 0.75f);
+					villageManagerRef.foodSupply-= Random.Range(1,10);
 				}else if (rand == 2)
 				{
 					villageManagerRef.waterSupply*= Random.Range (0.50f, 0.75f);
+					villageManagerRef.waterSupply-= Random.Range(1,10);
 				}else if (rand == 3)
 				{
 					villageManagerRef.population*= Random.Range (0.50f, 0.75f);
+					villageManagerRef.population-= Random.Range(1,3);
 				}
-				villageManagerRef.happiness-= Random.Range (0.50f, 0.75f);
+				villageManagerRef.happiness*= Random.Range (0.50f, 0.75f);
 				break;
 			case "lose1Food":
 				villageManagerRef.foodSupply--;
