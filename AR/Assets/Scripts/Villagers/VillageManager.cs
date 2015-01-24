@@ -203,11 +203,11 @@ public class VillageManager : MonoBehaviour
                     APop.Play();
 
 					//Pick random amount of time for next decision
-<<<<<<< HEAD
+
 					nextDecisionTimer = 10;// Random.Range(0,1);
-=======
+
 					nextDecisionTimer = Random.Range(1,35);
->>>>>>> origin/master
+
 
 					decisionTimer = 0;
 				}
