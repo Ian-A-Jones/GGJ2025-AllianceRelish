@@ -3,68 +3,76 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class ChatDialogue : MonoBehaviour {
-
+	
 	public VillageManager villageManagerRef;
-
+	
 	#region Variables
-    public GUISkin GSKIN; 
+	public GUISkin GSKIN; 
 	string Question;
 	//string[] Answers; 
 	public static bool activeQ;
-    Rect QuestionRectangle = new Rect(Screen.width - (Screen.width / 3 * 2), Screen.height - (Screen.height / 10 * 3), Screen.width / 3 * 2, Screen.height / 10 * 3);
-    Rect LabelRectangle = new Rect(Screen.width - (Screen.width / 3 * 2), Screen.height - (Screen.height / 10 * 3), Screen.width / 3 * 2, Screen.height / 10 * 1);
-    Rect AnswerRectangle = new Rect(Screen.width - (Screen.width/2 + 100 ), Screen.height - (Screen.height / 10 * 2), Screen.width / 6*3, Screen.height / 20 * 1);
-    Rect AnswerRectangle2 = new Rect(Screen.width - (Screen.width/2 + 100), Screen.height - (Screen.height / 10 * 1), Screen.width / 6* 3, Screen.height / 20 * 1);
-
+	Rect QuestionRectangle = new Rect(Screen.width - (Screen.width / 3 * 2), Screen.height - (Screen.height / 10 * 3), Screen.width / 3 * 2, Screen.height / 10 * 3);
+	Rect LabelRectangle = new Rect(Screen.width - (Screen.width / 3 * 2), Screen.height - (Screen.height / 10 * 3), Screen.width / 3 * 2, Screen.height / 10 * 1);
+	Rect AnswerRectangle = new Rect(Screen.width - (Screen.width/2 + 100 ), Screen.height - (Screen.height / 10 * 2), Screen.width / 6*3, Screen.height / 20 * 1);
+	Rect AnswerRectangle2 = new Rect(Screen.width - (Screen.width/2 + 100), Screen.height - (Screen.height / 10 * 1), Screen.width / 6* 3, Screen.height / 20 * 1);
+	
 	public Questions questions;
-
+	
 	//keep track of the questions
 	public List<int> ListaskedQ= new List<int>();
-
-    //Rect LabelRectangle = new Rect(Screen.width-900, Screen.height-140, 500, 30);
+	
+	public bool Q3Active = false, Q4Active = false, Q30Next = false;
+	
+	//Rect LabelRectangle = new Rect(Screen.width-900, Screen.height-140, 500, 30);
 	
 	string Answer1, Answer2, Outcome1, Outcome2;
 	#endregion 
-
-    void Start()
-    {
-        questions = new Questions();
+	
+	void Start()
+	{
+		questions = new Questions();
 		nextQ();
-        activeQ = false;
-    }
-
+		activeQ = false;
+	}
+	
 	void OnGUI()
 	{
-        GUI.skin = GSKIN;
-        if (activeQ)
-        {
-           // GUI.Window(0, WindowRectangle, DoMyWindow,"");
+		GUI.skin = GSKIN;
+		if (activeQ)
+		{
+			// GUI.Window(0, WindowRectangle, DoMyWindow,"");
+			if(ListaskedQ.Count < 41)
+			{
+				GUI.Box(new Rect(QuestionRectangle), "");
+				GUI.Label(new Rect(LabelRectangle),Question);
+				if (GUI.Button(new Rect(AnswerRectangle), Answer1))
+				{
+					purformOutcome(Outcome1);
+					activeQ = false;
+					
+					Time.timeScale = 1;
+					nextQ();
+					
+					
+				}
+				if (GUI.Button(new Rect(AnswerRectangle2), Answer2))
+				{
+					purformOutcome(Outcome2);
+					activeQ = false;
+					
+					Time.timeScale = 1;
+					nextQ();
+				}
+			}
+			{
+				//Completed Decisions end state
 
-            GUI.Box(new Rect(QuestionRectangle), "");
-            GUI.Label(new Rect(LabelRectangle),Question);
-            if (GUI.Button(new Rect(AnswerRectangle), Answer1))
-            {
-				purformOutcome(Outcome1);
-                activeQ = false;
-
-				Time.timeScale = 1;
-				nextQ();
-
-
-            }
-            if (GUI.Button(new Rect(AnswerRectangle2), Answer2))
-            {
-				purformOutcome(Outcome2);
-                activeQ = false;
-
-				Time.timeScale = 1;
-				nextQ();
-            }
-          
-        }
-
+			}
+			
+		}
+		
 	}
-
+	
 	void nextQ()
 	{
 		int id = randQ();
@@ -76,28 +84,36 @@ public class ChatDialogue : MonoBehaviour {
 		Outcome1 = Outcomes[0];
 		Outcome2 = Outcomes[1];
 	}
-   //
+
 	#region new question + answer
 	private int randQ()
-	{	//TODO: cheack for a repeated question, if so pick another number.
-
+	{
+		
 		int qNum = -1;
 		bool newQFound = false;
-
+		
 		while(!newQFound)
 		{
 			qNum = Random.Range (0, 41);
-
+			
 			if(!ListaskedQ.Contains(qNum))
 			{
-				ListaskedQ.Add (qNum);
-				newQFound = true;
+				if(Q30Next)
+				{
+					Q30Next = false;
+					ListaskedQ.Add (30);
+					return 30;
+				}
+				if(((qNum != 4 && qNum != 3) || qNum == 3 && Q3Active || qNum == 4 && Q4Active) && qNum != 30)
+				{
+					ListaskedQ.Add (qNum);
+					newQFound = true;
+				}
 			}
 		}
-
 		return qNum;
-
 	}
+
 	private string newQ(int id)
 	{
 		string question = questions.returnQuestion(id);
@@ -234,21 +250,32 @@ public class ChatDialogue : MonoBehaviour {
 
 				//TODO: all visual changes
 			case "cutTree":
+				villageManagerRef.removeTree();
 				break;
 			case "goldHut":
+				villageManagerRef.GoldHut();
 				break;
 			case "gainGraffiti":
+				villageManagerRef.Graffiti();
 				break;
 			case "gainFineArt":
+				villageManagerRef.FineArt();
 				break;
 			case "burnHut":
+				villageManagerRef.BurntHut();
 				break;
 			case "arrowKnee":
+				villageManagerRef.arrowKnee();
 				break;
 			case "Q30":
+				Q30Next = true;
 				break;
-
-
+			case "activate3":
+				Q3Active = true;
+				break;
+			case "activate4":
+				Q4Active = true;
+				break;
 			}
 		}
 	}

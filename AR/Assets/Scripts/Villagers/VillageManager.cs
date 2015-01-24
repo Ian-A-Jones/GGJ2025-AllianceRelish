@@ -275,6 +275,36 @@ public class VillageManager : MonoBehaviour
 		Debug.Log (happiness);
 	}
 
+	public void  removeTree()
+	{
+		VillageGenRef.removeATree();
+	}
+
+	public void  GoldHut()
+	{
+		VillageGenRef.addAGoldHut();
+	}
+
+	public void  Graffiti()
+	{
+		VillageGenRef.addGraffiti();
+	}
+
+	public void  FineArt()
+	{
+		VillageGenRef.addFineArt();
+	}
+
+	public void  BurntHut()
+	{
+		VillageGenRef.addBurntHut();
+	}
+
+	public void arrowKnee()
+	{
+		VillageGenRef.addArrowKnee();
+	}
+
 	void OnGUI()
 	{
 		GUI.skin = skin;
