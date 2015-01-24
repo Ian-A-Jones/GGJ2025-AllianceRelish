@@ -23,7 +23,7 @@ public class MainMenu : MonoBehaviour {
 
 	public void OnClickPlayGame()
 	{
-		Application.LoadLevel ("");
+		Application.LoadLevel (1);
 	}
 
 	public void OnClickSettings()
