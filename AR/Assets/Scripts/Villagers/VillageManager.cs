@@ -63,6 +63,7 @@ public class VillageManager : MonoBehaviour
 	bool unhappyVillageEndState = false;
 	int happinessVictory = 200;
 	int populationVictory = 100;
+	int questionVictory = 40;
 
 	#endregion
 
@@ -344,6 +345,22 @@ public class VillageManager : MonoBehaviour
 			GUI.BeginGroup(new Rect (Screen.width / 2 - 250, Screen.height / 2, 400, 200), "");
 			GUI.Box (new Rect (10,0, 400, 200), "");
 			GUI.Label (new Rect (10,10, 400, 100), "congratulations, you have managed to make your community thrive!");
+			if (GUI.Button (new Rect ( 100,75, 100, 50), "Restart."))
+			{
+				Application.LoadLevel (1);
+			}
+			if (GUI.Button (new Rect ( 200,75, 100, 50), "Quit."))
+			{
+				Application.Quit();
+			}
+			GUI.EndGroup();
+		}
+
+		if () 
+		{
+			GUI.BeginGroup(new Rect (Screen.width / 2 - 250, Screen.height / 2, 400, 200), "");
+			GUI.Box (new Rect (10,0, 400, 200), "");
+			GUI.Label (new Rect (10,10, 400, 100), "You have lost! You have been overthrown!");
 			if (GUI.Button (new Rect ( 100,75, 100, 50), "Restart."))
 			{
 				Application.LoadLevel (1);
