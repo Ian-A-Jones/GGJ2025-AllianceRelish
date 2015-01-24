@@ -16,7 +16,7 @@ public class Villager : MonoBehaviour
 	// Use this for initialization
 	void Start () 
 	{
-	
+
 	}
 	
 	public bool alive()
