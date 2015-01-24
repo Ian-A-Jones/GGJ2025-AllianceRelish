@@ -14,16 +14,7 @@ public class ChatDialogue : MonoBehaviour {
     Rect AnswerRectangle = new Rect(Screen.width - (Screen.width/2 + 100 ), Screen.height - (Screen.height / 10 * 2), Screen.width / 6*3, Screen.height / 20 * 1);
     Rect AnswerRectangle2 = new Rect(Screen.width - (Screen.width/2 + 100), Screen.height - (Screen.height / 10 * 1), Screen.width / 6* 3, Screen.height / 20 * 1);
 
-
-
-
-
-    ////Rect LabelRectangle = new Rect(Screen.width-900, Screen.height-140, 500, 30);
-    //Rect AnswerRectangle = new Rect(Screen.width-950, Screen.height -90, 900,30);
-    //Rect AnswerRectangle2 = new Rect(Screen.width-950, Screen.height -60, 900,30);
 	public Questions questions;
-
-	int i = 0;
 	string Answer1, Answer2;
 	#endregion 
 
