@@ -5,11 +5,12 @@ using System.Collections.Generic;
 public class VillageManager : MonoBehaviour
 {		
 	//Reference to Village Generator
-	public Village VillageRef;
+	public VillageGenerator VillageRef;
 
 	#region Village stats
 	//Total number of Villagers
 	public int population;
+    public int newPopulation;
 
 	//Total amount of food and water available
 	public int foodSupply;
@@ -56,7 +57,15 @@ public class VillageManager : MonoBehaviour
 	float SADWATERTHRESH = 0.8f;
 
 	#endregion
-	
+
+	public GUIContent food;
+	public GUIContent water;
+	public GUIContent happinessIcon;
+	public GUIContent pop;
+	public GUIContent box;
+	public GUISkin skin;
+	public GUISkin skin2;
+
 	// Use this for initialization
 	void Start () 
 	{
@@ -75,20 +84,37 @@ public class VillageManager : MonoBehaviour
 		sickness = 0;
 
 		Villagers = new List<GameObject>();
-
-		for(int i = 0; i < population; i++)
-		{
-			Villagers.Add(new GameObject("Villager " + (i+1)));
-			Villagers[i].AddComponent("Villager");
-		}
+        //If the new Population is greater then create more
+        for (int i = 0; i < population; i++)
+        {
+            Villagers.Add(Instantiate(Resources.Load("Prefabs/Villagerlol")) as GameObject);
+            Villagers[Villagers.Count - 1].AddComponent<Villager>();
+            // Debug.Log("DRAWING VILLAGER");
+        }
+		newPopulation = population;
 	}
 	
 	// Update is called once per frame
 	void Update () 
 	{
+       
+
+        //If the population has increased draw a new villager and increase the population value.
+        if (newPopulation > population)
+        {
+            Villagers.Add(Instantiate(Resources.Load("Prefabs/Villagerlol")) as GameObject);
+            Villagers[Villagers.Count - 1].AddComponent<Villager>();
+
+            population = newPopulation;
+        }
+       
 		//If game isn't over
 		if(!gameOver())
 		{
+            foreach (GameObject villager in Villagers)
+            {
+                villager.GetComponent<Villager>().moveVillager();
+            }
 			//Decision timer stuff
 			if(decisionTimer > nextDecisionTimer)
 			{
@@ -120,6 +146,7 @@ public class VillageManager : MonoBehaviour
 				{
 					if(villager.GetComponent<Villager>().alive())
 					{
+                        
 						if(foodSupply > 0)
 						{
 							villager.GetComponent<Villager>().unHunger();
@@ -146,12 +173,21 @@ public class VillageManager : MonoBehaviour
 						Destroy(villager);
 						population--;
 					}
+                    if (foodSupply > 100 && waterSupply > 100 && happiness > 50)
+                    {
+                        newPopulation++;
+                    }
 				}
 
 				happyCalc(foodSupply, HAPPYFOODTHRESH, SADFOODTHRESH);
 				
 				happyCalc(waterSupply, HAPPYWATERTHRESH, SADWATERTHRESH);
-				
+
+				if(happiness > 50 && foodSupply > 0 && waterSupply > 0)
+				{
+					population++;
+				}
+
 				debugStats();
 			}
 			else
@@ -210,6 +246,24 @@ public class VillageManager : MonoBehaviour
 		Debug.Log ("Water %: " + percentPop(waterSupply) + "%");
 
 		Debug.Log (happiness);
+	}
+
+	void OnGUI()
+	{
+		GUI.skin = skin;
+
+		GUI.Box (new Rect (-200, 0, 2500, 50), "");
+		GUI.Label (new Rect (Screen.width / 2 - 400, 10, 150, 100), "Total Food: " + foodSupply);
+		GUI.Label (new Rect (Screen.width / 2 - 200, 10, 150, 100), "Total Water: " + waterSupply);
+		GUI.Label (new Rect (Screen.width / 2 , 10, 150, 100), "Happiness: " + happiness + "%");
+		GUI.Label (new Rect (Screen.width / 2 + 200, 10, 150, 100), "Population: " + population);
+
+		GUI.skin = skin2;
+		GUI.Label (new Rect (Screen.width / 2 - 425, 10, 50, 50), food);
+		GUI.Label (new Rect (Screen.width / 2 - 225, 10, 50, 50), water);
+		GUI.Label (new Rect (Screen.width / 2 - 25, 10, 50, 50), happinessIcon);
+		GUI.Label (new Rect (Screen.width / 2 + 175, 10, 50, 50), pop);
+
 	}
 
 }
