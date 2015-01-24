@@ -60,6 +60,7 @@ public class ChatDialogue : MonoBehaviour {
 				{
 					purformOutcome(Outcome1);
 					activeQ = false;
+					villageManagerRef.setVillagersKinematic(false);
 					nextQ();
 					
 					
@@ -67,6 +68,7 @@ public class ChatDialogue : MonoBehaviour {
 				if (GUI.Button(new Rect(AnswerRectangle2), Answer2))
 				{
 					purformOutcome(Outcome2);
+					villageManagerRef.setVillagersKinematic(false);
 					activeQ = false;			
 					nextQ();
 				}

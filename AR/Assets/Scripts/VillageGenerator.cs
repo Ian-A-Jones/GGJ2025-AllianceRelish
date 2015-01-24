@@ -34,7 +34,6 @@ public class VillageGenerator : MonoBehaviour {
 		GenerateRiver ();
 		GenerateHuts (population);
 		GenerateForest ();
-		Debug.Log (trees.Count);
 	}
 	
 	// Update is called once per frame
@@ -55,7 +54,7 @@ public class VillageGenerator : MonoBehaviour {
 			Vector2 hutPos; 
 			do{
 				hutPos = Random.insideUnitCircle*(VILLAGE_RADIUS*0.8f);
-			}while(Vector2.Distance(Vector2.zero, hutPos)<2);
+			}while(Vector2.Distance(Vector2.zero, hutPos)<4);
 			
 			
 			huts.Add(Instantiate(Resources.Load("Prefabs/Hut")) as GameObject);
@@ -68,7 +67,7 @@ public class VillageGenerator : MonoBehaviour {
 
 		for (int i = 0; i<huts.Count; i++) {
 			for(int j = 0; j<huts.Count; j++){
-				if(huts[i]!=huts[j] && i!=0){
+				if(huts[i]!=huts[j]){
 					if(huts[i].GetComponent<BoxCollider2D>().bounds.Intersects(huts[j].GetComponent<BoxCollider2D>().bounds)){
 						do{
 							Vector2 offset = Random.insideUnitCircle;

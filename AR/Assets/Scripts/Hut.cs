@@ -25,7 +25,6 @@ public class Hut : MonoBehaviour {
 	void OnTriggerStay2D(Collider2D col){
 		
 		if (col.gameObject.tag == "River") {
-			Debug.Log(1);
 			this.transform.position += new Vector3(col.gameObject.transform.position.x * -2,0,0);
 		}
 	}

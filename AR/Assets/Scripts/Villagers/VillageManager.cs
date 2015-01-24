@@ -87,7 +87,7 @@ public class VillageManager : MonoBehaviour
 	// Use this for initialization
 	void Start () 
 	{
-		population = 10;
+		population = 1;
 
 		villagerImporter = gameObject.AddComponent<VillagerImporter> ();
 
@@ -117,6 +117,15 @@ public class VillageManager : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
+
+		foreach (GameObject v in Villagers) {
+			v.GetComponent<SpriteRenderer>().sortingOrder = (int)((v.transform.position.y-10) * 100f) * -1;
+		}
+
+
+
+	
+		
 		//If game isn't over
 		if(!gameOver())
 		{
@@ -150,6 +159,7 @@ public class VillageManager : MonoBehaviour
 					if(villager.GetComponent<Villager>().alive())
 					{
 	                	villager.GetComponent<Villager>().moveVillager();
+
 					}
 					else
 					{
@@ -164,6 +174,7 @@ public class VillageManager : MonoBehaviour
 					//Start decision
 					Debug.Log ("Next decision");
 					ChatDialogue.activeQ = true;
+					setVillagersKinematic(true);
 
 					//Pick random amount of time for next decision
 					nextDecisionTimer = 100;// Random.Range(0,1);
@@ -266,6 +277,12 @@ public class VillageManager : MonoBehaviour
 		}
 	}
 
+	public void setVillagersKinematic(bool val){
+		foreach(GameObject v in Villagers){
+			v.GetComponent<Rigidbody2D>().isKinematic = val;
+		}
+	}
+		
 	public void cull(int toCull)
 	{
 		int totalCulled = 0;
