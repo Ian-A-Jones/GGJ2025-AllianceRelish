@@ -4,6 +4,9 @@ using System.Collections.Generic;
 
 public class VillageManager : MonoBehaviour
 {		
+	//Reference to Village Generator
+	public Village VillageRef;
+
 	#region Village stats
 	//Total number of Villagers
 	public int population;
@@ -66,6 +69,8 @@ public class VillageManager : MonoBehaviour
 	void Start () 
 	{
 		population = 10;
+
+		VillageRef.GenerateVillage(population);
 
 		foodSupply = 200;
 		waterSupply = 200;
@@ -154,7 +159,12 @@ public class VillageManager : MonoBehaviour
 				happyCalc(foodSupply, HAPPYFOODTHRESH, SADFOODTHRESH);
 				
 				happyCalc(waterSupply, HAPPYWATERTHRESH, SADWATERTHRESH);
-				
+
+				if(happiness > 50 && foodSupply > 0 && waterSupply > 0)
+				{
+					population++;
+				}
+
 				debugStats();
 			}
 			else

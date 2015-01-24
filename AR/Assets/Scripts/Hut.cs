@@ -25,8 +25,11 @@ public class Hut : MonoBehaviour {
 	void OnTriggerStay2D(Collider2D col){
 		
 		if (col.gameObject.tag == "River") {
-			Destroy(gameObject);
-			hutsRef.Remove(gameObject);
+			//Move hut Away
+			Debug.Log ("Before Move: " + this.transform.position);
+			Debug.Log ("River PosX: " + col.gameObject.transform.position.x);
+			this.transform.position += new Vector3(col.gameObject.transform.position.x * -2,0,0);
+			Debug.Log ("After Move: " + this.transform.position);
 		}
 	}
 }
