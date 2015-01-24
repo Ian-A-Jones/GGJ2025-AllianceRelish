@@ -197,7 +197,7 @@ public class VillageManager : MonoBehaviour
 			}
 			else
 			{
-				Time.timeScale = 0;
+				//Time.timeScale = 0;
 			}
 		}
 		else

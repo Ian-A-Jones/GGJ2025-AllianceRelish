@@ -22,17 +22,19 @@ public class ChatDialogue : MonoBehaviour {
 	public List<int> ListaskedQ= new List<int>();
 
 	public bool Q3Active = false, Q4Active = false;
-
-    //Rect LabelRectangle = new Rect(Screen.width-900, Screen.height-140, 500, 30);
 	
 	string Answer1, Answer2, Outcome1, Outcome2;
+
+
+    public ParticleSystem Rain;
+    public ParticleSystem BloodRain;
 	#endregion 
 
     void Start()
     {
         questions = new Questions();
 		nextQ();
-        activeQ = false;
+        activeQ = false;        
     }
 
 	void OnGUI()
@@ -40,7 +42,6 @@ public class ChatDialogue : MonoBehaviour {
         GUI.skin = GSKIN;
         if (activeQ)
         {
-           // GUI.Window(0, WindowRectangle, DoMyWindow,"");
 			if(ListaskedQ.Count < villageManagerRef.Villagers.Count)
 			{
 	            GUI.Box(new Rect(QuestionRectangle), "");
@@ -50,7 +51,7 @@ public class ChatDialogue : MonoBehaviour {
 					purformOutcome(Outcome1);
 	                activeQ = false;
 
-					Time.timeScale = 1;
+					//Time.timeScale = 1;
 					nextQ();
 
 
@@ -60,7 +61,7 @@ public class ChatDialogue : MonoBehaviour {
 					purformOutcome(Outcome2);
 	                activeQ = false;
 
-					Time.timeScale = 1;
+					//Time.timeScale = 1;
 					nextQ();
 	            }
 			}
@@ -131,7 +132,7 @@ public class ChatDialogue : MonoBehaviour {
 
 	void purformOutcome(string outcome)
 	{
-
+        //death.enabled = false;
 		string[] outcomes = outcome.Split ("," [0]);
 
 		for (int i = 0; i < outcomes.Length; i ++) {
@@ -154,7 +155,6 @@ public class ChatDialogue : MonoBehaviour {
 				int randPopLoss = Random.Range(1,5);
 
 				villageManagerRef.cull(randPopLoss);
-
 				break;
 			case "loseSupplies":
 				villageManagerRef.foodSupply-= Random.Range(1,3);
@@ -177,6 +177,7 @@ public class ChatDialogue : MonoBehaviour {
 				}else if (rand == 3)
 				{
 					villageManagerRef.population-= Random.Range (5,10);
+                    
 				}
 				villageManagerRef.happiness-= Random.Range (3,6);
 				break;
@@ -185,6 +186,7 @@ public class ChatDialogue : MonoBehaviour {
 				break;
 			case "lose1Population":
 				villageManagerRef.cull(1);
+                
 				break;
 			case "lose1Happiness":
 				villageManagerRef.happiness--;
@@ -276,6 +278,18 @@ public class ChatDialogue : MonoBehaviour {
 			case "activate4":
 				Q4Active = true;
 				break;
+            case "raining":
+                Debug.Log("RAIN NOW");
+                //Rain.playOnAwake = true;
+                BloodRain.Play(false);
+                Rain.Play(true);
+                break;
+            case "Rainingblood":
+                Debug.Log("RAIN NOW");
+                Rain.Play(false);
+                BloodRain.Play(true);
+                break;
+
 
 			}
 		}
