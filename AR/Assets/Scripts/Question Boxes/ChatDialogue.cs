@@ -26,6 +26,9 @@ public class ChatDialogue : MonoBehaviour {
 	//Rect LabelRectangle = new Rect(Screen.width-900, Screen.height-140, 500, 30);
 	
 	string Answer1, Answer2, Outcome1, Outcome2;
+
+    public ParticleSystem Rain;
+    public ParticleSystem BloodRain;
 	#endregion 
 	
 	void Start()
@@ -47,7 +50,7 @@ public class ChatDialogue : MonoBehaviour {
 				if (GUI.Button(new Rect(AnswerRectangle), Answer1))
 				{
 					purformOutcome(Outcome1);
-					activeQ = false;;
+					activeQ = false;
 					nextQ();
 					
 					
@@ -272,6 +275,16 @@ public class ChatDialogue : MonoBehaviour {
 			case "activate4":
 				Q4Active = true;
 				break;
+            case"raining":
+                BloodRain.Play(false);
+                Rain.Play(true);
+                //Rain.playOnAwake = true;
+                break;
+            case "RainingBlood":
+                Rain.Play(false);
+                BloodRain.Play(true);
+                //BloodRain.playOnAwake = true;
+                break;                   
 			}
 		}
 	}

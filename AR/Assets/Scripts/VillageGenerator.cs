@@ -196,20 +196,20 @@ public class VillageGenerator : MonoBehaviour {
 
 	public void removeATree()
 	{
-		float closestTree = 100;
-		float closestTreeIndex = 0;
-		int randomHut = Random.Range(0,huts.Count);
+        //float closestTree = 100;
+        //float closestTreeIndex = 0;
+        //int randomHut = Random.Range(0,huts.Count);
 
-		for(int i = 0; i < trees.Count; i++)
-		{
-			float tempDist = Vector2.Distance(huts[randomHut].transform.position, trees[i].transform.position);
+        //for(int i = 0; i < trees.Count; i++)
+        //{
+        //    float tempDist = Vector2.Distance(huts[randomHut].transform.position, trees[i].transform.position);
 
-			if(tempDist < closestTree)
-			{
-				closestTree = tempDist;
-				closestTreeIndex = i;
-			}
-		}
+        //    if(tempDist < closestTree)
+        //    {
+        //        closestTree = tempDist;
+        //        closestTreeIndex = i;
+        //    }
+		//}
 
 		//Change to Stump sprite
 		//
