@@ -68,7 +68,7 @@ public class ChatDialogue : MonoBehaviour {
 	#region new question + answer
 	private int randQ()
 	{	//TODO: cheack for a repeated question, if so pick another number.
-		int qNum = Random.Range (0, 41);
+		int qNum = Random.Range (0, 1);
 		ListaskedQ.Add (qNum);
 		return qNum;
 
@@ -86,7 +86,7 @@ public class ChatDialogue : MonoBehaviour {
 	}
 	private string[] newOutcome(int id)
 	{
-		string[] outcomes = questions.returnAnswer (id);
+		string[] outcomes = questions.returnOutcome (id);
 		
 		return outcomes;
 	}
@@ -96,13 +96,15 @@ public class ChatDialogue : MonoBehaviour {
 
 	void purformOutcome(string outcome)
 	{
+
 		string[] outcomes = outcome.Split ("," [0]);
 
-		for (int i = 0; i > outcomes.Length; i ++) {
+		for (int i = 0; i < outcomes.Length; i ++) {
 			switch(outcomes[i])
 			{
 			case "loseFood":
 				//TODO:pick range for loss
+				Debug.Log ("Food loss");
 				villageManagerRef.foodSupply-= Random.Range(1, 5);
 				break;
 			case "loseHappiness":
