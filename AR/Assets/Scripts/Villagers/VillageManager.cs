@@ -298,7 +298,7 @@ public class VillageManager : MonoBehaviour
 	}
 	bool gameOver()
 	{
-		if(population <=0)
+		if(population <1)
 		{
 			//Dead Village end state
 			villageDeadEndState = true;
