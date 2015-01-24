@@ -257,8 +257,9 @@ public class VillageManager : MonoBehaviour
 						}
 						else
 						{
-							Villagers.Remove(villager);
 							Destroy(villager);
+							Villagers.Remove(villager);
+
 							population--;
 						}
 					}
