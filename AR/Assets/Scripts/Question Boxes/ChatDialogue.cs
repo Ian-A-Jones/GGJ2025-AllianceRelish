@@ -1,11 +1,14 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
 public class ChatDialogue : MonoBehaviour {
 	
 	public VillageManager villageManagerRef;
-	
+	public string qOutcome;
+
+	float temp = 0.0f;
+
 	#region Variables
 	public GUISkin GSKIN; 
 	string Question;
@@ -33,6 +36,8 @@ public class ChatDialogue : MonoBehaviour {
 	
 	void Start()
 	{
+        gameObject.GetComponent<RenderParticlesOnLayer>().changeOrder(Rain);
+        gameObject.GetComponent<RenderParticlesOnLayer>().changeOrder(BloodRain);
 		questions = new Questions();
 		nextQ();
 	}
@@ -146,27 +151,41 @@ public class ChatDialogue : MonoBehaviour {
 				//TODO:pick range for loss
 				Debug.Log ("Food loss");
 				villageManagerRef.foodSupply*= Random.Range(0.80f, 0.85f);
+				temp = Random.Range(0.80f, 0.85f);
+				qOutcome = "Lose " + temp.ToString ("f0") + "food";
 				break;
 			case "loseHappiness":
 				Debug.Log ("Happiness loss");
 				villageManagerRef.happiness*= Random.Range(0.80f, 0.85f);
+				temp = Random.Range(0.80f, 0.85f);
+				qOutcome = "Lose " + temp.ToString ("f0") + "Happiness";
 				break;
 			case "loseWater":
 				villageManagerRef.waterSupply*= Random.Range(0.80f, 0.85f);
+				temp = Random.Range(0.80f, 0.85f);
+				qOutcome = "Lose " + temp.ToString ("f0") + "Water";
 				break;
 			case "losePopulation":
 				Debug.Log ("Pop loss");
 				villageManagerRef.population*= Random.Range(0.80f, 0.85f);
+				temp = Random.Range(0.80f, 0.85f);
+				qOutcome = "Lose " + temp.ToString ("f0") + "Population";
 				break;
 			case "loseSupplies":
 				villageManagerRef.foodSupply*= Random.Range(0.85f, 0.90f);
 				villageManagerRef.waterSupply*= Random.Range(0.85f, 0.90f);
+				temp = Random.Range(0.80f, 0.90f);
+				qOutcome = "Lose " + temp.ToString ("f0") + "Supplies";
 				break;
 			case "loseFoodIncrease":
 				villageManagerRef.foodGain*= Random.Range (0.85f, 0.90f);
+				temp = Random.Range(0.80f, 0.90f);
+				qOutcome = "Lose " + temp.ToString ("f0") + "Food Increase";
 				break;
 			case "loseWaterIncrease":
 				villageManagerRef.waterGain*= Random.Range (0.85f, 0.90f);
+				temp = Random.Range(0.80f, 0.85f);
+				qOutcome = "Lose " + temp.ToString ("f0") + "Water Increase";
 				break;
 			case "loseRandom":
 				int rand = Random.Range(1,3);
@@ -184,46 +203,66 @@ public class ChatDialogue : MonoBehaviour {
 				break;
 			case "lose1Food":
 				villageManagerRef.foodSupply--;
+				qOutcome = "Lose 1 Food";
 				break;
 			case "lose1Population":
 				villageManagerRef.population--;
+				qOutcome = "Lose 1 Population";
 				break;
 			case "lose1Happiness":
 				villageManagerRef.happiness--;
+				qOutcome = "Lose 1 Happiness";
 				break;
 			case "loseGame":
 				//TODO:call end state here
 				break;
 			case "gainFood":
 				villageManagerRef.foodSupply*= Random.Range(1.15f,1.20f);
+				temp = Random.Range(1.15f, 1.20f);
+				qOutcome = "Gain " + temp.ToString ("f0") + "Food";
 				break;
 			case "gainHappiness":
 				villageManagerRef.happiness*= Random.Range (1.15f,1.20f);
+				temp = Random.Range(1.15f, 1.20f);
+				qOutcome = "Gain " + temp.ToString ("f0") + "Happiness";
 				break;
 			case "gainWater":
 				villageManagerRef.waterSupply*= Random.Range (1.15f,1.20f);
+				temp = Random.Range(1.15f, 1.20f);
+				qOutcome = "Gain " + temp.ToString ("f0") + "Water";
 				break;
 			case "gainPopulation":
 				villageManagerRef.population*= Random.Range (1.15f,1.20f);
+				temp = Random.Range(1.15f, 1.20f);
+				qOutcome = "Gain " + temp.ToString ("f0") + "Population";
 				break;
 			case "gainSupplies":
 				villageManagerRef.foodSupply*= Random.Range (1.10f,1.15f);
 				villageManagerRef.waterSupply*= Random.Range (1.10f,1.15f);
+				temp = Random.Range(1.10f, 1.15f);
+				qOutcome = "Gain " + temp.ToString ("f0") + "Supplies";
 				break;
 			case "gainFoodIncrease":
 				villageManagerRef.foodGain*= Random.Range (1.10f,1.15f);
+				temp = Random.Range(1.10f, 1.15f);
+				qOutcome = "Gain " + temp.ToString ("f0") + "Food Increase";
 				break;
 			case "gainWaterIncrease":
 				villageManagerRef.waterGain*= Random.Range (1.10f,1.15f);
+				temp = Random.Range(1.10f, 1.15f);
+				qOutcome = "Gain " + temp.ToString ("f0") + "Water Increase";
 				break;
 			case "gain1Population":
 				villageManagerRef.population++;
+				qOutcome = "Gain 1 Population";
 				break;
 			case "gain1Happiness":
 				villageManagerRef.happiness++;
+				qOutcome = "Gain 1 Happiness";
 				break;
 			case "gain1Food":
 				villageManagerRef.foodSupply++;
+				qOutcome = "Gain 1 Food";
 				break;
 			case"nothing":
 				break;

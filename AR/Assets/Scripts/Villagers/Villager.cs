@@ -10,6 +10,8 @@ public class Villager : MonoBehaviour
 
 	public static int DeathThreshold = 6;
 
+	JSONObject info;
+
 
 	// Use this for initialization
 	void Start () 
@@ -27,6 +29,12 @@ public class Villager : MonoBehaviour
 		{
 			return true;
 		}
+	}
+
+	public void setInfo(JSONObject newInfo){
+		info = newInfo;
+		Debug.Log (info);
+		return;
 	}
 
 	public void unHunger()
@@ -67,7 +75,8 @@ public class Villager : MonoBehaviour
 
     public Vector2 getNewDestination()
     {
-        Vector2 newPos = new Vector2(Random.Range(-100, 100), Random.Range(-100, 100));
+        Vector2 newPos = new Vector2(Random.Range(-15, 15), Random.Range(-8, 8));
+		Debug.Log ("Dest pos: " + newPos);
 
         return newPos;
     }
@@ -81,7 +90,7 @@ public class Villager : MonoBehaviour
     public void moveVillager()
     {
 
-		gameObject.GetComponent<SpriteRenderer>().sortingOrder = Mathf.RoundToInt((gameObject.transform.position.y-10) * 100f) * -1;
+		//gameObject.GetComponent<SpriteRenderer>().sortingOrder = Mathf.RoundToInt((gameObject.transform.position.y-10) * 100f) * -1;
         Vector2 curPos = curPosition();
         Vector2 dest = getNewDestination();
 
