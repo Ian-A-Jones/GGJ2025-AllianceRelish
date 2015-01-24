@@ -32,8 +32,11 @@ public class ChatDialogue : MonoBehaviour {
 
     public ParticleSystem Rain;
     public ParticleSystem BloodRain;
+    public AudioSource Thunder;
+    public AudioSource Laugh;
 
-    float RAINTIMER = 20;
+    float RAINTIMER = 30;
+    float timeRained = 0;
     int days = 0;
     bool isRaining = false;
 	#endregion 
@@ -321,11 +324,14 @@ public class ChatDialogue : MonoBehaviour {
             case"raining":
                 Rain.Play(true);
                 isRaining = true;
+                Thunder.Play();
                 update();
                 break;
             case "RainingBlood":
                 BloodRain.Play();
                 isRaining = true;
+                Thunder.Play();
+                Laugh.Play();
                 update();
                 break;
 			}
@@ -338,13 +344,14 @@ public class ChatDialogue : MonoBehaviour {
         Debug.Log("IM UPDATING");
         if (isRaining)
         {
-            for (int i = 0; i < RAINTIMER; i++)
+            timeRained += Time.deltaTime;
+            if (timeRained > RAINTIMER)
             {
-                //stuff;
+                timeRained = 0;
+                isRaining = false;
+                BloodRain.Stop();
+                Rain.Stop();
             }
-            isRaining = false;
-            BloodRain.Stop();
-            Rain.Stop();
         }
     }
 }
