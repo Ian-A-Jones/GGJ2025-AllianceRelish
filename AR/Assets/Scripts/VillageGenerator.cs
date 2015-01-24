@@ -113,11 +113,14 @@ public class VillageGenerator : MonoBehaviour {
 			}
 		}
 		
-		
+		int total = trees.Count;
 		
 		//Move trees away from each other and river
-		for (int i = 0; i<trees.Count; i++) {
-			for(int j = 0; j<trees.Count; j++){
+		for (int i = 0; i<total; i++) {
+			for(int j = 0; j<total; j++){
+				if(trees[i]==null || trees[j]==null){
+					continue;
+				}
 				if(trees[i]!=trees[j]){
 					if(trees[i].GetComponent<BoxCollider2D>().bounds.Intersects(trees[j].GetComponent<BoxCollider2D>().bounds)){
 						
@@ -128,11 +131,17 @@ public class VillageGenerator : MonoBehaviour {
 					if(trees[i].gameObject.transform.localPosition.x>15 || trees[i].gameObject.transform.localPosition.x<-15 ||
 					   trees[i].gameObject.transform.localPosition.y>8 || trees[i].gameObject.transform.localPosition.y<-10){
 						trees[i].SetActive(false);
+						Destroy(trees[i]);
+						trees.Remove(trees[i]);
+						total--;
 						continue;
 					}
 					//Destroy trees on village
 					if(Vector2.Distance(Vector2.zero, trees[i].transform.localPosition)<VILLAGE_RADIUS+3){
 						trees[i].SetActive(false);
+						Destroy(trees[i]);
+						trees.Remove(trees[i]);
+						total--;
 					}
 
 
@@ -143,14 +152,7 @@ public class VillageGenerator : MonoBehaviour {
 			trees[i].GetComponent<SpriteRenderer>().sortingOrder = Mathf.RoundToInt((trees[i].transform.position.y-10) * 100f) * -1;
 		}
 		
-		int index = trees.Count;
-		for(int i = 0; i<index; i++){
-			if(!trees[i].activeSelf){
-				trees.Remove(trees[i]);
-				index--;
-			}
-			
-		}
+
 		
 		
 		
@@ -184,30 +186,40 @@ public class VillageGenerator : MonoBehaviour {
 
 	public void removeATree()
 	{
+
+
+		huts [0].GetComponent<SpriteRenderer> ().sprite = Resources.Load <Sprite> ("Sprites/Huts/Hut_Gold");
         //float closestTree = 100;
         //float closestTreeIndex = 0;
         //int randomHut = Random.Range(0,huts.Count);
+		float closestTree = 100;
+		int index = 0;
 
-        //for(int i = 0; i < trees.Count; i++)
-        //{
-        //    float tempDist = Vector2.Distance(huts[randomHut].transform.position, trees[i].transform.position);
-
-        //    if(tempDist < closestTree)
-        //    {
-        //        closestTree = tempDist;
-        //        closestTreeIndex = i;
-        //    }
-		//}
+        for(int i = 0; i < trees.Count; i++)
+        {
+			float dist = Vector2.Distance(Vector2.zero, new Vector2(trees[i].transform.localPosition.x, trees[i].transform.localPosition.y));
+			if(dist<closestTree){
+				closestTree = dist;
+				index = i;
+			}
+//			if(Mathf.Abs(trees[i].transform.localPosition.x)<Mathf.Abs(trees[closestTree].transform.localPosition.x)){
+//				closestTree = i;
+//
+//			}
+		}
 
 		//Change to Stump sprite
 		//
+		trees[index].GetComponent<SpriteRenderer> ().sprite = Resources.Load <Sprite> ("Sprites/Trees/Tree_Stump");
+		trees[index].name = "STUMPHERE";
 	}
 
 	public void addAGoldHut()
 	{
-		int randHut = Random.Range(0,huts.Count);
 
 		//Change randomHut to Gold
+
+		huts [0].GetComponent<SpriteRenderer> ().sprite = Resources.Load <Sprite> ("Sprites/Huts/Hut_Gold");
 	}
 
 	public void  addGraffiti()
