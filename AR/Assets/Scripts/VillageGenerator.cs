@@ -11,8 +11,6 @@ public class VillageGenerator : MonoBehaviour {
 
     List<GameObject> villagers = new List<GameObject>();
 
-
-
 	GameObject river;
 
 	GameObject fineArt;
@@ -67,7 +65,7 @@ public class VillageGenerator : MonoBehaviour {
 
 		for (int i = 0; i<huts.Count; i++) {
 			for(int j = 0; j<huts.Count; j++){
-				if(huts[i]!=huts[j]){
+				if(huts[i]!=huts[j] && i !=0){
 					if(huts[i].GetComponent<BoxCollider2D>().bounds.Intersects(huts[j].GetComponent<BoxCollider2D>().bounds)){
 						do{
 							Vector2 offset = Random.insideUnitCircle;
