@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class VillageManager : MonoBehaviour
 {		
 	//Reference to Village Generator
-	public Village VillageRef;
+	public VillageGenerator VillageRef;
 
 	#region Village stats
 	//Total number of Villagers
