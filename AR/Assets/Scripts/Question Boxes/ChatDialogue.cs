@@ -164,6 +164,7 @@ public class ChatDialogue : MonoBehaviour {
 
 	void purformOutcome(string outcome)
 	{
+		outcome = "Tornado";
 		string[] outcomes = outcome.Split ("," [0]);
 
 		for (int i = 0; i < outcomes.Length; i ++) {
@@ -363,6 +364,9 @@ public class ChatDialogue : MonoBehaviour {
                 Laugh.Play();
                 update();
                 break;
+			case "Tornado":
+				villageManagerRef.AddTornado();
+				break;
 			}
            
 		}

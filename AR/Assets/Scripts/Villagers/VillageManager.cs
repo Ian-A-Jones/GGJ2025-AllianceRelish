@@ -291,8 +291,12 @@ public class VillageManager : MonoBehaviour
 		}
 		else
 		{
-			Debug.Log ("Game over");
+
 		}
+	}
+
+	public void AddTornado(){
+		GameObject.Find ("Tornado").GetComponentInChildren<Tornado> ().StartTornado ();
 	}
 
 

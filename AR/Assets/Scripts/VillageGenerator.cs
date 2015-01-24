@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class VillageGenerator : MonoBehaviour {
 	
 	public List<GameObject> huts = new List<GameObject>();
-	List<GameObject> trees = new List<GameObject>();
+	public List<GameObject> trees = new List<GameObject>();
 
 	public GameObject elderHut;
 
@@ -118,7 +118,7 @@ public class VillageGenerator : MonoBehaviour {
 		//Move trees away from each other and river
 		for (int i = 0; i<total; i++) {
 			for(int j = 0; j<total; j++){
-				if(trees[i]==null || trees[j]==null){
+				if(i>trees.Count-1 || j>trees.Count-1){
 					continue;
 				}
 				if(trees[i]!=trees[j]){
@@ -139,8 +139,9 @@ public class VillageGenerator : MonoBehaviour {
 					//Destroy trees on village
 					if(Vector2.Distance(Vector2.zero, trees[i].transform.localPosition)<VILLAGE_RADIUS+3){
 						trees[i].SetActive(false);
-						Destroy(trees[i]);
+						GameObject tr = trees[i];
 						trees.Remove(trees[i]);
+						Destroy(tr);
 						total--;
 					}
 
@@ -148,7 +149,9 @@ public class VillageGenerator : MonoBehaviour {
 				}
 				
 			}
-
+			if(i>trees.Count-1){
+				continue;
+			}
 			trees[i].GetComponent<SpriteRenderer>().sortingOrder = Mathf.RoundToInt((trees[i].transform.position.y-10) * 100f) * -1;
 		}
 		
