@@ -8,7 +8,7 @@ public class Questions {
 	protected string[,] AnswerArr;
 	protected string[,] OutcomeArr; 
 	public int numQuestions; 
-	public List<int> ListaskedQ= new List<int>();
+	//public List<int> ListaskedQ= new List<int>();
 
 
 	public Questions()
