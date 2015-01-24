@@ -247,5 +247,13 @@ public class Questions {
 
 		return rAnswer;
 	}
+	public string[] returnOutcome(int oID)
+	{
+		string[] rOutcome = new string[2];
+		rOutcome[0] = OutcomeArr[oID,0];
+		rOutcome [1] = OutcomeArr [oID, 1];
+		
+		return rOutcome;
+	}
 
 }
