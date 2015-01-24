@@ -4,8 +4,10 @@ using System.Collections.Generic;
 
 public class VillageManager : MonoBehaviour
 {		
+
 	//Reference to Village Generator
 	public VillageGenerator VillageGenRef;
+	public ChatDialogue ChatDialogueRef;
 
 	#region Village stats
 	//Total number of Villagers
@@ -311,6 +313,11 @@ public class VillageManager : MonoBehaviour
 		GUI.Label (new Rect (Screen.width / 2 - 200, 10, 150, 100), "Total Water: " + waterSupply.ToString("F0"));
 		GUI.Label (new Rect (Screen.width / 2 , 10, 150, 100), "Happiness: " + happiness);
 		GUI.Label (new Rect (Screen.width / 2 + 200, 10, 150, 100), "Population: " + population.ToString("F0"));
+
+		GUI.BeginGroup(new Rect (0,25,200,50), "");
+		GUI.Box (new Rect (0,0,200,50), "Recent Stat Changes");
+		GUI.Label (new Rect (0,30,250,175), ChatDialogueRef.qOutcome);
+		GUI.EndGroup();
 
 		GUI.skin = skin2;
 		GUI.Label (new Rect (Screen.width / 2 - 425, 10, 50, 50), food);
