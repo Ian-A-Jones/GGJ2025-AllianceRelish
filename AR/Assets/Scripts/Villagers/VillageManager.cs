@@ -87,7 +87,7 @@ public class VillageManager : MonoBehaviour
 	// Use this for initialization
 	void Start () 
 	{
-		population = 1;
+		population = 10;
 
 		villagerImporter = gameObject.AddComponent<VillagerImporter> ();
 
@@ -177,7 +177,7 @@ public class VillageManager : MonoBehaviour
 					setVillagersKinematic(true);
 
 					//Pick random amount of time for next decision
-					nextDecisionTimer = 100;// Random.Range(0,1);
+					nextDecisionTimer = Random.Range(0,20);
 
 					decisionTimer = 0;
 				}
