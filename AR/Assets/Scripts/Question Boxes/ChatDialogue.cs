@@ -12,7 +12,7 @@ public class ChatDialogue : MonoBehaviour {
 	#region Variables
 	public GUISkin GSKIN; 
 	string Question;
-	//string[] Answers; 
+	string[] Answers; 
 	public static bool activeQ = false;
 	Rect QuestionRectangle = new Rect(Screen.width - (Screen.width / 3 * 2), Screen.height - (Screen.height / 10 * 3), Screen.width / 3 * 2, Screen.height / 10 * 3);
 	Rect LabelRectangle = new Rect(Screen.width - (Screen.width / 3 * 2), Screen.height - (Screen.height / 10 * 3), Screen.width / 3 * 2, Screen.height / 10 * 1);

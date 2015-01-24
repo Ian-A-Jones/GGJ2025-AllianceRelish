@@ -46,16 +46,21 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\JSON\JSONObject.cs" />
+     <Compile Include="Assets\JSON\JSONTemplates.cs" />
+     <Compile Include="Assets\JSON\VectorTemplates.cs" />
      <Compile Include="Assets\ParticleManager.cs" />
      <Compile Include="Assets\Scripts\Hut.cs" />
      <Compile Include="Assets\Scripts\Main Menu\MainMenu.cs" />
      <Compile Include="Assets\Scripts\Question Boxes\ChatDialogue.cs" />
      <Compile Include="Assets\Scripts\Question Boxes\Questions.cs" />
-     <Compile Include="Assets\Scripts\River.cs" />
+     <Compile Include="Assets\Scripts\RenderParticlesOnLayer.cs" />
      <Compile Include="Assets\Scripts\Tree.cs" />
      <Compile Include="Assets\Scripts\VillageGenerator.cs" />
      <Compile Include="Assets\Scripts\Villagers\VillageManager.cs" />
      <Compile Include="Assets\Scripts\Villagers\Villager.cs" />
+     <Compile Include="Assets\Scripts\Villagers\VillagerImporter.cs" />
+     <None Include="Assets\JSON\readme.txt" />
      <None Include="Assets\Standard Assets\Particles\Sources\Shaders\Particle Alpha Blend (Queue +100).shader" />
      <None Include="Assets\Necromancer GUI\Kingthings.txt" />
      <None Include="Assets\Necromancer GUI\Readme.txt" />
