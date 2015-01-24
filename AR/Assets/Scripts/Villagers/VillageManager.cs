@@ -10,7 +10,6 @@ public class VillageManager : MonoBehaviour
 	#region Village stats
 	//Total number of Villagers
 	public int population;
-    public int newPopulation;
 
 	//Total amount of food and water available
 	public int foodSupply;
@@ -41,7 +40,7 @@ public class VillageManager : MonoBehaviour
 	float decisionTimer = 0;
 
 	//Time reqiured for next decision
-	float nextDecisionTimer = 10;
+	float nextDecisionTimer = 1;
 
 	#endregion
 
@@ -91,31 +90,28 @@ public class VillageManager : MonoBehaviour
             Villagers[Villagers.Count - 1].AddComponent<Villager>();
             // Debug.Log("DRAWING VILLAGER");
         }
-		newPopulation = population;
 	}
 	
 	// Update is called once per frame
 	void Update () 
 	{
-       
-
-        //If the population has increased draw a new villager and increase the population value.
-        if (newPopulation > population)
-        {
-            Villagers.Add(Instantiate(Resources.Load("Prefabs/Villagerlol")) as GameObject);
-            Villagers[Villagers.Count - 1].AddComponent<Villager>();
-
-            population = newPopulation;
-        }
-       
 		//If game isn't over
 		if(!gameOver())
 		{
 			if(!ChatDialogue.activeQ)
 			{
-	            foreach (GameObject villager in Villagers)
+				foreach (GameObject villager in Villagers.ToArray())
 	            {
-	                villager.GetComponent<Villager>().moveVillager();
+					if(villager.GetComponent<Villager>().alive())
+					{
+	                	villager.GetComponent<Villager>().moveVillager();
+					}
+					else
+					{
+						Villagers.Remove(villager);
+						Destroy(villager);
+						population--;
+					}
 	            }
 				//Decision timer stuff
 				if(decisionTimer > nextDecisionTimer)
@@ -125,7 +121,7 @@ public class VillageManager : MonoBehaviour
 					ChatDialogue.activeQ = true;
 
 					//Pick random amount of time for next decision
-					nextDecisionTimer = Random.Range(0,70);
+					nextDecisionTimer = Random.Range(0,1);
 
 					decisionTimer = 0;
 				}
@@ -148,7 +144,6 @@ public class VillageManager : MonoBehaviour
 					{
 						if(villager.GetComponent<Villager>().alive())
 						{
-	                        
 							if(foodSupply > 0)
 							{
 								villager.GetComponent<Villager>().unHunger();
@@ -187,6 +182,8 @@ public class VillageManager : MonoBehaviour
 						//25% chance of Pop increase
 						if(Random.value > 0.75f)
 						{
+							Villagers.Add(Instantiate(Resources.Load("Prefabs/Villagerlol")) as GameObject);
+							Villagers[Villagers.Count - 1].AddComponent<Villager>();
 							population++;
 						}
 					}
@@ -221,6 +218,19 @@ public class VillageManager : MonoBehaviour
 		}
 	}
 
+	public void cull(int toCull)
+	{
+		int totalCulled = 0;
+		while(totalCulled < toCull)
+		{
+			int randVil = Random.Range(0, Villagers.Count);
+			if(Villagers[randVil].GetComponent<Villager>().alive())
+			{
+				Villagers[randVil].GetComponent<Villager>().dead = true;
+				totalCulled++;
+			}
+		}
+	}
 	bool gameOver()
 	{
 		if(population <=0)

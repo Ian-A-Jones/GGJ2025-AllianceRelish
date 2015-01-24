@@ -21,6 +21,8 @@ public class ChatDialogue : MonoBehaviour {
 	//keep track of the questions
 	public List<int> ListaskedQ= new List<int>();
 
+	public bool Q3Active = false, Q4Active = false;
+
     //Rect LabelRectangle = new Rect(Screen.width-900, Screen.height-140, 500, 30);
 	
 	string Answer1, Answer2, Outcome1, Outcome2;
@@ -39,27 +41,32 @@ public class ChatDialogue : MonoBehaviour {
         if (activeQ)
         {
            // GUI.Window(0, WindowRectangle, DoMyWindow,"");
+			if(ListaskedQ.Count < villageManagerRef.Villagers.Count)
+			{
+	            GUI.Box(new Rect(QuestionRectangle), "");
+	            GUI.Label(new Rect(LabelRectangle),Question);
+	            if (GUI.Button(new Rect(AnswerRectangle), Answer1))
+	            {
+					purformOutcome(Outcome1);
+	                activeQ = false;
 
-            GUI.Box(new Rect(QuestionRectangle), "");
-            GUI.Label(new Rect(LabelRectangle),Question);
-            if (GUI.Button(new Rect(AnswerRectangle), Answer1))
-            {
-				purformOutcome(Outcome1);
-                activeQ = false;
-
-				Time.timeScale = 1;
-				nextQ();
+					Time.timeScale = 1;
+					nextQ();
 
 
-            }
-            if (GUI.Button(new Rect(AnswerRectangle2), Answer2))
-            {
-				purformOutcome(Outcome2);
-                activeQ = false;
+	            }
+	            if (GUI.Button(new Rect(AnswerRectangle2), Answer2))
+	            {
+					purformOutcome(Outcome2);
+	                activeQ = false;
 
-				Time.timeScale = 1;
-				nextQ();
-            }
+					Time.timeScale = 1;
+					nextQ();
+	            }
+			}
+			{
+				//Completed Decisions end state
+			}
           
         }
 
@@ -90,8 +97,11 @@ public class ChatDialogue : MonoBehaviour {
 
 			if(!ListaskedQ.Contains(qNum))
 			{
-				ListaskedQ.Add (qNum);
-				newQFound = true;
+				if(qNum != 4 || qNum != 3 || Q3Active && qNum == 3 || Q4Active && qNum == 4)
+				{
+					ListaskedQ.Add (qNum);
+					newQFound = true;
+				}
 			}
 		}
 
@@ -141,7 +151,10 @@ public class ChatDialogue : MonoBehaviour {
 				break;
 			case "losePopulation":
 				Debug.Log ("Pop loss");
-				villageManagerRef.population-= Random.Range(1,5);
+				int randPopLoss = Random.Range(1,5);
+
+				villageManagerRef.cull(randPopLoss);
+
 				break;
 			case "loseSupplies":
 				villageManagerRef.foodSupply-= Random.Range(1,3);
@@ -171,7 +184,7 @@ public class ChatDialogue : MonoBehaviour {
 				villageManagerRef.foodSupply--;
 				break;
 			case "lose1Population":
-				villageManagerRef.population--;
+				villageManagerRef.cull(1);
 				break;
 			case "lose1Happiness":
 				villageManagerRef.happiness--;
@@ -189,7 +202,14 @@ public class ChatDialogue : MonoBehaviour {
 				villageManagerRef.waterSupply+= Random.Range (1,5);
 				break;
 			case "gainPopulation":
-				villageManagerRef.population+= Random.Range (1,5);
+				rand = Random.Range (1,5);
+				villageManagerRef.population += rand;
+
+				for(int j = 0 ; j < rand; j++)
+				{
+					villageManagerRef.Villagers.Add(Instantiate(Resources.Load("Prefabs/Villagerlol")) as GameObject);
+					villageManagerRef.Villagers[villageManagerRef.Villagers.Count - 1].AddComponent<Villager>();
+				}
 				break;
 			case "gainSupplies":
 				villageManagerRef.foodSupply+= Random.Range (1,3);
@@ -202,6 +222,9 @@ public class ChatDialogue : MonoBehaviour {
 				villageManagerRef.waterGain+= Random.Range (1,3);
 				break;
 			case "gain1Population":
+
+				villageManagerRef.Villagers.Add(Instantiate(Resources.Load("Prefabs/Villagerlol")) as GameObject);
+				villageManagerRef.Villagers[villageManagerRef.Villagers.Count - 1].AddComponent<Villager>();
 				villageManagerRef.population++;
 				break;
 			case "gain1Happiness":
@@ -247,7 +270,12 @@ public class ChatDialogue : MonoBehaviour {
 				break;
 			case "Q30":
 				break;
-
+			case "activate3":
+				Q3Active = true;
+				break;
+			case "activate4":
+				Q4Active = true;
+				break;
 
 			}
 		}
