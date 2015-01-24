@@ -39,8 +39,6 @@ public class VillageGenerator : MonoBehaviour {
 		GenerateForest ();
 
 		SetRenderingOrder ();
-
-		fineArt.SetActive(false);
 	}
 	
 	// Update is called once per frame
