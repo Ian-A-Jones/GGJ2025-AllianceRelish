@@ -10,7 +10,7 @@ public class ChatDialogue : MonoBehaviour {
 	public GUISkin GSKIN; 
 	string Question;
 	//string[] Answers; 
-	public static bool activeQ;
+	public static bool activeQ = false;
 	Rect QuestionRectangle = new Rect(Screen.width - (Screen.width / 3 * 2), Screen.height - (Screen.height / 10 * 3), Screen.width / 3 * 2, Screen.height / 10 * 3);
 	Rect LabelRectangle = new Rect(Screen.width - (Screen.width / 3 * 2), Screen.height - (Screen.height / 10 * 3), Screen.width / 3 * 2, Screen.height / 10 * 1);
 	Rect AnswerRectangle = new Rect(Screen.width - (Screen.width/2 + 100 ), Screen.height - (Screen.height / 10 * 2), Screen.width / 6*3, Screen.height / 20 * 1);
@@ -32,7 +32,6 @@ public class ChatDialogue : MonoBehaviour {
 	{
 		questions = new Questions();
 		nextQ();
-		activeQ = false;
 	}
 	
 	void OnGUI()
@@ -48,9 +47,7 @@ public class ChatDialogue : MonoBehaviour {
 				if (GUI.Button(new Rect(AnswerRectangle), Answer1))
 				{
 					purformOutcome(Outcome1);
-					activeQ = false;
-					
-					Time.timeScale = 1;
+					activeQ = false;;
 					nextQ();
 					
 					
@@ -58,15 +55,13 @@ public class ChatDialogue : MonoBehaviour {
 				if (GUI.Button(new Rect(AnswerRectangle2), Answer2))
 				{
 					purformOutcome(Outcome2);
-					activeQ = false;
-					
-					Time.timeScale = 1;
+					activeQ = false;			
 					nextQ();
 				}
 			}
 			{
 				//Completed Decisions end state
-
+				villageManagerRef.questionVictory = true;
 			}
 			
 		}
