@@ -6,6 +6,7 @@ public class Village : MonoBehaviour {
 
 	List<GameObject> huts = new List<GameObject>();
 	List<GameObject> trees = new List<GameObject>();
+    List<GameObject> villagers = new List<GameObject>();
 
 	GameObject river;
 
@@ -18,14 +19,10 @@ public class Village : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-
-
 		GenerateRiver ();
 		GenerateForest ();
 		GenerateHuts ();
 		SetRenderingOrder ();
-
-
 	}
 	
 	// Update is called once per frame
@@ -134,8 +131,9 @@ public class Village : MonoBehaviour {
 
 		
 	}
-	
-	Vector2 OffsetTrees(Vector2 pos){
+
+    Vector2 OffsetTrees(Vector2 pos)
+    {
 		Vector2 offset = new Vector2 ();
 
 		if (pos.x > 0) {

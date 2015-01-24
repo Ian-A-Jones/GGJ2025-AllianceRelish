@@ -7,6 +7,7 @@ public class VillageManager : MonoBehaviour
 	#region Village stats
 	//Total number of Villagers
 	public int population;
+    public int newPopulation;
 
 	//Total amount of food and water available
 	public int foodSupply;
@@ -70,20 +71,37 @@ public class VillageManager : MonoBehaviour
 		sickness = 0;
 
 		Villagers = new List<GameObject>();
-
-		for(int i = 0; i < population; i++)
-		{
-			Villagers.Add(new GameObject("Villager " + (i+1)));
-			Villagers[i].AddComponent("Villager");
-		}
+        //If the new Population is greater then create more
+        for (int i = 0; i < population; i++)
+        {
+            Villagers.Add(Instantiate(Resources.Load("Prefabs/Villagerlol")) as GameObject);
+            Villagers[Villagers.Count - 1].AddComponent<Villager>();
+            // Debug.Log("DRAWING VILLAGER");
+        }
+		newPopulation = population;
 	}
 	
 	// Update is called once per frame
 	void Update () 
 	{
+       
+
+        //If the population has increased draw a new villager and increase the population value.
+        if (newPopulation > population)
+        {
+            Villagers.Add(Instantiate(Resources.Load("Prefabs/Villagerlol")) as GameObject);
+            Villagers[Villagers.Count - 1].AddComponent<Villager>();
+
+            population = newPopulation;
+        }
+       
 		//If game isn't over
 		if(!gameOver())
 		{
+            foreach (GameObject villager in Villagers)
+            {
+                villager.GetComponent<Villager>().moveVillager();
+            }
 			//Decision timer stuff
 			if(decisionTimer > nextDecisionTimer)
 			{
@@ -115,6 +133,7 @@ public class VillageManager : MonoBehaviour
 				{
 					if(villager.GetComponent<Villager>().alive())
 					{
+                        
 						if(foodSupply > 0)
 						{
 							villager.GetComponent<Villager>().unHunger();
@@ -141,6 +160,10 @@ public class VillageManager : MonoBehaviour
 						Destroy(villager);
 						population--;
 					}
+                    if (foodSupply > 100 && waterSupply > 100 && happiness > 50)
+                    {
+                        newPopulation++;
+                    }
 				}
 
 				happyCalc(foodSupply, HAPPYFOODTHRESH, SADFOODTHRESH);

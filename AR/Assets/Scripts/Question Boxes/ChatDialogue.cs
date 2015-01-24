@@ -10,16 +10,17 @@ public class ChatDialogue : MonoBehaviour {
 	//string[] Answers; 
 	bool activeQ;
     Rect QuestionRectangle = new Rect(Screen.width - (Screen.width / 3 * 2), Screen.height - (Screen.height / 10 * 3), Screen.width / 3 * 2, Screen.height / 10 * 3);
-    Rect LabelRectangle = new Rect(Screen.width - (Screen.width / 3 * 1), Screen.height - (Screen.height / 10 * 3), Screen.width / 3 * 1, Screen.height / 10 * 1);
+    Rect LabelRectangle = new Rect(Screen.width - (Screen.width / 3 * 2), Screen.height - (Screen.height / 10 * 3), Screen.width / 3 * 2, Screen.height / 10 * 1);
+    Rect AnswerRectangle = new Rect(Screen.width - (Screen.width/2 + 100 ), Screen.height - (Screen.height / 10 * 2), Screen.width / 6*3, Screen.height / 20 * 1);
+    Rect AnswerRectangle2 = new Rect(Screen.width - (Screen.width/2 + 100), Screen.height - (Screen.height / 10 * 1), Screen.width / 6* 3, Screen.height / 20 * 1);
 
 
 
 
 
-
-    //Rect LabelRectangle = new Rect(Screen.width-900, Screen.height-140, 500, 30);
-	Rect AnswerRectangle = new Rect(Screen.width-950, Screen.height -90, 900,30);
-	Rect AnswerRectangle2 = new Rect(Screen.width-950, Screen.height -60, 900,30);
+    ////Rect LabelRectangle = new Rect(Screen.width-900, Screen.height-140, 500, 30);
+    //Rect AnswerRectangle = new Rect(Screen.width-950, Screen.height -90, 900,30);
+    //Rect AnswerRectangle2 = new Rect(Screen.width-950, Screen.height -60, 900,30);
 	public Questions questions;
 
 	int i = 0;

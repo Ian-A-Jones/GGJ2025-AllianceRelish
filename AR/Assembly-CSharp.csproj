@@ -47,12 +47,13 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\Hut.cs" />
+     <Compile Include="Assets\Scripts\Main Menu\MainMenu.cs" />
      <Compile Include="Assets\Scripts\Question Boxes\ChatDialogue.cs" />
      <Compile Include="Assets\Scripts\Question Boxes\Questions.cs" />
      <Compile Include="Assets\Scripts\Tree.cs" />
      <Compile Include="Assets\Scripts\Village.cs" />
-     <Compile Include="Assets\Scripts\VillageManager.cs" />
-     <Compile Include="Assets\Scripts\Villager.cs" />
+     <Compile Include="Assets\Scripts\Villagers\VillageManager.cs" />
+     <Compile Include="Assets\Scripts\Villagers\Villager.cs" />
      <None Include="Assets\Standard Assets\Particles\Sources\Shaders\Particle Alpha Blend (Queue +100).shader" />
      <None Include="Assets\Necromancer GUI\Kingthings.txt" />
      <None Include="Assets\Necromancer GUI\Readme.txt" />
