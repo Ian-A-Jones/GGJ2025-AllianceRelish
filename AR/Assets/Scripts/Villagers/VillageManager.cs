@@ -181,9 +181,14 @@ public class VillageManager : MonoBehaviour
 					
 					happyCalc(waterSupply, HAPPYWATERTHRESH, SADWATERTHRESH);
 
-					if(happiness > 50 && foodSupply > 0 && waterSupply > 0)
+					//If Village is happy enough and there's a surplus of food
+					if(happiness > 50 && foodSupply > population * 1.5 && waterSupply > population * 1.5)
 					{
-						population++;
+						//25% chance of Pop increase
+						if(Random.value > 0.75f)
+						{
+							population++;
+						}
 					}
 
 					debugStats();

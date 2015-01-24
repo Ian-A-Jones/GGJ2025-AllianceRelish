@@ -12,41 +12,24 @@ public class ChatDialogue : MonoBehaviour {
 	//string[] Answers; 
 	public static bool activeQ;
     Rect QuestionRectangle = new Rect(Screen.width - (Screen.width / 3 * 2), Screen.height - (Screen.height / 10 * 3), Screen.width / 3 * 2, Screen.height / 10 * 3);
-<<<<<<< HEAD
     Rect LabelRectangle = new Rect(Screen.width - (Screen.width / 3 * 2), Screen.height - (Screen.height / 10 * 3), Screen.width / 3 * 2, Screen.height / 10 * 1);
     Rect AnswerRectangle = new Rect(Screen.width - (Screen.width/2 + 100 ), Screen.height - (Screen.height / 10 * 2), Screen.width / 6*3, Screen.height / 20 * 1);
     Rect AnswerRectangle2 = new Rect(Screen.width - (Screen.width/2 + 100), Screen.height - (Screen.height / 10 * 1), Screen.width / 6* 3, Screen.height / 20 * 1);
 
 	public Questions questions;
-	string Answer1, Answer2;
-=======
-    Rect LabelRectangle = new Rect(Screen.width - (Screen.width / 3 * 1), Screen.height - (Screen.height / 10 * 3), Screen.width / 3 * 1, Screen.height / 10 * 1);
-
-
 
 	//keep track of the questions
 	public List<int> ListaskedQ= new List<int>();
 
     //Rect LabelRectangle = new Rect(Screen.width-900, Screen.height-140, 500, 30);
-	Rect AnswerRectangle = new Rect(Screen.width-950, Screen.height -90, 900,30);
-	Rect AnswerRectangle2 = new Rect(Screen.width-950, Screen.height -60, 900,30);
-	public Questions questions;
 	
 	string Answer1, Answer2, Outcome1, Outcome2;
->>>>>>> origin/master
 	#endregion 
 
     void Start()
     {
         questions = new Questions();
-        int id = randQ();
-        Question = newQ(id);
-        string[] Answers = newA(id);
-        Answer1 = Answers[0];
-        Answer2 = Answers[1];
-		string[] Outcomes = newOutcome(id);
-		Outcome1 = Outcomes[0];
-		Outcome2 = Outcomes[1];
+		nextQ();
         activeQ = false;
     }
 
@@ -63,24 +46,55 @@ public class ChatDialogue : MonoBehaviour {
             {
 				purformOutcome(Outcome1);
                 activeQ = false;
+
 				Time.timeScale = 1;
+				nextQ();
+
+
             }
             if (GUI.Button(new Rect(AnswerRectangle2), Answer2))
             {
 				purformOutcome(Outcome2);
                 activeQ = false;
+
 				Time.timeScale = 1;
+				nextQ();
             }
           
         }
 
 	}
+
+	void nextQ()
+	{
+		int id = randQ();
+		Question = newQ(id);
+		string[] Answers = newA(id);
+		Answer1 = Answers[0];
+		Answer2 = Answers[1];
+		string[] Outcomes = newOutcome(id);
+		Outcome1 = Outcomes[0];
+		Outcome2 = Outcomes[1];
+	}
    //
 	#region new question + answer
 	private int randQ()
 	{	//TODO: cheack for a repeated question, if so pick another number.
-		int qNum = Random.Range (0, 1);
-		ListaskedQ.Add (qNum);
+
+		int qNum = -1;
+		bool newQFound = false;
+
+		while(!newQFound)
+		{
+			qNum = Random.Range (0, 41);
+
+			if(!ListaskedQ.Contains(qNum))
+			{
+				ListaskedQ.Add (qNum);
+				newQFound = true;
+			}
+		}
+
 		return qNum;
 
 	}
