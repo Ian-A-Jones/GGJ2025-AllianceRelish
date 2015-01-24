@@ -21,7 +21,7 @@ public class ChatDialogue : MonoBehaviour {
 	//keep track of the questions
 	public List<int> ListaskedQ= new List<int>();
 
-	public bool Q3Active = false, Q4Active = false;
+	public bool Q3Active = false, Q4Active = false, Q30Next = false;
 
     //Rect LabelRectangle = new Rect(Screen.width-900, Screen.height-140, 500, 30);
 	
@@ -41,7 +41,7 @@ public class ChatDialogue : MonoBehaviour {
         if (activeQ)
         {
            // GUI.Window(0, WindowRectangle, DoMyWindow,"");
-			if(ListaskedQ.Count < villageManagerRef.Villagers.Count)
+			if(ListaskedQ.Count < 41)
 			{
 	            GUI.Box(new Rect(QuestionRectangle), "");
 	            GUI.Label(new Rect(LabelRectangle),Question);
@@ -86,7 +86,7 @@ public class ChatDialogue : MonoBehaviour {
    //
 	#region new question + answer
 	private int randQ()
-	{	//TODO: cheack for a repeated question, if so pick another number.
+	{
 
 		int qNum = -1;
 		bool newQFound = false;
@@ -97,7 +97,13 @@ public class ChatDialogue : MonoBehaviour {
 
 			if(!ListaskedQ.Contains(qNum))
 			{
-				if(qNum != 4 || qNum != 3 || Q3Active && qNum == 3 || Q4Active && qNum == 4)
+				if(Q30Next)
+				{
+					Q30Next = false;
+					ListaskedQ.Add (30);
+					return 30;
+				}
+				if(((qNum != 4 && qNum != 3) || qNum == 3 && Q3Active || qNum == 4 && Q4Active) && qNum != 30)
 				{
 					ListaskedQ.Add (qNum);
 					newQFound = true;
@@ -269,6 +275,7 @@ public class ChatDialogue : MonoBehaviour {
 			case "arrowKnee":
 				break;
 			case "Q30":
+				Q30Next = true;
 				break;
 			case "activate3":
 				Q3Active = true;
