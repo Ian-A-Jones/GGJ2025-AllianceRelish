@@ -129,7 +129,7 @@ public class VillageManager : MonoBehaviour
 					ChatDialogue.activeQ = true;
 
 					//Pick random amount of time for next decision
-					nextDecisionTimer = Random.Range(0,1);
+					nextDecisionTimer = 100;// Random.Range(0,1);
 
 					decisionTimer = 0;
 				}
