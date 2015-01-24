@@ -8,10 +8,7 @@
 //    public CanvasGroup menuPanel2;
 //    public CanvasGroup settingsPanel;
 //	public CanvasGroup creditsPanel;
-<<<<<<< HEAD
 //	public CanvasGroup tutorialPanel;
-=======
->>>>>>> origin/master
 //
 //    // Use this for initialization
 //    void Start () {
@@ -26,14 +23,11 @@
 //		creditsPanel.interactable = false;
 //		creditsPanel.blocksRaycasts = false;
 //		creditsPanel.alpha = 0f;
-//
-<<<<<<< HEAD
-//		tutorialPanel.interactable = false;
+////		tutorialPanel.interactable = false;
 //		tutorialPanel.blocksRaycasts = false;
 //		tutorialPanel.alpha = 0f;
 //
-=======
->>>>>>> origin/master
+
 //    }
 //
 //    public void OnClickPlayGame()
@@ -82,7 +76,6 @@
 //		menuPanel.alpha = 1f;
 //	}
 //
-<<<<<<< HEAD
 //	public void OnClickTutorial()
 //	{
 //		tutorialPanel.interactable = true;
@@ -121,8 +114,7 @@
 //		creditsPanel.alpha = 0f;
 //	}
 //
-=======
->>>>>>> origin/master
+
 //    public void OnClickExitGame()
 //    {
 //        Application.Quit ();

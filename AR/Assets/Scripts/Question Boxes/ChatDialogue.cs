@@ -59,6 +59,7 @@ public class ChatDialogue : MonoBehaviour {
 					nextQ();
 				}
 			}
+			else
 			{
 				//Completed Decisions end state
 				villageManagerRef.questionVictory = true;

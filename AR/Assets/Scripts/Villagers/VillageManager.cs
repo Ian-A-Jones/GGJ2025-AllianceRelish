@@ -68,7 +68,7 @@ public class VillageManager : MonoBehaviour
 	#region stateConditions
 	bool villageDeadEndState = false;
 	bool unhappyVillageEndState = false;
-	public bool questionVictory;
+	public bool questionVictory = false;
 	int happinessVictory = 200;
 	int populationVictory = 100;
 	#endregion
@@ -309,7 +309,7 @@ public class VillageManager : MonoBehaviour
 		GUI.Box (new Rect (-200, 0, 2500, 50), "");
 		GUI.Label (new Rect (Screen.width / 2 - 400, 10, 150, 100), "Total Food: " + foodSupply.ToString("F0"));
 		GUI.Label (new Rect (Screen.width / 2 - 200, 10, 150, 100), "Total Water: " + waterSupply.ToString("F0"));
-		GUI.Label (new Rect (Screen.width / 2 , 10, 150, 100), "Happiness: " + happiness.ToString("F0"));
+		GUI.Label (new Rect (Screen.width / 2 , 10, 150, 100), "Happiness: " + happiness);
 		GUI.Label (new Rect (Screen.width / 2 + 200, 10, 150, 100), "Population: " + population.ToString("F0"));
 
 		GUI.skin = skin2;
@@ -322,7 +322,7 @@ public class VillageManager : MonoBehaviour
 		{
 			GUI.BeginGroup(new Rect (Screen.width / 2 - 250, Screen.height / 2, 400, 200), "");
 			GUI.Box (new Rect (10,0, 400, 200), "");
-			GUI.Label (new Rect (10,10, 400, 100), "You have lost! You have been overthrown!");
+			GUI.Label (new Rect (10,10, 400, 100), "Congratulations you have made all the decisions and survived");
 			if (GUI.Button (new Rect ( 100,75, 100, 50), "Restart."))
 			{
 				Application.LoadLevel (1);
