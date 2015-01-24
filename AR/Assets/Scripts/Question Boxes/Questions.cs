@@ -27,7 +27,9 @@ public class Questions {
 		QuestionArr [9] = "Im sorry elder, we have had a very poor hunt, what do we do now?"; 
 		QuestionArr [10] = "Elder, there is a drought, what do we do now?"; 
 		QuestionArr [11] = "Elder some of our people are becoming ill, what do we do now?";
+
 		QuestionArr [12] = "God is unhappy with us, a tornado has struck the village";
+
 		QuestionArr [13] = "I challenge you for position of elder!"; 
 		QuestionArr [14] = "Elder you must think about your lineage, what do we do now? "; 
 		QuestionArr [15] = "Elder there are strangers at our door, what do we do now?";
