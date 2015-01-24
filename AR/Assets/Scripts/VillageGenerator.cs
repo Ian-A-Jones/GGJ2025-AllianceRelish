@@ -15,7 +15,7 @@ public class VillageGenerator : MonoBehaviour {
 
 	private const float FOREST_DENSITY = 0.8f;
 	private const float THICKETS = 100;
-	private const float VILLAGE_RADIUS = 4;
+	private const float VILLAGE_RADIUS = 6;
 	
 	private float riverXPos = 0;
 	// Use this for initialization
