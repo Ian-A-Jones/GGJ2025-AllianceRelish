@@ -14,13 +14,16 @@ public class Tornado : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-
+		if (gameObject.transform.position.y < -30) {
+			Destroy(gameObject.transform.parent.gameObject);
+		}
 	}
 
 	void OnTriggerStay2D(Collider2D col){
 		
 		if (col.gameObject.tag == "Tree") {
-			Destroy(col.gameObject);
+
+
 			trees.Remove(col.gameObject);
 		}
 	}
