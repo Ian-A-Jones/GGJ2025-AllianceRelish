@@ -33,6 +33,8 @@ public class ChatDialogue : MonoBehaviour {
 	
 	void Start()
 	{
+        gameObject.GetComponent<RenderParticlesOnLayer>().changeOrder(Rain);
+        gameObject.GetComponent<RenderParticlesOnLayer>().changeOrder(BloodRain);
 		questions = new Questions();
 		nextQ();
 	}

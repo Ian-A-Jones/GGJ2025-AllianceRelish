@@ -51,7 +51,7 @@
      <Compile Include="Assets\Scripts\Main Menu\MainMenu.cs" />
      <Compile Include="Assets\Scripts\Question Boxes\ChatDialogue.cs" />
      <Compile Include="Assets\Scripts\Question Boxes\Questions.cs" />
-     <Compile Include="Assets\Scripts\River.cs" />
+     <Compile Include="Assets\Scripts\RenderParticlesOnLayer.cs" />
      <Compile Include="Assets\Scripts\Tree.cs" />
      <Compile Include="Assets\Scripts\VillageGenerator.cs" />
      <Compile Include="Assets\Scripts\Villagers\VillageManager.cs" />

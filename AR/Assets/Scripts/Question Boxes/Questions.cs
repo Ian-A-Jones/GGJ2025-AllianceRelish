@@ -160,7 +160,7 @@ public class Questions {
 		OutcomeArr [4, 1] = "loseSupplies";
 		OutcomeArr [5, 0] = "gainFoodIncrease";
 		OutcomeArr [5, 1] = "loseHappiness,goldHut";
-		OutcomeArr [6, 0] = "losePopulation,gainHappiness,rainingblood";
+		OutcomeArr [6, 0] = "losePopulation,gainHappiness,RainingBlood";
 		OutcomeArr [6, 1] = "loseHappiness";//natural desaster chance increase
 		OutcomeArr [7, 0] = "gainHapiness";
 		OutcomeArr [7, 1] = "gainPopulation";
