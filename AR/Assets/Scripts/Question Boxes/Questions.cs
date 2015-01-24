@@ -8,7 +8,7 @@ public class Questions {
 	protected string[,] AnswerArr;
 	protected string[,] OutcomeArr; 
 	public int numQuestions; 
-	public List<int> ListaskedQ= new List<int>();
+	//public List<int> ListaskedQ= new List<int>();
 
 
 	public Questions()
@@ -246,6 +246,14 @@ public class Questions {
 		rAnswer [1] = AnswerArr [aID, 1];
 
 		return rAnswer;
+	}
+	public string[] returnOutcome(int oID)
+	{
+		string[] rOutcome = new string[2];
+		rOutcome[0] = OutcomeArr[oID,0];
+		rOutcome [1] = OutcomeArr [oID, 1];
+		
+		return rOutcome;
 	}
 
 }
