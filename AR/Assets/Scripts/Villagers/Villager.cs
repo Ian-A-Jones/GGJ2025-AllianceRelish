@@ -9,7 +9,8 @@ public class Villager : MonoBehaviour
 	public int daysHungry = 0, daysThirsty = 0;
 
 	public static int DeathThreshold = 6;
-	
+
+
 	// Use this for initialization
 	void Start () 
 	{
@@ -20,7 +21,7 @@ public class Villager : MonoBehaviour
 	{
 		if(daysHungry + daysThirsty >= DeathThreshold || dead)
 		{
-			return false;
+			return false;            
 		}
 		else
 		{

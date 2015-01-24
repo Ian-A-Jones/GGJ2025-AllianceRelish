@@ -13,6 +13,8 @@ public class VillageGenerator : MonoBehaviour {
 
 	GameObject river;
 
+	GameObject fineArt;
+
 	private const float FOREST_DENSITY = 0.8f;
 	private const float THICKETS = 100;
 	private const float VILLAGE_RADIUS = 6;
@@ -37,13 +39,14 @@ public class VillageGenerator : MonoBehaviour {
 		GenerateForest ();
 
 		SetRenderingOrder ();
+
+		fineArt.SetActive(false);
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		
 	}
-
 
 	void GenerateHuts(int population){		
 		
@@ -191,5 +194,67 @@ public class VillageGenerator : MonoBehaviour {
 			treesAndHuts[i].GetComponent<SpriteRenderer>().sortingOrder = renderOrder;
 		}
 		
+	}
+
+	public void removeATree()
+	{
+		float closestTree = 100;
+		float closestTreeIndex = 0;
+		int randomHut = Random.Range(0,huts.Count);
+
+		for(int i = 0; i < trees.Count; i++)
+		{
+			float tempDist = Vector2.Distance(huts[randomHut].transform.position, trees[i].transform.position);
+
+			if(tempDist < closestTree)
+			{
+				closestTree = tempDist;
+				closestTreeIndex = i;
+			}
+		}
+
+		//Change to Stump sprite
+		//
+	}
+
+	public void addAGoldHut()
+	{
+		int randHut = Random.Range(0,huts.Count);
+
+		//Change randomHut to Gold
+	}
+
+	public void  addGraffiti()
+	{
+		int randHut = Random.Range(0,huts.Count);
+		
+		//Change randomHut to Graffiti
+	}
+
+	public void addFineArt()
+	{
+		Vector2 ArtPos; 
+		do{
+			ArtPos = Random.insideUnitCircle*VILLAGE_RADIUS;
+		}while(Vector2.Distance(Vector2.zero, ArtPos)<0.75f);
+
+		fineArt = Instantiate(Resources.Load("Prefabs/Villagerlol")) as GameObject;
+		fineArt.transform.parent = gameObject.transform.FindChild("Terrain").FindChild("Huts");
+		fineArt.transform.localPosition = new Vector3(ArtPos.x, ArtPos.y, 0);
+		fineArt.SetActive(true);
+	}
+
+	public void addBurntHut()
+	{
+		int randHut = Random.Range(0,huts.Count);
+		
+		//Change randomHut to Burn
+	}
+
+	public void addArrowKnee()
+	{
+		int randHut = Random.Range(0,villagers.Count);
+		
+		//Change randomVillager to ArrowInKnee
 	}
 }

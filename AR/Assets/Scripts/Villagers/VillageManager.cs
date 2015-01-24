@@ -70,7 +70,7 @@ public class VillageManager : MonoBehaviour
 	{
 		population = 10;
 
-		VillageGenRef.GenerateVillage((int)(population*0.5f));
+		VillageGenRef.GenerateVillage(population);
 
 		foodSupply = 200;
 		waterSupply = 200;
@@ -95,7 +95,6 @@ public class VillageManager : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
-
 		//If game isn't over
 		if(!gameOver())
 		{
@@ -122,7 +121,7 @@ public class VillageManager : MonoBehaviour
 					ChatDialogue.activeQ = true;
 
 					//Pick random amount of time for next decision
-					nextDecisionTimer = 100;// Random.Range(0,1);
+					nextDecisionTimer = Random.Range(0,1);
 
 					decisionTimer = 0;
 				}
@@ -196,7 +195,10 @@ public class VillageManager : MonoBehaviour
 					dayTimer += Time.deltaTime;
 				}
 			}
-
+			else
+			{
+				//Time.timeScale = 0;
+			}
 		}
 		else
 		{
@@ -262,6 +264,36 @@ public class VillageManager : MonoBehaviour
 		Debug.Log ("Water %: " + percentPop(waterSupply) + "%");
 
 		Debug.Log (happiness);
+	}
+
+	public void  removeTree()
+	{
+		VillageGenRef.removeATree();
+	}
+
+	public void  GoldHut()
+	{
+		VillageGenRef.addAGoldHut();
+	}
+
+	public void  Graffiti()
+	{
+		VillageGenRef.addGraffiti();
+	}
+
+	public void  FineArt()
+	{
+		VillageGenRef.addFineArt();
+	}
+
+	public void  BurntHut()
+	{
+		VillageGenRef.addBurntHut();
+	}
+
+	public void arrowKnee()
+	{
+		VillageGenRef.addArrowKnee();
 	}
 
 	void OnGUI()
