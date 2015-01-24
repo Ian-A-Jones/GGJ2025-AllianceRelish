@@ -57,8 +57,14 @@ public class VillageManager : MonoBehaviour
 
 	#endregion
 
-	bool villageDeadEndState = true;
+	#region state conditions
+
+	bool villageDeadEndState = false;
 	bool unhappyVillageEndState = false;
+	int happinessVictory = 200;
+	int populationVictory = 100;
+
+	#endregion
 
 	#region GUI
 
@@ -317,6 +323,37 @@ public class VillageManager : MonoBehaviour
 			GUI.EndGroup();
 		}
 
+		if (happiness == happinessVictory) 
+		{
+			GUI.BeginGroup(new Rect (Screen.width / 2 - 250, Screen.height / 2, 400, 200), "");
+			GUI.Box (new Rect (10,0, 400, 200), "");
+			GUI.Label (new Rect (10,10, 400, 100), "congratulations, you have managed to please the entire village!");
+			if (GUI.Button (new Rect ( 100,75, 100, 50), "Restart."))
+			{
+				Application.LoadLevel (1);
+			}
+			if (GUI.Button (new Rect ( 200,75, 100, 50), "Quit."))
+			{
+				Application.Quit();
+			}
+			GUI.EndGroup();
+		}
+
+		if (population == populationVictory) 
+		{
+			GUI.BeginGroup(new Rect (Screen.width / 2 - 250, Screen.height / 2, 400, 200), "");
+			GUI.Box (new Rect (10,0, 400, 200), "");
+			GUI.Label (new Rect (10,10, 400, 100), "congratulations, you have managed to make your community thrive!");
+			if (GUI.Button (new Rect ( 100,75, 100, 50), "Restart."))
+			{
+				Application.LoadLevel (1);
+			}
+			if (GUI.Button (new Rect ( 200,75, 100, 50), "Quit."))
+			{
+				Application.Quit();
+			}
+			GUI.EndGroup();
+		}
 
 		GUI.skin = skin2;
 		GUI.Label (new Rect (Screen.width / 2 - 425, 10, 50, 50), food);

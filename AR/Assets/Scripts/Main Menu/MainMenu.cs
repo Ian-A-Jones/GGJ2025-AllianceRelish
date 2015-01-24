@@ -8,6 +8,7 @@ public class MainMenu : MonoBehaviour {
     public CanvasGroup menuPanel2;
     public CanvasGroup settingsPanel;
 	public CanvasGroup creditsPanel;
+	public CanvasGroup tutorialPanel;
 
     // Use this for initialization
     void Start () {
@@ -22,6 +23,10 @@ public class MainMenu : MonoBehaviour {
 		creditsPanel.interactable = false;
 		creditsPanel.blocksRaycasts = false;
 		creditsPanel.alpha = 0f;
+
+		tutorialPanel.interactable = false;
+		tutorialPanel.blocksRaycasts = false;
+		tutorialPanel.alpha = 0f;
 
     }
 
@@ -69,6 +74,44 @@ public class MainMenu : MonoBehaviour {
 		menuPanel.interactable = true;
 		menuPanel.blocksRaycasts = true;
 		menuPanel.alpha = 1f;
+	}
+
+	public void OnClickTutorial()
+	{
+		tutorialPanel.interactable = true;
+		tutorialPanel.blocksRaycasts = true;
+		tutorialPanel.alpha = 1f;
+		
+		menuPanel.interactable = false;
+		menuPanel.blocksRaycasts = false;
+		menuPanel.alpha = 0f;
+		
+		settingsPanel.interactable = false;
+		settingsPanel.blocksRaycasts = false;
+		settingsPanel.alpha = 0f;
+
+		creditsPanel.interactable = false;
+		creditsPanel.blocksRaycasts = false;
+		creditsPanel.alpha = 0f;
+	}
+
+	public void OnClickTutorialClose()
+	{
+		tutorialPanel.interactable = false;
+		tutorialPanel.blocksRaycasts = false;
+		tutorialPanel.alpha = 0f;
+		
+		menuPanel.interactable = true;
+		menuPanel.blocksRaycasts = true;
+		menuPanel.alpha = 1f;
+		
+		settingsPanel.interactable = false;
+		settingsPanel.blocksRaycasts = false;
+		settingsPanel.alpha = 0f;
+		
+		creditsPanel.interactable = false;
+		creditsPanel.blocksRaycasts = false;
+		creditsPanel.alpha = 0f;
 	}
 
     public void OnClickExitGame()
