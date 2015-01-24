@@ -7,7 +7,8 @@ public class Hut : MonoBehaviour {
 	public List<GameObject> hutsRef;
 	// Use this for initialization
 	void Start () {
-	
+		int rand = Random.Range (1, 6);
+		gameObject.GetComponent<SpriteRenderer> ().sprite = Resources.Load<Sprite> ("Sprites/Huts/Hut_" + rand);
 	}
 	
 	// Update is called once per frame
@@ -18,18 +19,13 @@ public class Hut : MonoBehaviour {
 	public void Initialise(Vector2 pos){
 		gameObject.transform.localPosition = pos;
 
-		float scale = 1.5f-((gameObject.transform.localPosition.y+10)*0.05f);
-		gameObject.transform.localScale = new Vector3 (scale, scale, 1);
+
 	}
 
 	void OnTriggerStay2D(Collider2D col){
 		
 		if (col.gameObject.tag == "River") {
-			//Move hut Away
-			Debug.Log ("Before Move: " + this.transform.position);
-			Debug.Log ("River PosX: " + col.gameObject.transform.position.x);
 			this.transform.position += new Vector3(col.gameObject.transform.position.x * -2,0,0);
-			Debug.Log ("After Move: " + this.transform.position);
 		}
 	}
 }

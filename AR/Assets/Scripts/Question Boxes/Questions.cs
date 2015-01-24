@@ -160,7 +160,7 @@ public class Questions {
 		OutcomeArr [4, 1] = "loseSupplies";
 		OutcomeArr [5, 0] = "gainFoodIncrease";
 		OutcomeArr [5, 1] = "loseHappiness,goldHut";
-		OutcomeArr [6, 0] = "losePopulation,gainHappiness";
+		OutcomeArr [6, 0] = "losePopulation,gainHappiness,rainingblood";
 		OutcomeArr [6, 1] = "loseHappiness";//natural desaster chance increase
 		OutcomeArr [7, 0] = "gainHapiness";
 		OutcomeArr [7, 1] = "gainPopulation";
@@ -168,8 +168,8 @@ public class Questions {
 		OutcomeArr [8, 1] = "gainFood";
 		OutcomeArr [9, 0] = "gainHappiness";
 		OutcomeArr [9, 1] = "losePopulation,loseHappiness,loseFoodIncrease";
-		OutcomeArr [10, 0] = "losePopulation,gainHappiness";
-		OutcomeArr [10, 1] = "loseHappiness,loseWater";
+		OutcomeArr [10, 0] = "losePopulation,gainHappiness,raining";
+		OutcomeArr [10, 1] = "loseHappiness,loseWater,raining";
 		OutcomeArr [11, 0] = "losePopulation,loseHappiness";//long turm pop increas
 		OutcomeArr [11, 1] = "loseSupplies,gainHappiness";//long turm pop decrease
 		OutcomeArr [12, 0] = "loseSupplies,loseSupplies,losePopulation";

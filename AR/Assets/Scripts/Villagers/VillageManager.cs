@@ -9,14 +9,14 @@ public class VillageManager : MonoBehaviour
 
 	#region Village stats
 	//Total number of Villagers
-	public float population;
+	public int population;
 
 	//Total amount of food and water available
-	public float foodSupply;
-	public float waterSupply;
+	public int foodSupply;
+	public int waterSupply;
 
-	public float foodGain;
-	public float waterGain;
+	public int foodGain;
+	public int waterGain;
 
 	//How happy village is as a whole
 	public float happiness;
@@ -57,11 +57,6 @@ public class VillageManager : MonoBehaviour
 
 	#endregion
 
-	bool villageDeadEndState = true;
-	bool unhappyVillageEndState = false;
-
-	#region GUI
-
 	public GUIContent food;
 	public GUIContent water;
 	public GUIContent happinessIcon;
@@ -70,14 +65,12 @@ public class VillageManager : MonoBehaviour
 	public GUISkin skin;
 	public GUISkin skin2;
 
-	#endregion
-
 	// Use this for initialization
 	void Start () 
 	{
 		population = 10;
 
-		VillageGenRef.GenerateVillage((int)population);
+		VillageGenRef.GenerateVillage(population);
 
 		foodSupply = 200;
 		waterSupply = 200;
@@ -204,7 +197,7 @@ public class VillageManager : MonoBehaviour
 			}
 			else
 			{
-				Time.timeScale = 0;
+				//Time.timeScale = 0;
 			}
 		}
 		else
@@ -243,14 +236,12 @@ public class VillageManager : MonoBehaviour
 		if(population <=0)
 		{
 			//Dead Village end state
-			villageDeadEndState = true;
 			return true;
 		}
 
 		if (happiness <= 0) 
 		{
 			//Unhappy Village end state
-			unhappyVillageEndState = true;
 			return true;
 		}
 
@@ -310,43 +301,10 @@ public class VillageManager : MonoBehaviour
 		GUI.skin = skin;
 
 		GUI.Box (new Rect (-200, 0, 2500, 50), "");
-		GUI.Label (new Rect (Screen.width / 2 - 400, 10, 150, 100), "Total Food: " + foodSupply.ToString("f0"));
-		GUI.Label (new Rect (Screen.width / 2 - 200, 10, 150, 100), "Total Water: " + waterSupply.ToString("f0"));
-		GUI.Label (new Rect (Screen.width / 2 , 10, 150, 100), "Happiness: " + happiness.ToString("f0"));
-		GUI.Label (new Rect (Screen.width / 2 + 200, 10, 150, 100), "Population: " + population.ToString("f0"));
-
-		if (unhappyVillageEndState == true) 
-		{
-			GUI.BeginGroup(new Rect (Screen.width / 2 - 250, Screen.height / 2, 400, 200), "");
-			GUI.Box (new Rect (10,0, 400, 200), "");
-			GUI.Label (new Rect (10,10, 400, 100), "You have lost! You have been overthrown!");
-			if (GUI.Button (new Rect ( 100,75, 100, 50), "Restart."))
-			{
-				Application.LoadLevel (1);
-			}
-			if (GUI.Button (new Rect ( 200,75, 100, 50), "Quit."))
-			{
-				Application.Quit();
-			}
-			GUI.EndGroup();
-		}
-
-		if (villageDeadEndState == true) 
-		{
-			GUI.BeginGroup(new Rect (Screen.width / 2 - 250, Screen.height / 2, 400, 200), "");
-			GUI.Box (new Rect (10,0, 400, 200), "");
-			GUI.Label (new Rect (10,10, 400, 100), "You have lost! you have let all of your villagers die!");
-			if (GUI.Button (new Rect ( 100,75, 100, 50), "Restart."))
-			{
-				Application.LoadLevel (1);
-			}
-			if (GUI.Button (new Rect ( 200,75, 100, 50), "Quit."))
-			{
-				Application.Quit();
-			}
-			GUI.EndGroup();
-		}
-
+		GUI.Label (new Rect (Screen.width / 2 - 400, 10, 150, 100), "Total Food: " + foodSupply);
+		GUI.Label (new Rect (Screen.width / 2 - 200, 10, 150, 100), "Total Water: " + waterSupply);
+		GUI.Label (new Rect (Screen.width / 2 , 10, 150, 100), "Happiness: " + happiness + "%");
+		GUI.Label (new Rect (Screen.width / 2 + 200, 10, 150, 100), "Population: " + population);
 
 		GUI.skin = skin2;
 		GUI.Label (new Rect (Screen.width / 2 - 425, 10, 50, 50), food);
