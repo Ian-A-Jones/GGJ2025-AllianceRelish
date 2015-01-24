@@ -1,8 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Tree : MonoBehaviour {
 
+	public List<GameObject> treesRef;
 	// Use this for initialization
 	void Start () {
 	
@@ -18,7 +20,11 @@ public class Tree : MonoBehaviour {
 	}
 
 	void OnTriggerStay2D(Collider2D col){
-		//gameObject.transform.localPosition += new Vector3 (Random.Range(-1f,1f), Random.Range(-1f,1f), 0);
 
+		if (col.gameObject.tag == "River") {
+			Destroy(gameObject);
+			treesRef.Remove(gameObject);
+		}
 	}
+
 }
