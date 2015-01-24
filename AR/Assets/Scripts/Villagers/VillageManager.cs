@@ -70,7 +70,9 @@ public class VillageManager : MonoBehaviour
 	public GUISkin skin2;
 
 	string villagerInfoName;
+	string villagerInfoGender;
 	string villagerInfoAge;
+	int villagerID;
 
 	public bool VillagerInfo = false;
 
@@ -123,17 +125,22 @@ public class VillageManager : MonoBehaviour
 				if(Input.GetMouseButtonDown(0))
 				{
 					RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
-					
-					if(hit.collider.tag == "Villager")
-					{
-						VillagerInfo = true;
 
-						villagerInfoName = hit.collider.name;
-//						villagerInfoAge = hit.collider.GetComponent<Villager>().age.ToString();						
+					if(hit)
+					{
+						if(hit.collider.tag == "Villager")
+						{
+							VillagerInfo = true;
+
+							villagerInfoName = hit.collider.gameObject.GetComponent<Villager>().info.GetField("Name").str;
+							villagerInfoGender = hit.collider.gameObject.GetComponent<Villager>().info.GetField("Gender").str;
+							villagerInfoAge = hit.collider.GetComponent<Villager>().age.ToString();
+							villagerID = hit.collider.gameObject.GetInstanceID();
+						}
 					}
 					else
 					{
-						VillagerInfo = false;
+							VillagerInfo = false;
 					}
 
 				}
@@ -178,11 +185,17 @@ public class VillageManager : MonoBehaviour
 					foodSupply += foodGain;
 					waterSupply += waterGain;
 
+					VillagerInfo = false;
+
 					foreach(GameObject villager in Villagers.ToArray())
 					{
 						if(villager.GetComponent<Villager>().alive())
 						{
-//							villager.GetComponent<Villager>().age++;
+							villager.GetComponent<Villager>().age++;
+							if(villager.gameObject.GetInstanceID() == villagerID)
+							{
+								villagerInfoAge = villager.GetComponent<Villager>().age.ToString();
+							}
 							if(foodSupply > 0)
 							{
 								villager.GetComponent<Villager>().unHunger();
@@ -348,23 +361,19 @@ public class VillageManager : MonoBehaviour
 		GUI.Label (new Rect (0,30,250,175), ChatDialogueRef.qOutcome);
 		GUI.EndGroup();
 
-		GUI.skin = skin2;
-		GUI.Label (new Rect (Screen.width / 2 - 425, 10, 50, 50), food);
-		GUI.Label (new Rect (Screen.width / 2 - 225, 10, 50, 50), water);
-		GUI.Label (new Rect (Screen.width / 2 - 25, 10, 50, 50), happinessIcon);
-		GUI.Label (new Rect (Screen.width / 2 + 175, 10, 50, 50), pop);
-
 		if(VillagerInfo)
 		{
-			GUI.BeginGroup(new Rect (50, Screen.height - 200, 400, 200));
-
+			GUI.BeginGroup(new Rect (50, Screen.height - 250, 400, 300));
+			
 			GUI.Box(new Rect(0,0,250,400), "Villager Info");
-
-			GUI.Label(new Rect(25,80,200,100), "Name: " + villagerInfoName); 
-			GUI.Label(new Rect(25,140,200,100), "Age: " + villagerInfoAge);
-
+			
+			GUI.Label(new Rect(25,80,200,100), "Name: " + villagerInfoName);
+			GUI.Label(new Rect(25,140,200,100), "Gender: " + villagerInfoGender);
+			GUI.Label(new Rect(25,200,200,100), "Age: " + villagerInfoAge);
+			
 			GUI.EndGroup();
 		}
+
 
 		if (questionVictory) 
 		{
@@ -445,6 +454,13 @@ public class VillageManager : MonoBehaviour
 			}
 			GUI.EndGroup();
 		}
+
+		GUI.skin = skin2;
+		GUI.Label (new Rect (Screen.width / 2 - 425, 10, 50, 50), food);
+		GUI.Label (new Rect (Screen.width / 2 - 225, 10, 50, 50), water);
+		GUI.Label (new Rect (Screen.width / 2 - 25, 10, 50, 50), happinessIcon);
+		GUI.Label (new Rect (Screen.width / 2 + 175, 10, 50, 50), pop);
+
 		
 	}
 

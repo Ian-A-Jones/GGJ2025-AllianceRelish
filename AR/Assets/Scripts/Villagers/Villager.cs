@@ -6,11 +6,11 @@ public class Villager : MonoBehaviour
 {
 	public bool hungry = false, thirsty = false, dead = false;
 
-	public int daysHungry = 0, daysThirsty = 0;
+	public int daysHungry = 0, daysThirsty = 0, age = 0;
 
 	public static int DeathThreshold = 6;
 
-	JSONObject info;
+	public JSONObject info;
 
 
 	// Use this for initialization
@@ -75,7 +75,7 @@ public class Villager : MonoBehaviour
     public Vector2 getNewDestination()
     {
         Vector2 newPos = new Vector2(Random.Range(-15, 15), Random.Range(-8, 8));
-		Debug.Log ("Dest pos: " + newPos);
+//		Debug.Log ("Dest pos: " + newPos);
 
         return newPos;
     }
