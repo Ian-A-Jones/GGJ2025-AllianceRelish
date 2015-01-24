@@ -60,12 +60,13 @@
      <Compile Include="Assets\Scripts\Villagers\VillageManager.cs" />
      <Compile Include="Assets\Scripts\Villagers\Villager.cs" />
      <Compile Include="Assets\Scripts\Villagers\VillagerImporter.cs" />
+     <Compile Include="Assets\UI.cs" />
      <None Include="Assets\JSON\readme.txt" />
      <None Include="Assets\Standard Assets\Particles\Sources\Shaders\Particle Alpha Blend (Queue +100).shader" />
      <None Include="Assets\Necromancer GUI\Kingthings.txt" />
      <None Include="Assets\Necromancer GUI\Readme.txt" />
  <Reference Include="Assembly-UnityScript-firstpass">
- <HintPath>D:/GGJ REPO2/GGJ2025-AllianceRelish/AR/Library/ScriptAssemblies/Assembly-UnityScript-firstpass.dll</HintPath>
+ <HintPath>D:/GGJ2025-AllianceRelish/AR/Library/ScriptAssemblies/Assembly-UnityScript-firstpass.dll</HintPath>
  </Reference>
   </ItemGroup>
   <ItemGroup>

@@ -71,6 +71,7 @@
     <Compile Include="Assets\Scripts\Villagers\VillageManager.cs" />
     <Compile Include="Assets\Scripts\Villagers\Villager.cs" />
     <Compile Include="Assets\Scripts\Villagers\VillagerImporter.cs" />
+    <Compile Include="Assets\UI.cs" />
     <None Include="Assets\JSON\readme.txt" />
     <None Include="Assets\Necromancer GUI\Kingthings.txt" />
     <None Include="Assets\Necromancer GUI\Readme.txt" />
