@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class VillageGenerator : MonoBehaviour {
 	
-	List<GameObject> huts = new List<GameObject>();
+	public List<GameObject> huts = new List<GameObject>();
 	List<GameObject> trees = new List<GameObject>();
 
 	public GameObject elderHut;
