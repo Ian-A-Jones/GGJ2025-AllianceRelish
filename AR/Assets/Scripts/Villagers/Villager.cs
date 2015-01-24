@@ -10,11 +10,15 @@ public class Villager : MonoBehaviour
 
 	public static int DeathThreshold = 6;
 
+	public bool hasDestination = false;
+
+	private Vector2 dest;
+
 
 	// Use this for initialization
 	void Start () 
 	{
-	
+		Vector2 dest = getNewDestination ();
 	}
 	
 	public bool alive()
@@ -69,7 +73,7 @@ public class Villager : MonoBehaviour
     {
         Vector2 newPos = new Vector2(Random.Range(-15, 15), Random.Range(-8, 8));
 		Debug.Log ("Dest pos: " + newPos);
-
+		hasDestination = true;
         return newPos;
     }
 
@@ -82,9 +86,11 @@ public class Villager : MonoBehaviour
     public void moveVillager()
     {
 
-		//gameObject.GetComponent<SpriteRenderer>().sortingOrder = Mathf.RoundToInt((gameObject.transform.position.y-10) * 100f) * -1;
+		gameObject.GetComponent<SpriteRenderer>().sortingOrder = Mathf.RoundToInt((gameObject.transform.position.y-10) * 100f) * -1;
         Vector2 curPos = curPosition();
-        Vector2 dest = getNewDestination();
+		if (!hasDestination) {
+						dest = getNewDestination ();
+				}
 
         Vector2 diff = dest - curPos;
 
@@ -101,16 +107,15 @@ public class Villager : MonoBehaviour
             this.rigidbody2D.AddForce(new Vector2(1, 0));
 
         }
-        if (col.gameObject.tag == "Hut")
-        {
-            Vector2 curPos = curPosition();
-            Vector2 dest = getNewDestination();
+        //if (col.gameObject.tag == "Hut")
+        //{
+        //    Vector2 curPos = curPosition();
+		//	if (!hasDestination){dest = getNewDestination();}
+        //   Vector2 diff = dest - curPos;
 
-            Vector2 diff = dest - curPos;
-
-            diff = diff.normalized;
-            rigidbody2D.AddForce(diff);
-        }
+         //   diff = diff.normalized;
+         //   rigidbody2D.AddForce(diff);
+        //}
     }
 	
 }
