@@ -198,6 +198,7 @@ public class VillageManager : MonoBehaviour
 					Debug.Log ("Next decision");
 					ChatDialogue.activeQ = true;
 					setVillagersKinematic(true);
+					VillagerInfo = false;
                     APop.Play();
 
 					//Pick random amount of time for next decision
@@ -224,7 +225,7 @@ public class VillageManager : MonoBehaviour
 					foodSupply += foodGain;
 					waterSupply += waterGain;
 
-					VillagerInfo = false;
+
 
 					foreach(GameObject villager in Villagers.ToArray())
 					{
@@ -259,6 +260,8 @@ public class VillageManager : MonoBehaviour
 						{
 							Villagers.Remove(villager);
 							Destroy(villager);
+							death.Play();
+							Splat.Play();
 							population--;
 						}
 					}
