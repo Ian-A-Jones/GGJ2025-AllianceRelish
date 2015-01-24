@@ -55,7 +55,7 @@ public class VillageGenerator : MonoBehaviour {
 			Vector2 hutPos; 
 			do{
 				hutPos = Random.insideUnitCircle*(VILLAGE_RADIUS*0.8f);
-			}while(false);//Vector2.Distance(Vector2.zero, hutPos)<2);
+			}while(Vector2.Distance(Vector2.zero, hutPos)<2);
 			
 			
 			huts.Add(Instantiate(Resources.Load("Prefabs/Hut")) as GameObject);
