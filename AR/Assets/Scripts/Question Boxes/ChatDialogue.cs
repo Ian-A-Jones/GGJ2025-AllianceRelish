@@ -29,6 +29,10 @@ public class ChatDialogue : MonoBehaviour {
 
     public ParticleSystem Rain;
     public ParticleSystem BloodRain;
+
+    float RAINTIMER = 20;
+    int days = 0;
+    bool isRaining = false;
 	#endregion 
 	
 	void Start()
@@ -278,18 +282,34 @@ public class ChatDialogue : MonoBehaviour {
 				Q4Active = true;
 				break;
             case"raining":
-                BloodRain.Play(false);
                 Rain.Play(true);
-                //Rain.playOnAwake = true;
+                isRaining = true;
+                update();
                 break;
             case "RainingBlood":
-                Rain.Play(false);
-                BloodRain.Play(true);
-                //BloodRain.playOnAwake = true;
-                break;                   
+                BloodRain.Play();
+                isRaining = true;
+                update();
+                break;
 			}
+           
 		}
 	}
+
+    void update()
+    {
+        Debug.Log("IM UPDATING");
+        if (isRaining)
+        {
+            for (int i = 0; i < RAINTIMER; i++)
+            {
+                //stuff;
+            }
+            isRaining = false;
+            BloodRain.Stop();
+            Rain.Stop();
+        }
+    }
 }
 	
 

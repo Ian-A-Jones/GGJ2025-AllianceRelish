@@ -28,6 +28,7 @@ public class RenderParticlesOnLayer : MonoBehaviour {
 
     public void changeOrder(ParticleSystem particleSystem)
     {
+        Debug.Log("ANything" + sortingLayerName);
         particleSystem.renderer.sortingLayerName = sortingLayerName;
         particleSystem.renderer.sortingOrder = 1;
 
