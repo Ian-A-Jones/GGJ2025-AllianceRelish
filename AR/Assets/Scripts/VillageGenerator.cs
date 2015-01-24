@@ -6,17 +6,10 @@ public class VillageGenerator : MonoBehaviour {
 	
 	List<GameObject> huts = new List<GameObject>();
 	List<GameObject> trees = new List<GameObject>();
-<<<<<<< HEAD:AR/Assets/Scripts/Village.cs
     List<GameObject> villagers = new List<GameObject>();
 
 	GameObject river;
 
-	private const float HUT_COUNT = 10;
-=======
-	
-	GameObject river;
-	
->>>>>>> 698872ed74f7c184597a33d0f7c355817ce093af:AR/Assets/Scripts/VillageGenerator.cs
 	private const float FOREST_DENSITY = 0.8f;
 	private const float THICKETS = 100;
 	private const float VILLAGE_RADIUS = 5;
@@ -24,9 +17,6 @@ public class VillageGenerator : MonoBehaviour {
 	private float riverXPos = 0;
 	// Use this for initialization
 	void Start () {
-<<<<<<< HEAD:AR/Assets/Scripts/Village.cs
-
-=======
 		
 		//		GenerateRiver ();
 		//		GenerateForest ();
@@ -36,10 +26,9 @@ public class VillageGenerator : MonoBehaviour {
 	
 	public void GenerateVillage(int population)
 	{
->>>>>>> 698872ed74f7c184597a33d0f7c355817ce093af:AR/Assets/Scripts/VillageGenerator.cs
 		GenerateRiver ();
 		GenerateForest ();
-		GenerateHuts ();
+		GenerateHuts (population);
 		SetRenderingOrder ();
 	}
 	
@@ -47,25 +36,11 @@ public class VillageGenerator : MonoBehaviour {
 	void Update () {
 		
 	}
-<<<<<<< HEAD:AR/Assets/Scripts/Village.cs
-
-
-	void GenerateHuts(){
-
-
-		for (int i = 0; i<HUT_COUNT; i++) {
-
-
-=======
-	
-	
 	void GenerateHuts(int population){
 		
 		
 		for (int i = 0; i < population; i++) {
-			
-			
->>>>>>> 698872ed74f7c184597a33d0f7c355817ce093af:AR/Assets/Scripts/VillageGenerator.cs
+
 			//Vector2 hutPos = Random.insideUnitCircle*VILLAGE_RADIUS;
 			
 			Vector2 hutPos; 
