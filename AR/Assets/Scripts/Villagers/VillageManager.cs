@@ -357,7 +357,8 @@ public class VillageManager : MonoBehaviour
 
 		Villagers [Villagers.Count - 1].transform.localPosition = VillageGenRef.huts [randHut].transform.position;
 
-
+		VillageGenRef.updateHuts((int)population);
+		
 	}
 	
 	public void cull(int toCull)
