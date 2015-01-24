@@ -4,8 +4,12 @@ using System.Collections.Generic;
 
 public class VillageManager : MonoBehaviour
 {		
+
 	//Reference to Village Generator
 	public VillageGenerator VillageGenRef;
+	public ChatDialogue ChatDialogueRef;
+
+	VillagerImporter villagerImporter;
 
 	#region Village stats
 	//Total number of Villagers
@@ -78,6 +82,8 @@ public class VillageManager : MonoBehaviour
 	{
 		population = 10;
 
+		villagerImporter = gameObject.AddComponent<VillagerImporter> ();
+
 		VillageGenRef.GenerateVillage((int)population);
 
 		foodSupply = 200;
@@ -96,6 +102,7 @@ public class VillageManager : MonoBehaviour
         {
             Villagers.Add(Instantiate(Resources.Load("Prefabs/Villagerlol")) as GameObject);
             Villagers[Villagers.Count - 1].AddComponent<Villager>();
+			Villagers[Villagers.Count - 1].GetComponent<Villager>().setInfo(villagerImporter.GetVillagerInfo());
             // Debug.Log("DRAWING VILLAGER");
         }
 	}
@@ -311,6 +318,11 @@ public class VillageManager : MonoBehaviour
 		GUI.Label (new Rect (Screen.width / 2 - 200, 10, 150, 100), "Total Water: " + waterSupply.ToString("F0"));
 		GUI.Label (new Rect (Screen.width / 2 , 10, 150, 100), "Happiness: " + happiness.ToString("F0"));
 		GUI.Label (new Rect (Screen.width / 2 + 200, 10, 150, 100), "Population: " + population.ToString("F0"));
+
+		GUI.BeginGroup(new Rect (0,25,200,50), "");
+		GUI.Box (new Rect (0,0,200,50), "Recent Stat Changes");
+		GUI.Label (new Rect (0,30,250,175), ChatDialogueRef.qOutcome);
+		GUI.EndGroup();
 
 		GUI.skin = skin2;
 		GUI.Label (new Rect (Screen.width / 2 - 425, 10, 50, 50), food);
