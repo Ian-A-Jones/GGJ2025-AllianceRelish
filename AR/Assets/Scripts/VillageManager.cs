@@ -151,7 +151,12 @@ public class VillageManager : MonoBehaviour
 				happyCalc(foodSupply, HAPPYFOODTHRESH, SADFOODTHRESH);
 				
 				happyCalc(waterSupply, HAPPYWATERTHRESH, SADWATERTHRESH);
-				
+
+				if(happiness > 50 && foodSupply > 0 && waterSupply > 0)
+				{
+					population++;
+				}
+
 				debugStats();
 			}
 			else
