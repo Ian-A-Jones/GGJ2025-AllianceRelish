@@ -27,5 +27,6 @@ public class Hut : MonoBehaviour {
 		if (col.gameObject.tag == "River") {
 			this.transform.position += new Vector3(col.gameObject.transform.position.x * -2,0,0);
 		}
+
 	}
 }

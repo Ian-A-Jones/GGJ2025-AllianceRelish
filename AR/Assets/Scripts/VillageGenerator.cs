@@ -51,14 +51,14 @@ public class VillageGenerator : MonoBehaviour {
 
 			//Vector2 hutPos = Random.insideUnitCircle*VILLAGE_RADIUS;
 			
-			Vector2 hutPos; 
+			Vector3 hutPos; 
 			do{
-				hutPos = Random.insideUnitCircle*(VILLAGE_RADIUS*0.8f);
-			}while(Vector2.Distance(Vector2.zero, hutPos)<4);
+				hutPos = Random.;//*(VILLAGE_RADIUS*0.5f)*1.5f;
+			}while(false);//Vector2.Distance(Vector2.zero, hutPos)<4);
 			
 			
 			huts.Add(Instantiate(Resources.Load("Prefabs/Hut")) as GameObject);
-			huts[huts.Count-1].GetComponent<Hut>().Initialise(hutPos);
+			huts[huts.Count-1].GetComponent<Hut>().Initialise(new Vector2(hutPos.x, hutPos.y));
 			huts[huts.Count-1].GetComponent<Hut>().hutsRef = huts;
 			huts[huts.Count-1].gameObject.transform.parent = gameObject.transform.FindChild("Terrain").FindChild("Huts");
 		}
@@ -73,6 +73,7 @@ public class VillageGenerator : MonoBehaviour {
 							Vector2 offset = Random.insideUnitCircle;
 						
 							huts[i].transform.localPosition += new Vector3 (offset.x*5, offset.y*5, 0);
+
 						}while(huts[i].GetComponent<BoxCollider2D>().bounds.Intersects(huts[j].GetComponent<BoxCollider2D>().bounds));
 					}
 					
