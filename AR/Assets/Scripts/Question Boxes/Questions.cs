@@ -27,7 +27,9 @@ public class Questions {
 		QuestionArr [9] = "Im sorry elder, we have had a very poor hunt, what do we do now?"; 
 		QuestionArr [10] = "Elder, there is a drought, what do we do now?"; 
 		QuestionArr [11] = "Elder some of our people are becoming ill, what do we do now?";
-		QuestionArr [12] = "God is unhappy with us, a “natural disaster choice” has struck the village";
+
+		QuestionArr [12] = "God is unhappy with us, a tornado has struck the village";
+
 		QuestionArr [13] = "I challenge you for position of elder!"; 
 		QuestionArr [14] = "Elder you must think about your lineage, what do we do now? "; 
 		QuestionArr [15] = "Elder there are strangers at our door, what do we do now?";
@@ -172,8 +174,8 @@ public class Questions {
 		OutcomeArr [10, 1] = "loseHappiness,loseWater,raining";
 		OutcomeArr [11, 0] = "losePopulation,loseHappiness";//long turm pop increas
 		OutcomeArr [11, 1] = "loseSupplies,gainHappiness";//long turm pop decrease
-		OutcomeArr [12, 0] = "loseSupplies,loseSupplies,losePopulation";
-		OutcomeArr [12, 1] = "loseRandom";
+		OutcomeArr [12, 0] = "loseSupplies,loseSupplies,losePopulation,Tornado";
+		OutcomeArr [12, 1] = "loseRandom,Tornado";
 		OutcomeArr [13, 0] = "lose1Population,gainHappiness";
 		OutcomeArr [13, 1] = "loseGame";
 		OutcomeArr [14, 0] = "randomHappiness";

@@ -125,9 +125,7 @@ public class VillageManager : MonoBehaviour
         //If the new Population is greater then create more
         for (int i = 0; i < population; i++)
         {
-            Villagers.Add(Instantiate(Resources.Load("Prefabs/Villagerlol")) as GameObject);
-            Villagers[Villagers.Count - 1].AddComponent<Villager>();
-			Villagers[Villagers.Count - 1].GetComponent<Villager>().setInfo(villagerImporter.GetVillagerInfo());
+			AddVillager();
             // Debug.Log("DRAWING VILLAGER");
         }
 	}
@@ -195,6 +193,7 @@ public class VillageManager : MonoBehaviour
 					Debug.Log ("Next decision");
 					ChatDialogue.activeQ = true;
 					setVillagersKinematic(true);
+					VillagerInfo = false;
                     APop.Play();
 
 					//Pick random amount of time for next decision
@@ -221,7 +220,7 @@ public class VillageManager : MonoBehaviour
 					foodSupply += foodGain;
 					waterSupply += waterGain;
 
-					VillagerInfo = false;
+
 
 					foreach(GameObject villager in Villagers.ToArray())
 					{
@@ -254,8 +253,10 @@ public class VillageManager : MonoBehaviour
 						}
 						else
 						{
-							Villagers.Remove(villager);
 							Destroy(villager);
+							death.Play();
+							Splat.Play();
+							Villagers.Remove(villager);
 							population--;
 						}
 					}
@@ -270,8 +271,7 @@ public class VillageManager : MonoBehaviour
 						//25% chance of Pop increase
 						if(Random.value > 0.75f)
 						{
-							Villagers.Add(Instantiate(Resources.Load("Prefabs/Villagerlol")) as GameObject);
-							Villagers[Villagers.Count - 1].AddComponent<Villager>();
+							AddVillager();
 							population++;
 						}
 					}
@@ -286,8 +286,12 @@ public class VillageManager : MonoBehaviour
 		}
 		else
 		{
-			Debug.Log ("Game over");
+
 		}
+	}
+
+	public void AddTornado(){
+		GameObject.Find ("Tornado").GetComponentInChildren<Tornado> ().StartTornado ();
 	}
 
 
@@ -342,7 +346,20 @@ public class VillageManager : MonoBehaviour
 			v.GetComponent<Rigidbody2D>().isKinematic = val;
 		}
 	}
-		
+
+	public void AddVillager(){
+		Villagers.Add(Instantiate(Resources.Load("Prefabs/Villagerlol")) as GameObject);
+		Villagers[Villagers.Count - 1].AddComponent<Villager>();
+		Villagers[Villagers.Count - 1].GetComponent<Villager>().setInfo(villagerImporter.GetVillagerInfo());
+
+		//Place at random hut
+		int randHut = Random.Range (1, VillageGenRef.huts.Count);
+
+		Villagers [Villagers.Count - 1].transform.localPosition = VillageGenRef.huts [randHut].transform.position;
+
+
+	}
+	
 	public void cull(int toCull)
 	{
 		int totalCulled = 0;
