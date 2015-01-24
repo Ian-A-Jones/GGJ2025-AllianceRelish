@@ -18,8 +18,8 @@ public class Hut : MonoBehaviour {
 	public void Initialise(Vector2 pos){
 		gameObject.transform.localPosition = pos;
 
-		float rand = Random.Range (0.7f, 0.95f);
-		gameObject.transform.localScale = new Vector3 (rand, rand, 1);
+		float scale = 1.5f-((gameObject.transform.localPosition.y+10)*0.05f);
+		gameObject.transform.localScale = new Vector3 (scale, scale, 1);
 	}
 
 	void OnTriggerStay2D(Collider2D col){

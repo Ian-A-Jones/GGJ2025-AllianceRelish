@@ -9,9 +9,9 @@ public class Village : MonoBehaviour {
 
 	GameObject river;
 
-	private const float HUT_COUNT = 100;
+	private const float HUT_COUNT = 10;
 	private const float FOREST_DENSITY = 0.8f;
-	private const float THICKETS = 50;
+	private const float THICKETS = 100;
 	private const float VILLAGE_RADIUS = 5;
 
 	private float riverXPos = 0;
@@ -45,7 +45,7 @@ public class Village : MonoBehaviour {
 			Vector2 hutPos; 
 			do{
 				hutPos = Random.insideUnitCircle*VILLAGE_RADIUS;
-			}while(Vector2.Distance(Vector2.zero, hutPos)<1);
+			}while(Vector2.Distance(Vector2.zero, hutPos)<3);
 			
 			
 			huts.Add(Instantiate(Resources.Load("Prefabs/Hut")) as GameObject);
@@ -60,9 +60,9 @@ public class Village : MonoBehaviour {
 				if(huts[i]!=huts[j]){
 					if(huts[i].GetComponent<BoxCollider2D>().bounds.Intersects(huts[j].GetComponent<BoxCollider2D>().bounds)){
 						
-						Vector2 offset = Random.insideUnitCircle;
+						Vector2 offset = Random.insideUnitCircle*2;
 
-						huts[i].transform.localPosition += new Vector3 (offset.x, offset.y, 0);
+						huts[i].transform.localPosition += new Vector3 (offset.x*2, offset.y*2, 0);
 					}
 
 				}
@@ -87,7 +87,7 @@ public class Village : MonoBehaviour {
 		//Generate Trees
 		for(int i = 0; i<THICKETS; i++){
 
-			Vector2 randomRange = new Vector2(Random.Range(-9,9),Random.Range(-5,5));
+			Vector2 randomRange = new Vector2(Random.Range(-15,15),Random.Range(-10,10));
 			Vector2 thicketPos = randomRange;//OffsetTrees(randomRange);
 
 
@@ -113,7 +113,7 @@ public class Village : MonoBehaviour {
 						trees[i].transform.localPosition += new Vector3 (offset.x, offset.y, 0);
 					}
 					//Destroy trees on village
-					if(Vector2.Distance(Vector2.zero, trees[i].transform.localPosition)<VILLAGE_RADIUS-1){
+					if(Vector2.Distance(Vector2.zero, trees[i].transform.localPosition)<VILLAGE_RADIUS+3){
 						trees[i].SetActive(false);
 					}
 				}
