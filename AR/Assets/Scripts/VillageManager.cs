@@ -53,7 +53,15 @@ public class VillageManager : MonoBehaviour
 	float SADWATERTHRESH = 0.8f;
 
 	#endregion
-	
+
+	public GUIContent food;
+	public GUIContent water;
+	public GUIContent happinessIcon;
+	public GUIContent pop;
+	public GUIContent box;
+	public GUISkin skin;
+	public GUISkin skin2;
+
 	// Use this for initialization
 	void Start () 
 	{
@@ -205,6 +213,24 @@ public class VillageManager : MonoBehaviour
 		Debug.Log ("Water %: " + percentPop(waterSupply) + "%");
 
 		Debug.Log (happiness);
+	}
+
+	void OnGUI()
+	{
+		GUI.skin = skin;
+
+		GUI.Box (new Rect (-200, 0, 2500, 50), "");
+		GUI.Label (new Rect (Screen.width / 2 - 400, 10, 150, 100), "Total Food: " + foodSupply);
+		GUI.Label (new Rect (Screen.width / 2 - 200, 10, 150, 100), "Total Water: " + waterSupply);
+		GUI.Label (new Rect (Screen.width / 2 , 10, 150, 100), "Happiness: " + happiness + "%");
+		GUI.Label (new Rect (Screen.width / 2 + 200, 10, 150, 100), "Population: " + population);
+
+		GUI.skin = skin2;
+		GUI.Label (new Rect (Screen.width / 2 - 425, 10, 50, 50), food);
+		GUI.Label (new Rect (Screen.width / 2 - 225, 10, 50, 50), water);
+		GUI.Label (new Rect (Screen.width / 2 - 25, 10, 50, 50), happinessIcon);
+		GUI.Label (new Rect (Screen.width / 2 + 175, 10, 50, 50), pop);
+
 	}
 
 }
