@@ -58,6 +58,11 @@ public class VillageManager : MonoBehaviour
 
 	#endregion
 
+	bool villageDeadEndState = true;
+	bool unhappyVillageEndState = false;
+
+	#region GUI
+
 	public GUIContent food;
 	public GUIContent water;
 	public GUIContent happinessIcon;
@@ -65,6 +70,8 @@ public class VillageManager : MonoBehaviour
 	public GUIContent box;
 	public GUISkin skin;
 	public GUISkin skin2;
+
+	#endregion
 
 	// Use this for initialization
 	void Start () 
@@ -226,12 +233,14 @@ public class VillageManager : MonoBehaviour
 		if(population <=0)
 		{
 			//Dead Village end state
+			villageDeadEndState = true;
 			return true;
 		}
 
 		if (happiness <= 0) 
 		{
 			//Unhappy Village end state
+			unhappyVillageEndState = true;
 			return true;
 		}
 
@@ -265,6 +274,39 @@ public class VillageManager : MonoBehaviour
 		GUI.Label (new Rect (Screen.width / 2 - 200, 10, 150, 100), "Total Water: " + waterSupply);
 		GUI.Label (new Rect (Screen.width / 2 , 10, 150, 100), "Happiness: " + happiness + "%");
 		GUI.Label (new Rect (Screen.width / 2 + 200, 10, 150, 100), "Population: " + population);
+
+		if (unhappyVillageEndState == true) 
+		{
+			GUI.BeginGroup(new Rect (Screen.width / 2 - 250, Screen.height / 2, 400, 200), "");
+			GUI.Box (new Rect (10,0, 400, 200), "");
+			GUI.Label (new Rect (10,10, 400, 100), "You have lost! You have been overthrown!");
+			if (GUI.Button (new Rect ( 100,75, 100, 50), "Restart."))
+			{
+				Application.LoadLevel (1);
+			}
+			if (GUI.Button (new Rect ( 200,75, 100, 50), "Quit."))
+			{
+				Application.Quit();
+			}
+			GUI.EndGroup();
+		}
+
+		if (villageDeadEndState == true) 
+		{
+			GUI.BeginGroup(new Rect (Screen.width / 2 - 250, Screen.height / 2, 400, 200), "");
+			GUI.Box (new Rect (10,0, 400, 200), "");
+			GUI.Label (new Rect (10,10, 400, 100), "You have lost! you have let all of your villagers die!");
+			if (GUI.Button (new Rect ( 100,75, 100, 50), "Restart."))
+			{
+				Application.LoadLevel (1);
+			}
+			if (GUI.Button (new Rect ( 200,75, 100, 50), "Quit."))
+			{
+				Application.Quit();
+			}
+			GUI.EndGroup();
+		}
+
 
 		GUI.skin = skin2;
 		GUI.Label (new Rect (Screen.width / 2 - 425, 10, 50, 50), food);
