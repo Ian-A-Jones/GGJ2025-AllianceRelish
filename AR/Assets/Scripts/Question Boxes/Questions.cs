@@ -150,8 +150,8 @@ public class Questions {
 		OutcomeArr [0, 1] = "loseHappiness,losePopulation";
 		OutcomeArr [1, 0] = "loseWater";
 		OutcomeArr [1, 1] = "loseHappiness,losePopulation";
-		OutcomeArr [2, 0] = "losePopulation,loseSupplies,gainHappiness";
-		OutcomeArr [2, 1] = "losePopulation,loseHappiness";
+		OutcomeArr [2, 0] = "losePopulation,loseSupplies,gainHappiness,activate4";
+		OutcomeArr [2, 1] = "losePopulation,loseHappiness,activate3";
 		//answers to the good outcome of people returning
 		OutcomeArr [3, 0] = "gainSupplies";
 		OutcomeArr [3, 1] = "gainSupplies";
