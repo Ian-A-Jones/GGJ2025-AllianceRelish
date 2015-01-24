@@ -48,7 +48,6 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\Hut.cs" />
      <Compile Include="Assets\Scripts\Tree.cs" />
-     <Compile Include="Assets\Scripts\Village.cs" />
      <Compile Include="Assets\Scripts\VillageManager.cs" />
      <Compile Include="Assets\Scripts\Villager.cs" />
      <None Include="Assets\Standard Assets\Particles\Sources\Shaders\Particle Alpha Blend (Queue +100).shader" />

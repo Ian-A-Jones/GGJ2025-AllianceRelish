@@ -21,10 +21,13 @@ public class VillageManager : MonoBehaviour
 
 	//Number of people that are sick
 	public int sickness;
+
+	//How many days have passed
+	public int days = 0;
 	
 	#endregion
 
-	List<Villager> Villagers;
+	public List<GameObject> Villagers;
 
 	#region timers
 
@@ -42,7 +45,7 @@ public class VillageManager : MonoBehaviour
 	#region Constants
 
 	//Time for each day to pass
-	float TIMEPERDAY = 10;
+	float TIMEPERDAY = 5;
 
 	float HAPPYFOODTHRESH = 1.5f;
 	float HAPPYWATERTHRESH = 1.5f;
@@ -57,14 +60,20 @@ public class VillageManager : MonoBehaviour
 	{
 		population = 10;
 
-		foodSupply = 280;
+		foodSupply = 200;
 		waterSupply = 200;
 
 		happiness = 50;
 
 		sickness = 0;
 
-		Villagers = new List<Villager>(population);
+		Villagers = new List<GameObject>();
+
+		for(int i = 0; i < population; i++)
+		{
+			Villagers.Add(new GameObject("Villager " + (i+1)));
+			Villagers[i].AddComponent("Villager");
+		}
 	}
 	
 	// Update is called once per frame
@@ -94,30 +103,44 @@ public class VillageManager : MonoBehaviour
 			//IF a day has passed
 			if(dayTimer > TIMEPERDAY)
 			{
+				days ++;
 				dayTimer = 0;
 
-				foodSupply 	-= population;
-				if(foodSupply < 0)
+				foreach(GameObject villager in Villagers.ToArray())
 				{
-					makeHungry(Mathf.Abs(foodSupply));
-					foodSupply = 0;
+					if(villager.GetComponent<Villager>().alive())
+					{
+						if(foodSupply > 0)
+						{
+							villager.GetComponent<Villager>().unHunger();
+							foodSupply --;
+						}
+						else
+						{
+							villager.GetComponent<Villager>().hungerTick();
+						}
+
+						if(waterSupply > 0)
+						{
+							villager.GetComponent<Villager>().unThirst();
+							waterSupply --;
+						}
+						else
+						{
+							villager.GetComponent<Villager>().thirstTick();
+						}		
+					}
+					else
+					{
+						Villagers.Remove(villager);
+						Destroy(villager);
+						population--;
+					}
 				}
 
-				waterSupply -= population;
-				if(waterSupply < 0)
-				{
-					makeThirsty(Mathf.Abs(waterSupply));
-					waterSupply = 0;
-				}
-				
 				happyCalc(foodSupply, HAPPYFOODTHRESH, SADFOODTHRESH);
 				
 				happyCalc(waterSupply, HAPPYWATERTHRESH, SADWATERTHRESH);
-
-				foreach(Villager villager in Villagers)
-				{
-					villager.tick();
-				}
 				
 				debugStats();
 			}
@@ -126,46 +149,12 @@ public class VillageManager : MonoBehaviour
 				dayTimer += Time.deltaTime;
 			}
 		}
-	}
-
-	void makeHungry(int toConvert)
-	{
-		int madeHungry = 0;
-
-		foreach(Villager villager in Villagers)
+		else
 		{
-			if(!villager.hungry)
-			{
-				villager.hungry = true;
-				madeHungry ++;
-
-				if(madeHungry == toConvert)
-				{
-					return;
-				}
-			}
+			Debug.Log ("Game over");
 		}
 	}
-
-	void makeThirsty(int toConvert)
-	{
-		int madeThirsty = 0;
-		
-		foreach(Villager villager in Villagers)
-		{
-			if(!villager.thirsty)
-			{
-				villager.thirsty = true;
-				madeThirsty ++;
-				
-				if(madeThirsty == toConvert)
-				{
-					return;
-				}
-			}
-		}
-	}
-
+	
 	void happyCalc(float supply, float happyThresh, float sadThresh)
 	{
 		if(supply / population > happyThresh)
@@ -202,6 +191,7 @@ public class VillageManager : MonoBehaviour
 
 	void debugStats()
 	{
+		Debug.Log ("Day " + days);
 		Debug.Log ("population: " + population);
 
 		Debug.Log ("Total Food: " + foodSupply);
