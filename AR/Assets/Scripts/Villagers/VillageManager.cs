@@ -177,7 +177,7 @@ public class VillageManager : MonoBehaviour
 					setVillagersKinematic(true);
 
 					//Pick random amount of time for next decision
-					nextDecisionTimer = 1;// Random.Range(0,1);
+					nextDecisionTimer = Random.Range(1,35);
 
 					decisionTimer = 0;
 				}
