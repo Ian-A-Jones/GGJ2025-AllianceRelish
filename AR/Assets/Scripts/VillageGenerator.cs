@@ -224,8 +224,14 @@ public class VillageGenerator : MonoBehaviour {
 
 	public void addGraffiti()
 	{
-		int randHut = Random.Range(0,huts.Count);
-		
+		int randHut = Random.Range(1,huts.Count);
+
+		GameObject graffiti = new GameObject ();
+		graffiti.transform.parent = huts [randHut].transform;
+		SpriteRenderer rend =graffiti.AddComponent<SpriteRenderer> ();
+		rend.sprite = Resources.Load <Sprite> ("Sprites/Huts/Graffiti");
+		rend.sortingLayerName = "Graffiti";
+		graffiti.transform.localPosition = Vector3.zero;
 		//Change randomHut to Graffiti
 	}
 
@@ -284,7 +290,7 @@ public class VillageGenerator : MonoBehaviour {
 
 			int rand = Random.Range(1,3);
 			bush.name = "Bush_"+rand;
-			Debug.Log(rand);
+		
 			rend.sprite = Resources.Load<Sprite>("Sprites/Trees/Bush_"+rand);
 
 			Vector2 randomRange = new Vector2(Random.Range(-15f,15f),Random.Range(-10f,10f));
