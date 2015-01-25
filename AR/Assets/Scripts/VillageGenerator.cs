@@ -52,8 +52,8 @@ public class VillageGenerator : MonoBehaviour {
 			
 			Vector3 hutPos; 
 			do{
-				hutPos = Random.insideUnitCircle*(VILLAGE_RADIUS*0.5f)*1.5f;
-			}while(false);//Vector2.Distance(Vector2.zero, hutPos)<4);
+				hutPos = Random.insideUnitCircle * VILLAGE_RADIUS * 1.35f;
+			}while(Vector2.Distance(Vector2.zero, hutPos)>3.5f);//Vector2.Distance(Vector2.zero, hutPos)<4);
 			
 			
 			huts.Add(Instantiate(Resources.Load("Prefabs/Hut")) as GameObject);
@@ -253,8 +253,11 @@ public class VillageGenerator : MonoBehaviour {
 
 	public void addBurntHut()
 	{
-		int randHut = Random.Range(0,huts.Count);
-		
+		if (huts.Count == 1) {
+			return;
+		}
+		int randHut = Random.Range(1,huts.Count);
+		huts [randHut].GetComponent<SpriteRenderer> ().sprite = Resources.Load<Sprite> ("Sprites/Huts/Hut_Burnt");
 		//Change randomHut to Burn
 	}
 
@@ -272,8 +275,8 @@ public class VillageGenerator : MonoBehaviour {
 
 			Vector3 hutPos; 
 			do{
-				hutPos = Random.insideUnitCircle*(VILLAGE_RADIUS*0.5f)*1.5f;
-			}while(false);//Vector2.Distance(Vector2.zero, hutPos)<4);
+				hutPos = Random.insideUnitCircle * VILLAGE_RADIUS * 1.35f;
+			}while(Vector2.Distance(huts[0].transform.localPosition, hutPos)> 3.5f);//Vector2.Distance(Vector2.zero, hutPos)<4);
 
 			huts.Add(Instantiate(Resources.Load("Prefabs/Hut")) as GameObject);
 			huts[huts.Count-1].GetComponent<Hut>().Initialise(new Vector2(hutPos.x, hutPos.y));
