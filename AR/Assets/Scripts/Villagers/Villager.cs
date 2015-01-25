@@ -18,7 +18,7 @@ public class Villager : MonoBehaviour
 
 	SpriteRenderer renderer;
 
-	Sprite forwardSprite, rightSprite;
+	Sprite forwardSprite, rightSprite, backSprite;
 
 
 	// Use this for initialization
@@ -49,7 +49,7 @@ public class Villager : MonoBehaviour
 
 		forwardSprite = Resources.Load<Sprite>("Sprites/People/Villager_Front_"+gender);
 		rightSprite = Resources.Load<Sprite>("Sprites/People/Villager_Right_"+gender);
-
+		backSprite = Resources.Load<Sprite>("Sprites/People/Villager_Back_"+gender);
 
 		renderer.sprite = forwardSprite;
 
@@ -124,7 +124,13 @@ public class Villager : MonoBehaviour
 			}
 		}
 		else{
-			renderer.sprite = forwardSprite;
+
+			if (direction.y > 0) {
+				renderer.sprite = backSprite;
+			}
+			else{
+				renderer.sprite = forwardSprite;
+			}
 		}
 
 

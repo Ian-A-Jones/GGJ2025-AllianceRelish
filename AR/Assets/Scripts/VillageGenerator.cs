@@ -11,7 +11,7 @@ public class VillageGenerator : MonoBehaviour {
 
     List<GameObject> villagers = new List<GameObject>();
 
-	GameObject river;
+	public GameObject river;
 
 
 	private const float FOREST_DENSITY = 0.4f;
@@ -32,6 +32,7 @@ public class VillageGenerator : MonoBehaviour {
 		GenerateHuts (population);
 		GenerateForest ();
 		GenerateBushes ();
+		TurnRiverBlood ();
 	}
 	
 	// Update is called once per frame
@@ -305,5 +306,9 @@ public class VillageGenerator : MonoBehaviour {
 				bush.transform.localScale = new Vector3(-1,1,1);
 			}
 		}
+	}
+
+	void TurnRiverBlood(){
+
 	}
 }

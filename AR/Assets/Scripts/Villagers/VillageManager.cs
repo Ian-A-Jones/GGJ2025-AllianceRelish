@@ -148,6 +148,8 @@ public class VillageManager : MonoBehaviour
 		foreach (GameObject v in Villagers) {
 			v.GetComponent<SpriteRenderer>().sortingOrder = (int)((v.transform.position.y-10) * 100f) * -1;
 		}	
+
+		VillageGenRef.river.transform.FindChild ("RiverParticles").gameObject.GetComponent<ParticleSystem> ().emissionRate = Mathf.Min(waterSupply, 100)*2;
 		
 		//If game isn't over
 		if(!gameOver())
