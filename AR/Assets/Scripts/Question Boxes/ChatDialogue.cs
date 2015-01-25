@@ -76,8 +76,9 @@ public class ChatDialogue : MonoBehaviour {
 
 		if (activeQ)
 		{
+			Debug.Log (ListaskedQ.Count);
 			// GUI.Window(0, WindowRectangle, DoMyWindow,"");
-			if(ListaskedQ.Count < 41)
+			if(ListaskedQ.Count < 39)
 			{
 
 				GUI.Box(new Rect(QuestionRectangle), "");
@@ -140,6 +141,7 @@ public class ChatDialogue : MonoBehaviour {
 				if(Q30Next)
 				{
 					Q30Next = false;
+					newQFound = true;
 					ListaskedQ.Add (30);
 					return 30;
 				}
