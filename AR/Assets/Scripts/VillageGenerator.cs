@@ -60,7 +60,6 @@ public class VillageGenerator : MonoBehaviour {
 			huts[huts.Count-1].GetComponent<Hut>().Initialise(new Vector2(hutPos.x, hutPos.y));
 			huts[huts.Count-1].GetComponent<Hut>().hutsRef = huts;
 			huts[huts.Count-1].gameObject.transform.parent = gameObject.transform.FindChild("Terrain").FindChild("Huts");
-
 		}
 		
 		//Move huts away from each other and river
@@ -200,7 +199,7 @@ public class VillageGenerator : MonoBehaviour {
         for(int i = 0; i < trees.Count; i++)
         {
 			float dist = Vector2.Distance(Vector2.zero, new Vector2(trees[i].transform.localPosition.x, trees[i].transform.localPosition.y));
-			if(dist<closestTree && trees[i].name != "Stump"){
+			if(dist<closestTree){
 				closestTree = dist;
 				index = i;
 			}
@@ -212,15 +211,14 @@ public class VillageGenerator : MonoBehaviour {
 
 		//Change to Stump sprite
 		//
-		Debug.Log("Changing Tree " + index + " to stump");
 		trees[index].GetComponent<SpriteRenderer> ().sprite = Resources.Load <Sprite> ("Sprites/Trees/Tree_Stump");
-		trees[index].name = "Stump";
+		trees[index].name = "STUMPHERE";
 	}
 
 	public void addAGoldHut()
 	{
 
-		//Change Elder to Gold
+		//Change randomHut to Gold
 
 		huts [0].GetComponent<SpriteRenderer> ().sprite = Resources.Load <Sprite> ("Sprites/Huts/Hut_Gold");
 	}
@@ -255,8 +253,11 @@ public class VillageGenerator : MonoBehaviour {
 
 	public void addBurntHut()
 	{
-		int randHut = Random.Range(0,huts.Count);
-		
+		if (huts.Count == 1) {
+			return;
+		}
+		int randHut = Random.Range(1,huts.Count);
+		huts [randHut].GetComponent<SpriteRenderer> ().sprite = Resources.Load<Sprite> ("Sprites/Huts/Hut_Burnt");
 		//Change randomHut to Burn
 	}
 
@@ -269,7 +270,7 @@ public class VillageGenerator : MonoBehaviour {
 
 	public void updateHuts(int pop)
 	{
-		if(pop > huts.Count-1)
+		if(pop > huts.Count)
 		{
 
 			Vector3 hutPos; 
@@ -282,11 +283,6 @@ public class VillageGenerator : MonoBehaviour {
 			huts[huts.Count-1].GetComponent<Hut>().hutsRef = huts;
 			huts[huts.Count-1].gameObject.transform.parent = gameObject.transform.FindChild("Terrain").FindChild("Huts");
 			huts[huts.Count-1].GetComponent<SpriteRenderer>().sortingOrder = (int)((huts[huts.Count-1].transform.position.y-10) * 100f) * -1;
-
-			for(int i = 0; i <3; i++)
-			{
-				removeATree();
-			}
 		}
 	}
 
@@ -316,6 +312,6 @@ public class VillageGenerator : MonoBehaviour {
 	}
 
 	void TurnRiverBlood(){
-
+		//river.transform.FindChild ("RiverParticles").gameObject.GetComponent<ParticleSystem> ().
 	}
 }

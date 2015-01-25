@@ -61,6 +61,7 @@
     <Compile Include="Assets\JSON\JSONTemplates.cs" />
     <Compile Include="Assets\JSON\VectorTemplates.cs" />
     <Compile Include="Assets\ParticleManager.cs" />
+    <Compile Include="Assets\Scripts\Cow.cs" />
     <Compile Include="Assets\Scripts\Hut.cs" />
     <Compile Include="Assets\Scripts\Main Menu\MainMenu.cs" />
     <Compile Include="Assets\Scripts\Question Boxes\ChatDialogue.cs" />
