@@ -50,9 +50,8 @@ public class ChatDialogue : MonoBehaviour {
 	#endregion 
 
 	#region temp Variables
-	float popPercent;
-	float oldPop;
-	float popLoss;
+
+	int popLoss;
 
 	#endregion
 	
@@ -67,7 +66,8 @@ public class ChatDialogue : MonoBehaviour {
 	void OnGUI()
 	{
 		GUI.skin = GSKIN;
-		GSKIN.button.fontSize = Screen.width / 50;
+		GSKIN.button.fontSize = Screen.width / 55;
+		float scaleSfontSize = Screen.width / 55;
 		if (activeQ)
 		{
 			Debug.Log (ListaskedQ.Count);
@@ -76,7 +76,7 @@ public class ChatDialogue : MonoBehaviour {
 			{
 
 				GUI.Box(new Rect(QuestionRectangle), "");
-				GUI.Label(new Rect(LabelRectangle),Question);
+				GUI.Label(new Rect(LabelRectangle), "<size = scaleSfontSize>" + Question);
 				if (GUI.Button(new Rect(AnswerRectangle), Answer1))
 				{
 					purformOutcome(Outcome1);
@@ -172,6 +172,7 @@ public class ChatDialogue : MonoBehaviour {
 
 	void purformOutcome(string outcome)
 	{
+
 		string[] outcomes = outcome.Split ("," [0]);
         
 		for (int i = 0; i < outcomes.Length; i ++) {
@@ -196,12 +197,9 @@ public class ChatDialogue : MonoBehaviour {
 				break;
 			case "losePopulation":
 				Debug.Log ("Pop loss");
-				popPercent = Random.Range(0.50f, 0.75f);
-				oldPop = villageManagerRef.population;
 				popLoss = Random.Range(1,4);
-
-				villageManagerRef.cull ((int)((villageManagerRef.population-oldPop) + popLoss));
-				qOutcome = "Lose " + ((villageManagerRef.population-oldPop) + popLoss).ToString("F0") + " Population";
+				villageManagerRef.cull (popLoss);
+				qOutcome = "Lose Population";
 				break;
 			case "loseSupplies":
 				villageManagerRef.foodSupply*= Random.Range(0.55f, 0.80f);
@@ -232,13 +230,10 @@ public class ChatDialogue : MonoBehaviour {
 					qOutcome = "Lose Water";
 				}else if (rand == 3)
 				{
-					popPercent = Random.Range(0.50f, 0.75f);
-					oldPop = villageManagerRef.population;
 					popLoss = Random.Range(1,3);
-					villageManagerRef.population-= popLoss;
 					
-					villageManagerRef.cull ((int)((villageManagerRef.population-oldPop) + popLoss));
-					qOutcome = "Lose " + ((villageManagerRef.population-oldPop) + popLoss).ToString() + " Population";
+					villageManagerRef.cull (popLoss);
+					qOutcome = "Lose Population";
 				}
 				villageManagerRef.happiness*= Random.Range (0.30f, 0.65f);
 				break;

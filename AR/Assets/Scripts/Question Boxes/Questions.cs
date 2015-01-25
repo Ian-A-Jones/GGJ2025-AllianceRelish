@@ -210,8 +210,8 @@ public class Questions {
 		OutcomeArr [28, 1] = "nothing";
 		OutcomeArr [29, 0] = "Q30";
 		OutcomeArr [29, 1] = "Q30";
-		OutcomeArr [30, 0] = "burntHut,lose1Population";
-		OutcomeArr [30, 1] = "burntHut,loseWater,loseHappiness";
+		OutcomeArr [30, 0] = "burnHut,lose1Population";
+		OutcomeArr [30, 1] = "burnHut,loseWater,loseHappiness";
 		OutcomeArr [31, 0] = "loseHappiness";
 		OutcomeArr [31, 1] = "gainHappiness";
 		OutcomeArr [32, 0] = "lose1happiness";
