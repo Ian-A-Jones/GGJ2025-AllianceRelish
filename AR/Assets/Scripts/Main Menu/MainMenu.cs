@@ -23,11 +23,12 @@
 //		creditsPanel.interactable = false;
 //		creditsPanel.blocksRaycasts = false;
 //		creditsPanel.alpha = 0f;
-////		tutorialPanel.interactable = false;
+//
+//		tutorialPanel.interactable = false;
 //		tutorialPanel.blocksRaycasts = false;
 //		tutorialPanel.alpha = 0f;
 //
-
+//
 //    }
 //
 //    public void OnClickPlayGame()
@@ -97,14 +98,15 @@
 //
 //	public void OnClickTutorialClose()
 //	{
-//		tutorialPanel.interactable = false;
-//		tutorialPanel.blocksRaycasts = false;
-//		tutorialPanel.alpha = 0f;
 //		
 //		menuPanel.interactable = true;
 //		menuPanel.blocksRaycasts = true;
 //		menuPanel.alpha = 1f;
-//		
+//
+//		tutorialPanel.interactable = false;
+//		tutorialPanel.blocksRaycasts = false;
+//		tutorialPanel.alpha = 0f;
+//
 //		settingsPanel.interactable = false;
 //		settingsPanel.blocksRaycasts = false;
 //		settingsPanel.alpha = 0f;
@@ -114,7 +116,7 @@
 //		creditsPanel.alpha = 0f;
 //	}
 //
-
+//
 //    public void OnClickExitGame()
 //    {
 //        Application.Quit ();

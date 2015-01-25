@@ -122,8 +122,8 @@ public class VillageManager : MonoBehaviour
 
 		VillageGenRef.GenerateVillage((int)population);
 
-		foodSupply = 100;
-		waterSupply = 100;
+		foodSupply = 200;
+		waterSupply = 200;
 
 		foodGain = 5;
 		waterGain = 5;
@@ -372,7 +372,7 @@ public class VillageManager : MonoBehaviour
 
 		Villagers [Villagers.Count - 1].transform.localPosition = VillageGenRef.huts [randHut].transform.position;
 
-		VillageGenRef.updateHuts((int)population);
+		VillageGenRef.updateHuts(Villagers.Count);
 		
 	}
 	
@@ -461,10 +461,11 @@ public class VillageManager : MonoBehaviour
 		GUI.skin = skin;
 
 		GUI.Box (new Rect (-200, -12, 2500, 50), "");
-		GUI.Label (new Rect (Screen.width / 2 - 400, 0, 150, 100), "Total Food: " + foodSupply.ToString("F0"));
-		GUI.Label (new Rect (Screen.width / 2 - 200, 0, 150, 100), "Total Water: " + waterSupply.ToString("F0"));
-		GUI.Label (new Rect (Screen.width / 2 , 0, 150, 100), "Happiness: " + happiness.ToString("F0"));
-		GUI.Label (new Rect (Screen.width / 2 + 200, 0, 150, 100), "Population: " + population.ToString("F0"));
+		GUI.Label (new Rect (Screen.width / 2 - 525, 0, 150, 100), "Total Food: " + foodSupply.ToString("F0"));
+		GUI.Label (new Rect (Screen.width / 2 - 300, 0, 150, 100), "Total Water: " + waterSupply.ToString("F0"));
+		GUI.Label (new Rect (Screen.width / 2 - 75 , 0, 150, 100), "Happiness: " + happiness.ToString("F0"));
+		GUI.Label (new Rect (Screen.width / 2 + 150, 0, 150, 100), "Population: " + population.ToString("F0"));
+		GUI.Label (new Rect (Screen.width / 2 + 375, 0, 150, 100), "Days Passed: " + days);
 
 		GUI.BeginGroup(new Rect (0,35,200,50), "");
 		GUI.Box (new Rect (0,0,200,50), "Recent Stat Changes");
@@ -566,10 +567,10 @@ public class VillageManager : MonoBehaviour
 		}
 
 		GUI.skin = skin2;
-		GUI.Label (new Rect (Screen.width / 2 - 425, 0, 50, 50), food);
-		GUI.Label (new Rect (Screen.width / 2 - 225, 0, 50, 50), water);
-		GUI.Label (new Rect (Screen.width / 2 - 25, 0, 50, 50), happinessIcon);
-		GUI.Label (new Rect (Screen.width / 2 + 175, 0, 50, 50), pop);
+		GUI.Label (new Rect (Screen.width / 2 - 525, 0, 50, 50), food);
+		GUI.Label (new Rect (Screen.width / 2 - 300, 0, 50, 50), water);
+		GUI.Label (new Rect (Screen.width / 2 - 75, 0, 50, 50), happinessIcon);
+		GUI.Label (new Rect (Screen.width / 2 + 150, 0, 50, 50), pop);
 
 		
 	}
