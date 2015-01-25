@@ -50,9 +50,8 @@ public class ChatDialogue : MonoBehaviour {
 	#endregion 
 
 	#region temp Variables
-	float popPercent;
-	float oldPop;
-	float popLoss;
+
+	int popLoss;
 
 	#endregion
 	
@@ -67,7 +66,7 @@ public class ChatDialogue : MonoBehaviour {
 	void OnGUI()
 	{
 		GUI.skin = GSKIN;
-		GSKIN.button.fontSize = Screen.width / 50;
+		GSKIN.button.fontSize = Screen.width / 55;
 		if (activeQ)
 		{
 			// GUI.Window(0, WindowRectangle, DoMyWindow,"");
@@ -195,7 +194,7 @@ public class ChatDialogue : MonoBehaviour {
 			case "losePopulation":
 				Debug.Log ("Pop loss");
 				popLoss = Random.Range(1,4);
-				villageManagerRef.cull ( popLoss);
+				villageManagerRef.cull (popLoss);
 				qOutcome = "Lose Population";
 				break;
 			case "loseSupplies":
@@ -227,13 +226,10 @@ public class ChatDialogue : MonoBehaviour {
 					qOutcome = "Lose Water";
 				}else if (rand == 3)
 				{
-					popPercent = Random.Range(0.50f, 0.75f);
-					oldPop = villageManagerRef.population;
 					popLoss = Random.Range(1,3);
-					villageManagerRef.population-= popLoss;
 					
-					villageManagerRef.cull ((int)((villageManagerRef.population-oldPop) + popLoss));
-					qOutcome = "Lose " + ((villageManagerRef.population-oldPop) + popLoss).ToString() + " Population";
+					villageManagerRef.cull (popLoss);
+					qOutcome = "Lose Population";
 				}
 				villageManagerRef.happiness*= Random.Range (0.30f, 0.65f);
 				break;
