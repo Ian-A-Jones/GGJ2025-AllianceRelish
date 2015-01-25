@@ -122,8 +122,8 @@ public class VillageManager : MonoBehaviour
 
 		VillageGenRef.GenerateVillage((int)population);
 
-		foodSupply = 100;
-		waterSupply = 100;
+		foodSupply = 200;
+		waterSupply = 200;
 
 		foodGain = 5;
 		waterGain = 5;
@@ -370,7 +370,7 @@ public class VillageManager : MonoBehaviour
 
 		Villagers [Villagers.Count - 1].transform.localPosition = VillageGenRef.huts [randHut].transform.position;
 
-		VillageGenRef.updateHuts((int)population);
+		VillageGenRef.updateHuts(Villagers.Count);
 		
 	}
 	
