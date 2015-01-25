@@ -68,6 +68,7 @@ public class ChatDialogue : MonoBehaviour {
 	{
 		GUI.skin = GSKIN;
 		GSKIN.button.fontSize = Screen.width / 50;
+		GSKIN.label.fontSize = Screen.width / 60;
 		if (activeQ)
 		{
 			// GUI.Window(0, WindowRectangle, DoMyWindow,"");
