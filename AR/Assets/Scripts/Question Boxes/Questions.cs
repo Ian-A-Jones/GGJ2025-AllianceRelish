@@ -67,11 +67,11 @@ public class Questions {
 		AnswerArr [2, 0] = "Of course I will help you, here take some supplies with you, I hope to see you again.";
 		AnswerArr [2, 1] = "Who do you think you are! We need our supplies!";
 		//answers to the good outcome of people returning
-		AnswerArr [3, 0] = "...";
-		AnswerArr [3, 1] = "...";
+		AnswerArr [3, 0] = "Ask for Water";
+		AnswerArr [3, 1] = "Ask for Food";
 		//answers to the bad outcome of people returning
-		AnswerArr [4, 0] = "...";
-		AnswerArr [4, 1] = "...";
+		AnswerArr [4, 0] = "At least its just Water";
+		AnswerArr [4, 1] = "At least its just Food";
 		AnswerArr [5, 0] = "Use them to produce weapons for the hunters! ";
 		AnswerArr [5, 1] = "I could use some new valuables give them to me! ";
 		AnswerArr [6, 0] = "Okay mighty gods I will do as you ask.";
@@ -155,11 +155,11 @@ public class Questions {
 		OutcomeArr [2, 0] = "losePopulation,loseSupplies,gainHappiness,activate3";
 		OutcomeArr [2, 1] = "losePopulation,loseHappiness,activate4";
 		//answers to the good outcome of people returning
-		OutcomeArr [3, 0] = "gainSupplies";
-		OutcomeArr [3, 1] = "gainSupplies";
+		OutcomeArr [3, 0] = "gainWater";
+		OutcomeArr [3, 1] = "gainFood";
 		//answers to the bad outcome of people returning
-		OutcomeArr [4, 0] = "loseSupplies";
-		OutcomeArr [4, 1] = "loseSupplies";
+		OutcomeArr [4, 0] = "loseWater";
+		OutcomeArr [4, 1] = "loseFood";
 		OutcomeArr [5, 0] = "gainFoodIncrease";
 		OutcomeArr [5, 1] = "loseHappiness,goldHut";
 		OutcomeArr [6, 0] = "losePopulation,gainHappiness,RainingBlood";
