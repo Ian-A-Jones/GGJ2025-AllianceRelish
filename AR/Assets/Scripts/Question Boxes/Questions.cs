@@ -217,7 +217,7 @@ public class Questions {
 		OutcomeArr [32, 0] = "lose1happiness";
 		OutcomeArr [32, 1] = "gain1Population";
 		OutcomeArr [33, 0] = "loseHappiness";
-		OutcomeArr [33, 1] = "gainHappiness";
+		OutcomeArr [33, 1] = "gainHappiness, gainGraffiti";
 		OutcomeArr [34, 0] = "loseFood";
 		OutcomeArr [34, 1] = "lose1Population";
 		OutcomeArr [35, 0] = "gain1Happiness";

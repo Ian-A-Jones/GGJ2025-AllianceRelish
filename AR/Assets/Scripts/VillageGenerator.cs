@@ -253,8 +253,11 @@ public class VillageGenerator : MonoBehaviour {
 
 	public void addBurntHut()
 	{
-		int randHut = Random.Range(0,huts.Count);
-		
+		if (huts.Count == 1) {
+			return;
+		}
+		int randHut = Random.Range(1,huts.Count);
+		huts [randHut].GetComponent<SpriteRenderer> ().sprite = Resources.Load<Sprite> ("Sprites/Huts/Hut_Burnt");
 		//Change randomHut to Burn
 	}
 
