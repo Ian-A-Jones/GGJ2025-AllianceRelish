@@ -1,14 +1,9 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Question Boxes\ChatDialogue.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Villagers\VillageManager.cs">
     <Files>
-      <File FileName="Assets\Scripts\Question Boxes\ChatDialogue.cs" Line="397" Column="2" />
-      <File FileName="Assets\Scripts\Villagers\Villager.cs" Line="159" Column="1" />
-      <File FileName="Assets\Scripts\VillageGenerator.cs" Line="320" Column="1" />
-      <File FileName="Assets\Scripts\Villagers\VillageManager.cs" Line="632" Column="2" />
-      <File FileName="Assets\Scripts\Villagers\VillagerImporter.cs" Line="24" Column="1" />
-      <File FileName="Assets\Scripts\Hut.cs" Line="43" Column="1" />
-      <File FileName="Assets\Scripts\Question Boxes\Questions.cs" Line="262" Column="1" />
+      <File FileName="Assets\Scripts\Villagers\VillageManager.cs" Line="519" Column="54" />
+      <File FileName="Assets\Scripts\Question Boxes\ChatDialogue.cs" Line="71" Column="43" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
