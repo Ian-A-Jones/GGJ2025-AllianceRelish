@@ -9,6 +9,8 @@ public class VillageManager : MonoBehaviour
 	public VillageGenerator VillageGenRef;
 	public ChatDialogue ChatDialogueRef;
 
+	public GameObject VillagerAlert;
+
 	VillagerImporter villagerImporter;
 
 	#region Village stats
@@ -105,6 +107,15 @@ public class VillageManager : MonoBehaviour
 	// Use this for initialization
 	void Start () 
 	{
+		VillagerAlert = Instantiate(new GameObject())as GameObject;
+		VillagerAlert.AddComponent<SpriteRenderer>();
+		VillagerAlert.GetComponent<SpriteRenderer> ().sprite = Resources.Load<Sprite> ("Sprites/People/Man_Alert");
+		VillagerAlert.GetComponent<SpriteRenderer>().sortingLayerName = "AlertMessage";
+
+		VillagerAlert.transform.localScale = new Vector3(-0.5f,0.5f,0.5f);
+		VillagerAlert.transform.position = new Vector3(-11,-5,0);
+		VillagerAlert.SetActive(false);
+
 		population = 5;
 
 		villagerImporter = gameObject.AddComponent<VillagerImporter> ();
@@ -195,6 +206,8 @@ public class VillageManager : MonoBehaviour
 					setVillagersKinematic(true);
 					VillagerInfo = false;
                     APop.Play();
+					VillagerAlert.SetActive(true);
+
 
 					//Pick random amount of time for next decision
 
@@ -445,13 +458,13 @@ public class VillageManager : MonoBehaviour
 	{
 		GUI.skin = skin;
 
-		GUI.Box (new Rect (-200, 0, 2500, 50), "");
-		GUI.Label (new Rect (Screen.width / 2 - 400, 10, 150, 100), "Total Food: " + foodSupply.ToString("F0"));
-		GUI.Label (new Rect (Screen.width / 2 - 200, 10, 150, 100), "Total Water: " + waterSupply.ToString("F0"));
-		GUI.Label (new Rect (Screen.width / 2 , 10, 150, 100), "Happiness: " + happiness.ToString("F0"));
-		GUI.Label (new Rect (Screen.width / 2 + 200, 10, 150, 100), "Population: " + population.ToString("F0"));
+		GUI.Box (new Rect (-200, -12, 2500, 50), "");
+		GUI.Label (new Rect (Screen.width / 2 - 400, 0, 150, 100), "Total Food: " + foodSupply.ToString("F0"));
+		GUI.Label (new Rect (Screen.width / 2 - 200, 0, 150, 100), "Total Water: " + waterSupply.ToString("F0"));
+		GUI.Label (new Rect (Screen.width / 2 , 0, 150, 100), "Happiness: " + happiness.ToString("F0"));
+		GUI.Label (new Rect (Screen.width / 2 + 200, 0, 150, 100), "Population: " + population.ToString("F0"));
 
-		GUI.BeginGroup(new Rect (0,25,200,50), "");
+		GUI.BeginGroup(new Rect (0,35,200,50), "");
 		GUI.Box (new Rect (0,0,200,50), "Recent Stat Changes");
 		GUI.Label (new Rect (0,30,250,175), ChatDialogueRef.qOutcome);
 		GUI.EndGroup();
@@ -551,10 +564,10 @@ public class VillageManager : MonoBehaviour
 		}
 
 		GUI.skin = skin2;
-		GUI.Label (new Rect (Screen.width / 2 - 425, 10, 50, 50), food);
-		GUI.Label (new Rect (Screen.width / 2 - 225, 10, 50, 50), water);
-		GUI.Label (new Rect (Screen.width / 2 - 25, 10, 50, 50), happinessIcon);
-		GUI.Label (new Rect (Screen.width / 2 + 175, 10, 50, 50), pop);
+		GUI.Label (new Rect (Screen.width / 2 - 425, 0, 50, 50), food);
+		GUI.Label (new Rect (Screen.width / 2 - 225, 0, 50, 50), water);
+		GUI.Label (new Rect (Screen.width / 2 - 25, 0, 50, 50), happinessIcon);
+		GUI.Label (new Rect (Screen.width / 2 + 175, 0, 50, 50), pop);
 
 		
 	}
