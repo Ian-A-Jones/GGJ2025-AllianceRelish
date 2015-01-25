@@ -78,6 +78,7 @@ public class ChatDialogue : MonoBehaviour {
 					purformOutcome(Outcome1);
 					activeQ = false;
 					villageManagerRef.setVillagersKinematic(false);
+					villageManagerRef.VillagerAlert.SetActive(false);
 					nextQ();
 					
 					
@@ -86,6 +87,7 @@ public class ChatDialogue : MonoBehaviour {
 				{
 					purformOutcome(Outcome2);
 					villageManagerRef.setVillagersKinematic(false);
+					villageManagerRef.VillagerAlert.SetActive(false);
 					activeQ = false;			
 					nextQ();
 				}
