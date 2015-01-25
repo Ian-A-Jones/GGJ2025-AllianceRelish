@@ -25,7 +25,17 @@ public class Hut : MonoBehaviour {
 	void OnTriggerStay2D(Collider2D col){
 		
 		if (col.gameObject.tag == "River") {
-			this.transform.position += new Vector3(col.gameObject.transform.position.x * -2,0,0);
+			this.transform.position += new Vector3(col.gameObject.transform.position.x * -1.5f,0,0);
+		}
+		else if(col.gameObject.tag == "Hut")
+		{
+			Debug.Log (GetInstanceID() + "is colliding with another hut");
+			Vector2 diff = this.transform.localPosition - col.transform.localPosition;
+
+			diff.Normalize();
+
+			this.transform.position += new Vector3(diff.x, diff.y, 0) *1f;
+			this.GetComponent<SpriteRenderer>().sortingOrder = (int)((this.transform.position.y-10) * 100f) * -1;
 		}
 
 	}

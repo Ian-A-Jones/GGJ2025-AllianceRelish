@@ -515,11 +515,11 @@ public class VillageManager : MonoBehaviour
 		GUI.skin = skin;
 
 		GUI.Box (new Rect (-200, -12, 2500, 50), "");
-		GUI.Label (new Rect (Screen.width / 2 - 525, 0, 150, 100), "Total Food: " + foodSupply.ToString("F0"));
-		GUI.Label (new Rect (Screen.width / 2 - 300, 0, 150, 100), "Total Water: " + waterSupply.ToString("F0"));
-		GUI.Label (new Rect (Screen.width / 2 - 75 , 0, 150, 100), "Happiness: " + happiness.ToString("F0"));
-		GUI.Label (new Rect (Screen.width / 2 + 150, 0, 150, 100), "Population: " + population.ToString("F0"));
-		GUI.Label (new Rect (Screen.width / 2 + 375, 0, 150, 100), "Days Passed: " + days);
+		GUI.Label (new Rect (Screen.width / 2 - 525, 0, 160, 100), "Total Food: " + foodSupply.ToString("F0"));
+		GUI.Label (new Rect (Screen.width / 2 - 300, 0, 160, 100), "Total Water: " + waterSupply.ToString("F0"));
+		GUI.Label (new Rect (Screen.width / 2 - 75 , 0, 160, 100), "Happiness: " + happiness.ToString("F0"));
+		GUI.Label (new Rect (Screen.width / 2 + 150, 0, 160, 100), "Population: " + population.ToString("F0"));
+		GUI.Label (new Rect (Screen.width / 2 + 375, 0, 160, 100), "Days Passed: " + days);
 
 		GUI.BeginGroup(new Rect (0,35,200,50), "");
 		GUI.Box (new Rect (0,0,200,50), "Recent Stat Changes");
