@@ -67,7 +67,13 @@ public class ChatDialogue : MonoBehaviour {
 	{
 		GUI.skin = GSKIN;
 		GSKIN.button.fontSize = Screen.width / 55;
-		float scaleSfontSize = Screen.width / 55;
+		int scaleFontSize = Screen.width / 55;
+
+		GUIStyle scaleFont;
+
+		scaleFont = new GUIStyle (GSKIN.label);
+		scaleFont.fontSize = scaleFontSize;
+
 		if (activeQ)
 		{
 			Debug.Log (ListaskedQ.Count);
@@ -76,7 +82,7 @@ public class ChatDialogue : MonoBehaviour {
 			{
 
 				GUI.Box(new Rect(QuestionRectangle), "");
-				GUI.Label(new Rect(LabelRectangle), "<size = scaleSfontSize>" + Question);
+				GUI.Label(new Rect(LabelRectangle), Question, scaleFont);
 				if (GUI.Button(new Rect(AnswerRectangle), Answer1))
 				{
 					purformOutcome(Outcome1);
