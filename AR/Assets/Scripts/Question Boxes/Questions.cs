@@ -38,7 +38,7 @@ public class Questions {
 		QuestionArr [18] = "This hunter is a cowardly dog, what do we do now?"; 
 		QuestionArr [19] = "Elder, your mother has invited you over for dinner, what do we do now?";
 		QuestionArr [20] = "we have encountered a pack of wolves elder, what do we do now?";
-		QuestionArr [21] = "elder, the local farmer Gunter, his chicken has laid a couple of eggs, what do we do now?"; 
+		QuestionArr [21] = "Elder, the local farmer Gunter, his chicken has laid a couple of eggs, what do we do now?"; 
 		QuestionArr [22] = "One of the local villager wants to become an artist, what do we do now?"; 
 		QuestionArr [23] = "The harvest looks plentiful already, what should we do now?";
 		QuestionArr [24] = "Elder, this villager is annoyed at the tree near his hut, what do we do now?";
