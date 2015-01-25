@@ -269,7 +269,7 @@ public class ChatDialogue : MonoBehaviour {
 				break;
 			case "gainPopulation":
 
-				villageManagerRef.population*= Random.Range (1.15f,1.40f);
+				villageManagerRef.population+= Random.Range (2,4);
 
 				for(int j = 0; j < (int)(villageManagerRef.population - villageManagerRef.Villagers.Count-1); j++)
 				{

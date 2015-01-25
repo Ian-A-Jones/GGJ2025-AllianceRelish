@@ -231,8 +231,10 @@ public class VillageGenerator : MonoBehaviour {
 		graffiti.transform.parent = huts [randHut].transform;
 		SpriteRenderer rend =graffiti.AddComponent<SpriteRenderer> ();
 		rend.sprite = Resources.Load <Sprite> ("Sprites/Huts/Graffiti");
-		rend.sortingLayerName = "Graffiti";
+		rend.sortingLayerName = "Objects";
+
 		graffiti.transform.localPosition = Vector3.zero;
+		rend.sortingOrder = ((int)((graffiti.transform.parent.position.y-10) * 100f) * -1)+1;
 		//Change randomHut to Graffiti
 	}
 
