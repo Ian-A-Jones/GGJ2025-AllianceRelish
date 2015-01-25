@@ -46,6 +46,7 @@ public class ChatDialogue : MonoBehaviour {
     float timeRained = 0;
     int days = 0;
     bool isRaining = false;
+
 	#endregion 
 
 	#region temp Variables
@@ -66,12 +67,13 @@ public class ChatDialogue : MonoBehaviour {
 	void OnGUI()
 	{
 		GUI.skin = GSKIN;
-		GSKIN.button.fontSize = 20;
+		GSKIN.button.fontSize = Screen.width / 50;
 		if (activeQ)
 		{
 			// GUI.Window(0, WindowRectangle, DoMyWindow,"");
 			if(ListaskedQ.Count < 41)
 			{
+
 				GUI.Box(new Rect(QuestionRectangle), "");
 				GUI.Label(new Rect(LabelRectangle),Question);
 				if (GUI.Button(new Rect(AnswerRectangle), Answer1))
@@ -392,6 +394,7 @@ public class ChatDialogue : MonoBehaviour {
                 Rain.Stop();
             }
         }
+
     }
 }
 	
