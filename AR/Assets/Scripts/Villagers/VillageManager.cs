@@ -264,7 +264,6 @@ public class VillageManager : MonoBehaviour
 
 					foodSupply += foodGain;
 					waterSupply += waterGain;
-					foodSupply+=30;
 
 
 
