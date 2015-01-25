@@ -13,7 +13,6 @@ public class VillageGenerator : MonoBehaviour {
 
 	GameObject river;
 
-	GameObject fineArt;
 
 	private const float FOREST_DENSITY = 0.4f;
 	private const float THICKETS = 100;
@@ -232,15 +231,17 @@ public class VillageGenerator : MonoBehaviour {
 
 	public void addFineArt()
 	{
-		Vector2 ArtPos; 
-		do{
-			ArtPos = Random.insideUnitCircle*VILLAGE_RADIUS;
-		}while(Vector2.Distance(Vector2.zero, ArtPos)<0.75f);
 
-		fineArt = Instantiate(Resources.Load("Prefabs/Villagerlol")) as GameObject;
+
+		GameObject fineArt = new GameObject ();
+		fineArt.transform.localPosition = new Vector3 (Random.Range(-3,3), -2, 0);
 		fineArt.transform.parent = gameObject.transform.FindChild("Terrain").FindChild("Huts");
-		fineArt.transform.localPosition = new Vector3(ArtPos.x, ArtPos.y, 0);
-		fineArt.SetActive(true);
+
+		SpriteRenderer rend = fineArt.AddComponent<SpriteRenderer> ();
+		rend.sprite = Resources.Load<Sprite> ("Sprites/Art");
+		rend.sortingOrder = (int)((fineArt.transform.position.y-10) * 100f) * -1;
+		rend.sortingLayerName = "Objects";
+		fineArt.name = "ART";
 	}
 
 	public void addBurntHut()
@@ -271,7 +272,7 @@ public class VillageGenerator : MonoBehaviour {
 			huts[huts.Count-1].GetComponent<Hut>().Initialise(new Vector2(hutPos.x, hutPos.y));
 			huts[huts.Count-1].GetComponent<Hut>().hutsRef = huts;
 			huts[huts.Count-1].gameObject.transform.parent = gameObject.transform.FindChild("Terrain").FindChild("Huts");
-			huts[huts.Count-1].GetComponent<SpriteRenderer>().sortingOrder = Mathf.RoundToInt((huts[huts.Count-1].transform.position.y-10) * 100f) * -1;
+			huts[huts.Count-1].GetComponent<SpriteRenderer>().sortingOrder = (int)((huts[huts.Count-1].transform.position.y-10) * 100f) * -1;
 		}
 	}
 
