@@ -66,6 +66,7 @@ public class ChatDialogue : MonoBehaviour {
 	void OnGUI()
 	{
 		GUI.skin = GSKIN;
+		GSKIN.button.fontSize = 20;
 		if (activeQ)
 		{
 			// GUI.Window(0, WindowRectangle, DoMyWindow,"");
