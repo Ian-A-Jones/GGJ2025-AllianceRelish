@@ -194,12 +194,9 @@ public class ChatDialogue : MonoBehaviour {
 				break;
 			case "losePopulation":
 				Debug.Log ("Pop loss");
-				popPercent = Random.Range(0.50f, 0.75f);
-				oldPop = villageManagerRef.population;
 				popLoss = Random.Range(1,4);
-
-				villageManagerRef.cull ((int)((villageManagerRef.population-oldPop) + popLoss));
-				qOutcome = "Lose " + ((villageManagerRef.population-oldPop) + popLoss).ToString("F0") + " Population";
+				villageManagerRef.cull ( popLoss);
+				qOutcome = "Lose Population";
 				break;
 			case "loseSupplies":
 				villageManagerRef.foodSupply*= Random.Range(0.55f, 0.80f);
