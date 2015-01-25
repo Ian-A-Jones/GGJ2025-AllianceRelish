@@ -167,7 +167,7 @@ public class ChatDialogue : MonoBehaviour {
 
 	void purformOutcome(string outcome)
 	{
-		outcome = "gainFineArt";
+
 		string[] outcomes = outcome.Split ("," [0]);
         
 		for (int i = 0; i < outcomes.Length; i ++) {

@@ -19,7 +19,7 @@ public class Questions {
 		QuestionArr [1] = "The river is contaminated, what do we do now?";
 		QuestionArr [2] = "Greetings elder, me and a few other villagers are thinking about leaving and starting a new village, what do we do now?"; //leads to the next 2 depending on answer.
 		QuestionArr [3] = "Greetings elder the people have returned, thank you for helping, we have returned with supplies in return.";//for helping them
-		QuestionArr [4] = "Greetings elder the people that you refused to help have returned, they are not happy so they have taken some supplies.";//for not helping them
+		QuestionArr [4] = "Greetings elder the people that you refused to help have returned, they are not happy so they have taken some supplies. what do we do now?";//for not helping them
 		QuestionArr [5] = "Oh exalted one we have procured a supply of metal, what do we do now?";
 		QuestionArr [6] = "You hear a bellowing voice ‘We are not pleased with you, you must make a blood sacrife to please us!"; 
 		QuestionArr [7] = "We have come across a new forest, we have a bountiful selection of wood, what do we do now?"; 
@@ -28,7 +28,7 @@ public class Questions {
 		QuestionArr [10] = "Elder, there is a drought, what do we do now?"; 
 		QuestionArr [11] = "Elder some of our people are becoming ill, what do we do now?";
 
-		QuestionArr [12] = "God is unhappy with us, a tornado has struck the village";
+		QuestionArr [12] = "God is unhappy with us, a tornado has struck the village, what do we do now?";
 
 		QuestionArr [13] = "I challenge you for position of elder!"; 
 		QuestionArr [14] = "Elder you must think about your lineage, what do we do now? "; 
@@ -54,7 +54,7 @@ public class Questions {
 		QuestionArr [34] = "Dan is meddling with the cattle again, what do we do now?"; 
 		QuestionArr [35] = "Elder, Ellis has overslept again and has missed the hunt, what do we do now?";
 		QuestionArr [36] = "Elder, Ross has been plundering for booty again, what do we do now?";
-		QuestionArr [37] = "Elder, a wild Simon has appeared at the gate, what do we do now?"; 
+		QuestionArr [37] = "Elder, some Man in a waistcoat gave me this weird folded paper, what do we do now?"; 
 		QuestionArr [38] = "Elder, a wild Carina has appeared at the gate, what do we do now?"; 
 		QuestionArr [39] = "Elder, a wild Andy has appeared at the gate, what do we do now?"; 
 		QuestionArr [40] = "Elder, a wild Lloyd has appeared at the gate, what do we do now?"; 
@@ -136,8 +136,8 @@ public class Questions {
 		AnswerArr [35, 1] = "This is unacceptable, to miss a hunt, he needs to be punished! ";
 		AnswerArr [36, 0] = "Let him carry on, its not to severe.";
 		AnswerArr [36, 1] = "This is unacceptable it cannot continue ";
-		AnswerArr [37, 0] = "Fight him";
-		AnswerArr [37, 1] = "Make him flee";
+		AnswerArr [37, 0] = "It looks like a boat, stick it in the river!";
+		AnswerArr [37, 1] = "It looks like a hat, I need one of those!";
 		AnswerArr [38, 0] = "Fight her";
 		AnswerArr [38, 1] = "Make her flee";
 		AnswerArr [39, 0] = "Fight him";
@@ -224,8 +224,8 @@ public class Questions {
 		OutcomeArr [35, 1] = "lose1Happiness";
 		OutcomeArr [36, 0] = "loseFood,gainPopulation";
 		OutcomeArr [36, 1] = "loseHappiness";
-		OutcomeArr [37, 0] = "lose1Food,gain1Population";
-		OutcomeArr [37, 1] = "nothing";
+		OutcomeArr [37, 0] = "loseHappiness";
+		OutcomeArr [37, 1] = "gainHappiness";
 		OutcomeArr [38, 0] = "lose1Food,gain1Population";
 		OutcomeArr [38, 1] = "nothing";
 		OutcomeArr [39, 0] = "lose1Food,gain1Population";
