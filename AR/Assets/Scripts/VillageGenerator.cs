@@ -32,6 +32,7 @@ public class VillageGenerator : MonoBehaviour {
 		GenerateRiver ();
 		GenerateHuts (population);
 		GenerateForest ();
+		GenerateBushes ();
 	}
 	
 	// Update is called once per frame
@@ -99,7 +100,7 @@ public class VillageGenerator : MonoBehaviour {
 		//Generate Trees
 		for(int i = 0; i<THICKETS; i++){
 			
-			Vector2 randomRange = new Vector2(Random.Range(-15,15),Random.Range(-10,10));
+			Vector2 randomRange = new Vector2(Random.Range(-15f,15f),Random.Range(-10f,10f));
 			Vector2 thicketPos = randomRange;//OffsetTrees(randomRange);
 			
 			
@@ -273,6 +274,25 @@ public class VillageGenerator : MonoBehaviour {
 			huts[huts.Count-1].GetComponent<Hut>().Initialise(new Vector2(hutPos.x, hutPos.y));
 			huts[huts.Count-1].GetComponent<Hut>().hutsRef = huts;
 			huts[huts.Count-1].gameObject.transform.parent = gameObject.transform.FindChild("Terrain").FindChild("Huts");
+		}
+	}
+
+	void GenerateBushes(){
+		for (int i = 0; i<40; i++) {
+			GameObject bush = new GameObject();
+			bush.transform.parent = gameObject.transform.FindChild("Terrain");
+			SpriteRenderer rend = bush.AddComponent<SpriteRenderer>();
+
+			int rand = Random.Range(1,3);
+			bush.name = "Bush_"+rand;
+			Debug.Log(rand);
+			rend.sprite = Resources.Load<Sprite>("Sprites/Trees/Bush_"+rand);
+
+			Vector2 randomRange = new Vector2(Random.Range(-15f,15f),Random.Range(-10f,10f));
+
+			bush.transform.localPosition = randomRange;
+			bush.GetComponent<SpriteRenderer>().sortingLayerName = "Objects";
+			bush.GetComponent<SpriteRenderer>().sortingOrder = (int)((bush.transform.position.y-10) * 100f) * -1;
 		}
 	}
 }
