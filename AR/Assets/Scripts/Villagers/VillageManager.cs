@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public class VillageManager : MonoBehaviour
 {		
 
+	List<GameObject> cows = new List<GameObject> ();
 	//Reference to Village Generator
 	public VillageGenerator VillageGenRef;
 	public ChatDialogue ChatDialogueRef;
@@ -122,8 +123,8 @@ public class VillageManager : MonoBehaviour
 
 		VillageGenRef.GenerateVillage((int)population);
 
-		foodSupply = 200;
-		waterSupply = 200;
+		foodSupply = 100;
+		waterSupply = 100;
 
 		foodGain = 5;
 		waterGain = 5;
@@ -139,6 +140,10 @@ public class VillageManager : MonoBehaviour
 			AddVillager();
             // Debug.Log("DRAWING VILLAGER");
         }
+
+		for (int i = 0; i<foodSupply; i+=20) {
+			AddCow();
+		}
 	}
 	
 	// Update is called once per frame
@@ -148,6 +153,21 @@ public class VillageManager : MonoBehaviour
 		foreach (GameObject v in Villagers) {
 			v.GetComponent<SpriteRenderer>().sortingOrder = (int)((v.transform.position.y-10) * 100f) * -1;
 		}	
+
+		foreach (GameObject c in cows) {
+			if(c==null){
+				continue;
+			}
+			c.GetComponent<SpriteRenderer>().sortingOrder = (int)((c.transform.position.y-10) * 100f) * -1;
+		}
+		if (cows.Count > (int)foodSupply / 20) {
+			RemoveCow();
+			Debug.Log("remove");
+		}
+		else if(cows.Count< (int)foodSupply/20){
+			AddCow();
+			Debug.Log("add");
+		}
 
 		VillageGenRef.river.transform.FindChild ("RiverParticles").gameObject.GetComponent<ParticleSystem> ().emissionRate = Mathf.Min(waterSupply, 100)*2;
 		
@@ -199,6 +219,15 @@ public class VillageManager : MonoBehaviour
 					}
                     death.Stop();
 	            }
+
+				foreach (GameObject cow in cows)
+				{
+
+					cow.GetComponent<Cow>().Move();
+						
+					
+
+				}
 				//Decision timer stuff
 				if(decisionTimer > nextDecisionTimer)
 				{
@@ -206,6 +235,7 @@ public class VillageManager : MonoBehaviour
 					Debug.Log ("Next decision");
 					ChatDialogue.activeQ = true;
 					setVillagersKinematic(true);
+					setCowsKinematic(true);
 					VillagerInfo = false;
                     APop.Play();
 					VillagerAlert.SetActive(true);
@@ -234,6 +264,7 @@ public class VillageManager : MonoBehaviour
 
 					foodSupply += foodGain;
 					waterSupply += waterGain;
+					foodSupply+=30;
 
 
 
@@ -362,6 +393,12 @@ public class VillageManager : MonoBehaviour
 		}
 	}
 
+	public void setCowsKinematic(bool val){
+		foreach(GameObject c in cows){
+			c.GetComponent<Rigidbody2D>().isKinematic = val;
+		}
+	}
+
 	public void AddVillager(){
 		Villagers.Add(Instantiate(Resources.Load("Prefabs/Villagerlol")) as GameObject);
 		Villagers[Villagers.Count - 1].AddComponent<Villager>();
@@ -373,6 +410,24 @@ public class VillageManager : MonoBehaviour
 		Villagers [Villagers.Count - 1].transform.localPosition = VillageGenRef.huts [randHut].transform.position;
 
 		VillageGenRef.updateHuts(Villagers.Count);
+		
+	}
+
+	public void RemoveCow(){
+		Destroy (cows[cows.Count - 1]);
+		cows.Remove (cows [cows.Count-1]);
+	}
+
+	public void AddCow(){
+		cows.Add(Instantiate(Resources.Load("Prefabs/Cow")) as GameObject);
+		cows[cows.Count - 1].AddComponent<Cow>();
+		
+		//Place at random hut
+		int randHut = Random.Range (1, VillageGenRef.huts.Count);
+		
+		cows [cows.Count - 1].transform.localPosition = VillageGenRef.huts [randHut].transform.position;
+		
+		VillageGenRef.updateHuts(cows.Count);
 		
 	}
 	
