@@ -21,12 +21,14 @@ public class Tornado : MonoBehaviour {
 		}
 	}
 
-	void OnTriggerStay2D(Collider2D col){
-		
-		if (col.gameObject.tag == "Tree") {
+	void OnTriggerEnter2D(Collider2D col){
 
+		if (col.gameObject.tag == "Tree") {
+			GameObject treeToRemove = col.gameObject;
 
 			trees.Remove(col.gameObject);
+
+			Destroy(treeToRemove);
 		}
 	}
 

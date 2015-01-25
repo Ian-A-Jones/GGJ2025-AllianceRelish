@@ -167,7 +167,7 @@ public class ChatDialogue : MonoBehaviour {
 
 	void purformOutcome(string outcome)
 	{
-        outcome = "cutTree";
+
 		string[] outcomes = outcome.Split ("," [0]);
         
 		for (int i = 0; i < outcomes.Length; i ++) {
@@ -395,4 +395,3 @@ public class ChatDialogue : MonoBehaviour {
     }
 }
 	
-

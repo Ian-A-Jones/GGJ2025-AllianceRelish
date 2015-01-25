@@ -153,7 +153,7 @@ public class VillageGenerator : MonoBehaviour {
 			if(i>trees.Count-1){
 				continue;
 			}
-			trees[i].GetComponent<SpriteRenderer>().sortingOrder = Mathf.RoundToInt((trees[i].transform.position.y-10) * 100f) * -1;
+			trees[i].GetComponent<SpriteRenderer>().sortingOrder = (int)((trees[i].transform.position.y-10) * 100f) * -1; 
 		}
 		
 
@@ -271,6 +271,7 @@ public class VillageGenerator : MonoBehaviour {
 			huts[huts.Count-1].GetComponent<Hut>().Initialise(new Vector2(hutPos.x, hutPos.y));
 			huts[huts.Count-1].GetComponent<Hut>().hutsRef = huts;
 			huts[huts.Count-1].gameObject.transform.parent = gameObject.transform.FindChild("Terrain").FindChild("Huts");
+			huts[huts.Count-1].GetComponent<SpriteRenderer>().sortingOrder = Mathf.RoundToInt((huts[huts.Count-1].transform.position.y-10) * 100f) * -1;
 		}
 	}
 
@@ -290,6 +291,12 @@ public class VillageGenerator : MonoBehaviour {
 			bush.transform.localPosition = randomRange;
 			bush.GetComponent<SpriteRenderer>().sortingLayerName = "Objects";
 			bush.GetComponent<SpriteRenderer>().sortingOrder = (int)((bush.transform.position.y-10) * 100f) * -1;
+
+			int randomScale = Random.Range(0,2);
+
+			if(randomScale==1){
+				bush.transform.localScale = new Vector3(-1,1,1);
+			}
 		}
 	}
 }

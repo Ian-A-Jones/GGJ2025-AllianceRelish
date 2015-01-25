@@ -122,8 +122,8 @@ public class VillageManager : MonoBehaviour
 
 		VillageGenRef.GenerateVillage((int)population);
 
-		foodSupply = 200;
-		waterSupply = 200;
+		foodSupply = 100;
+		waterSupply = 100;
 
 		foodGain = 5;
 		waterGain = 5;
@@ -211,7 +211,7 @@ public class VillageManager : MonoBehaviour
 
 					//Pick random amount of time for next decision
 
-					nextDecisionTimer = 2;// Random.Range(0,1);
+					nextDecisionTimer = Random.Range(5,20);
 
 					//nextDecisionTimer = Random.Range(1,35);
 
