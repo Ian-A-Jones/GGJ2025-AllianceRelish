@@ -149,7 +149,18 @@ public class VillageManager : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
+		foodSupply = Mathf.Clamp(foodSupply, 0, 1000);
 
+		waterSupply = Mathf.Clamp(waterSupply, 0, 1000);
+
+		population = Mathf.Clamp(population, 0, 1000);
+
+		happiness = Mathf.Clamp(happiness, 0, 1000);
+
+		if(Input.GetKeyDown(KeyCode.Escape))
+		{
+			Application.Quit();
+		}
 		foreach (GameObject v in Villagers) {
 			v.GetComponent<SpriteRenderer>().sortingOrder = (int)((v.transform.position.y-10) * 100f) * -1;
 		}	

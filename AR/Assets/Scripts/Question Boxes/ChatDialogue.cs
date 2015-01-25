@@ -42,7 +42,7 @@ public class ChatDialogue : MonoBehaviour {
     public AudioSource Groan;  
 
     #endregion
-    float RAINTIMER = 0.05f;
+    float RAINTIMER = 20f;
     float timeRained = 0;
     int days = 0;
     bool isRaining = false;
@@ -185,7 +185,6 @@ public class ChatDialogue : MonoBehaviour {
 			switch(outcomes[i])
 			{
 			case "loseFood":
-				//TODO:pick range for loss
 				villageManagerRef.foodSupply*= Random.Range(0.50f, 0.75f);
 				villageManagerRef.foodSupply-= 10;
 				qOutcome = "Lose Food";
@@ -367,7 +366,7 @@ public class ChatDialogue : MonoBehaviour {
                 Thunder.Play();
                 update();
                 break;
-            case "RainingBlood":
+			case "RainingBlood":
                 BloodRain.Play();
                 isRaining = true;
                 Laugh.Play();
