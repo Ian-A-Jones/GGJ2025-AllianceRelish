@@ -46,6 +46,7 @@ public class ChatDialogue : MonoBehaviour {
     float timeRained = 0;
     int days = 0;
     bool isRaining = false;
+
 	#endregion 
 
 	#region temp Variables
@@ -66,12 +67,13 @@ public class ChatDialogue : MonoBehaviour {
 	void OnGUI()
 	{
 		GUI.skin = GSKIN;
-		GSKIN.button.fontSize = 20;
+		GSKIN.button.fontSize = Screen.width / 50;
 		if (activeQ)
 		{
 			// GUI.Window(0, WindowRectangle, DoMyWindow,"");
 			if(ListaskedQ.Count < 41)
 			{
+
 				GUI.Box(new Rect(QuestionRectangle), "");
 				GUI.Label(new Rect(LabelRectangle),Question);
 				if (GUI.Button(new Rect(AnswerRectangle), Answer1))
@@ -79,7 +81,6 @@ public class ChatDialogue : MonoBehaviour {
 					purformOutcome(Outcome1);
 					activeQ = false;
 					villageManagerRef.setVillagersKinematic(false);
-					villageManagerRef.setCowsKinematic(false);
 					villageManagerRef.VillagerAlert.SetActive(false);
 					nextQ();
 					
@@ -89,7 +90,6 @@ public class ChatDialogue : MonoBehaviour {
 				{
 					purformOutcome(Outcome2);
 					villageManagerRef.setVillagersKinematic(false);
-					villageManagerRef.setCowsKinematic(false);
 					villageManagerRef.VillagerAlert.SetActive(false);
 					activeQ = false;			
 					nextQ();
@@ -177,43 +177,43 @@ public class ChatDialogue : MonoBehaviour {
 			{
 			case "loseFood":
 				//TODO:pick range for loss
-				villageManagerRef.foodSupply*= Random.Range(0.60f, 0.85f);
-				villageManagerRef.foodSupply-= Random.Range(1,10);
+				villageManagerRef.foodSupply*= Random.Range(0.50f, 0.75f);
+				villageManagerRef.foodSupply-= 10;
 				qOutcome = "Lose Food";
 				break;
 			case "loseHappiness":
 				Debug.Log ("Happiness loss");
-				villageManagerRef.happiness*= Random.Range(0.60f, 0.85f);
-				villageManagerRef.happiness-= Random.Range(1,10);
+				villageManagerRef.happiness*= Random.Range(0.50f, 0.75f);
+				villageManagerRef.happiness-= 10;
 				qOutcome = "Lose Happiness";
 				break;
 			case "loseWater":
-				villageManagerRef.waterSupply*= Random.Range(0.60f, 0.85f);
-				villageManagerRef.waterSupply-= Random.Range(1,10);
+				villageManagerRef.waterSupply*= Random.Range(0.50f, 0.75f);
+				villageManagerRef.waterSupply-= 10;
 				qOutcome = "Lose Water";
 				break;
 			case "losePopulation":
 				Debug.Log ("Pop loss");
-				popPercent = Random.Range(0.60f, 0.85f);
+				popPercent = Random.Range(0.50f, 0.75f);
 				oldPop = villageManagerRef.population;
-				popLoss = Random.Range(1,3);
+				popLoss = Random.Range(1,4);
 
 				villageManagerRef.cull ((int)((villageManagerRef.population-oldPop) + popLoss));
 				qOutcome = "Lose " + ((villageManagerRef.population-oldPop) + popLoss).ToString("F0") + " Population";
 				break;
 			case "loseSupplies":
-				villageManagerRef.foodSupply*= Random.Range(0.65f, 0.90f);
-				villageManagerRef.foodSupply-= Random.Range(1,10);
-				villageManagerRef.waterSupply*= Random.Range(0.65f, 0.90f);
-				villageManagerRef.waterSupply-= Random.Range(1,10);
+				villageManagerRef.foodSupply*= Random.Range(0.55f, 0.80f);
+				villageManagerRef.foodSupply-= 10;
+				villageManagerRef.waterSupply*= Random.Range(0.55f, 0.80f);
+				villageManagerRef.waterSupply-= 10;
 				qOutcome = "Lose Supplies";
 				break;
 			case "loseFoodIncrease":
-				villageManagerRef.foodGain*= Random.Range (0.65f, 0.90f);
+				villageManagerRef.foodGain*= Random.Range (0.55f, 0.80f);
 				qOutcome = "Lose Food Increase";
 				break;
 			case "loseWaterIncrease":
-				villageManagerRef.waterGain*= Random.Range (0.65f, 0.90f);
+				villageManagerRef.waterGain*= Random.Range (0.55f, 0.80f);
 				qOutcome = "Lose Water Increase";
 				break;
 			case "loseRandom":
@@ -221,16 +221,16 @@ public class ChatDialogue : MonoBehaviour {
 				if (rand == 1)
 				{
 					villageManagerRef.foodSupply*= Random.Range (0.30f, 0.65f);
-					villageManagerRef.foodSupply-= Random.Range(1,10);
+					villageManagerRef.foodSupply-= 10;
 					qOutcome = "Lose Food";
 				}else if (rand == 2)
 				{
 					villageManagerRef.waterSupply*= Random.Range (0.30f, 0.65f);
-					villageManagerRef.waterSupply-= Random.Range(1,10);
+					villageManagerRef.waterSupply-= 10;
 					qOutcome = "Lose Water";
 				}else if (rand == 3)
 				{
-					popPercent = Random.Range(0.60f, 0.85f);
+					popPercent = Random.Range(0.50f, 0.75f);
 					oldPop = villageManagerRef.population;
 					popLoss = Random.Range(1,3);
 					villageManagerRef.population-= popLoss;
@@ -394,6 +394,7 @@ public class ChatDialogue : MonoBehaviour {
                 Rain.Stop();
             }
         }
+
     }
 }
 	

@@ -102,7 +102,7 @@ public class VillageManager : MonoBehaviour
 	bool unhappyVillageEndState = false;
 	public bool questionVictory = false;
 	int happinessVictory = 200;
-	int populationVictory = 100;
+	int populationVictory = 50;
 	#endregion
 
 	// Use this for initialization
@@ -117,7 +117,7 @@ public class VillageManager : MonoBehaviour
 		VillagerAlert.transform.position = new Vector3(-11,-5,0);
 		VillagerAlert.SetActive(false);
 
-		population = 5;
+		population = 3;
 
 		villagerImporter = gameObject.AddComponent<VillagerImporter> ();
 
@@ -126,8 +126,8 @@ public class VillageManager : MonoBehaviour
 		foodSupply = 100;
 		waterSupply = 100;
 
-		foodGain = 5;
-		waterGain = 5;
+		foodGain = 3;
+		waterGain = 3;
 
 		happiness = 50;
 
@@ -162,11 +162,11 @@ public class VillageManager : MonoBehaviour
 		}
 		if (cows.Count > (int)foodSupply / 20) {
 			RemoveCow();
-			Debug.Log("remove");
+			//Debug.Log("remove");
 		}
 		else if(cows.Count< (int)foodSupply/20){
 			AddCow();
-			Debug.Log("add");
+			//Debug.Log("add");
 		}
 
 		VillageGenRef.river.transform.FindChild ("RiverParticles").gameObject.GetComponent<ParticleSystem> ().emissionRate = Mathf.Min(waterSupply, 100)*2;
