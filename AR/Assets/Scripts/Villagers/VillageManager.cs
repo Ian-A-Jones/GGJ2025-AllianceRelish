@@ -119,7 +119,7 @@ public class VillageManager : MonoBehaviour
 
 		population = 3;
 
-		villagerImporter = gameObject.AddComponent<VillagerImporter> ();
+		villagerImporter = new VillagerImporter ();
 
 		VillageGenRef.GenerateVillage((int)population);
 
@@ -186,8 +186,8 @@ public class VillageManager : MonoBehaviour
 						{
 							VillagerInfo = true;
 
-							villagerInfoName = hit.collider.gameObject.GetComponent<Villager>().info.GetField("Name").str;
-							villagerInfoGender = hit.collider.gameObject.GetComponent<Villager>().info.GetField("Gender").str;
+							villagerInfoName = hit.collider.gameObject.GetComponent<Villager>().name;
+							villagerInfoGender = hit.collider.gameObject.GetComponent<Villager>().gender;
 							villagerInfoAge = hit.collider.GetComponent<Villager>().age.ToString();
 							villagerID = hit.collider.gameObject.GetInstanceID();
 
@@ -401,7 +401,8 @@ public class VillageManager : MonoBehaviour
 	public void AddVillager(){
 		Villagers.Add(Instantiate(Resources.Load("Prefabs/Villagerlol")) as GameObject);
 		Villagers[Villagers.Count - 1].AddComponent<Villager>();
-		Villagers[Villagers.Count - 1].GetComponent<Villager>().setInfo(villagerImporter.GetVillagerInfo());
+		villagerImporter.GetNewVillager ();
+		Villagers[Villagers.Count - 1].GetComponent<Villager>().setInfo(villagerImporter.getName(), villagerImporter.getGender());
 
 		//Place at random hut
 		int randHut = Random.Range (1, VillageGenRef.huts.Count);

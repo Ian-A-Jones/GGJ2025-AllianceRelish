@@ -12,7 +12,8 @@ public class Villager : MonoBehaviour
 
 	public JSONObject info;
 
-	string gender = "Male";
+	public string gender = "Male";
+	public string name = "";
 
 	Vector2 targetPos = new Vector2();
 
@@ -41,9 +42,9 @@ public class Villager : MonoBehaviour
 		}
 	}
 
-	public void setInfo(JSONObject newInfo){
-		info = newInfo;
-		gender = info.GetField ("Gender").str;
+	public void setInfo(string nam, string gend){
+		name = nam;
+		gender = gend;
 
 
 

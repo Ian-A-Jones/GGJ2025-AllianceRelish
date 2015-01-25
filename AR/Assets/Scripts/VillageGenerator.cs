@@ -86,6 +86,7 @@ public class VillageGenerator : MonoBehaviour {
 	}
 	
 	void GenerateRiver(){
+		Debug.Log (1);
 		river = (Instantiate(Resources.Load("Prefabs/River")) as GameObject);
 		riverXPos = Random.Range (-7, -4);
 		
