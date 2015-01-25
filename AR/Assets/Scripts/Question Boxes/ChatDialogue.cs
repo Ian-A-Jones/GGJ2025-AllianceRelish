@@ -165,8 +165,9 @@ public class ChatDialogue : MonoBehaviour {
 
 	void purformOutcome(string outcome)
 	{
+        outcome = "cutTree";
 		string[] outcomes = outcome.Split ("," [0]);
-
+        
 		for (int i = 0; i < outcomes.Length; i ++) {
 			switch(outcomes[i])
 			{
@@ -327,8 +328,9 @@ public class ChatDialogue : MonoBehaviour {
 				//TODO: all visual changes
 			case "cutTree":
 				villageManagerRef.removeTree();
-				break;
+				break;                
 			case "goldHut":
+                Debug.Log("YOU CANT RUN THIS SHIT");
 				villageManagerRef.GoldHut();
 				break;
 			case "gainGraffiti":

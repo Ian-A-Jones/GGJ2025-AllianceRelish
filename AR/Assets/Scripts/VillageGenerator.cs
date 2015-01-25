@@ -189,9 +189,6 @@ public class VillageGenerator : MonoBehaviour {
 
 	public void removeATree()
 	{
-
-
-		huts [0].GetComponent<SpriteRenderer> ().sprite = Resources.Load <Sprite> ("Sprites/Huts/Hut_Gold");
         //float closestTree = 100;
         //float closestTreeIndex = 0;
         //int randomHut = Random.Range(0,huts.Count);
